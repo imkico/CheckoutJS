@@ -1,0 +1,11 @@
+{
+  "initialize": {
+    "title": "How to initialize"
+  },
+  "customize": {
+    "title": "How to customize"
+  },
+  "class-diagram": {
+    "title": "Class Diagram"
+  }
+}

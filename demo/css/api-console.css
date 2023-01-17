@@ -1,0 +1,228 @@
+#api-console {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000000;
+    color: #222;
+    font-size: .9em;
+}
+
+#api-console .resize {
+    resize: vertical;
+    cursor: n-resize;
+    text-align: center;
+    background-color: #d1d1d1;
+    user-select: none;
+    line-height: 13px;
+}
+#api-console .api-list-container {
+    min-height:200px;
+}
+#api-console .btn-api-console {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, .7);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 15px;
+    bottom: 15px;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 10px 3px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 0 10px 3px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, .2);
+}
+
+#api-console .btn-api-console:hover {
+    background-color: #eee;
+}
+
+#api-console .api-logs-wrapper {
+    background-color: rgba(255, 255, 255, 1);
+    /*
+    -webkit-box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.3);
+     */
+}
+
+#api-console .api-list-header {
+    position: absolute;
+    padding: 5px 5px 0px 5px;
+    background: #e1e1e1;
+    font-weight: bold;
+    color: #222;
+    border-bottom: 1px solid #707070;
+    width:100%;
+    line-height: 25px;
+}
+
+#api-console .btn-close-logs,
+#api-console .btn-trash-logs {
+    margin-right: 7px;
+    float:right;
+    cursor: pointer;
+    border: 1px solid transparent;
+}{
+    position: absolute;
+    right: 25px;
+    top: 5px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+#api-console .btn-close-logs:hover {
+    border: 1px solid #00a7e1;
+    color: #00a7e1;
+}
+
+#api-console .api-list {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 35px;
+    padding-bottom: 15px;
+    box-sizing: border-box;
+}
+
+#api-console .api-list li {
+    padding: 0 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+#api-console .api-list li:nth-of-type(even) {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+#api-console .api-list li:hover {
+    background: #ccc;
+}
+
+#api-console .api-list li.active {
+    background: #f1cfb5;
+}
+#api-console .api-list li.error {
+    color: red;
+}
+
+#api-console .api-list li .api-title {
+    color: #00a7e1;
+    flex: 1;
+    overflow: hidden;
+    min-width: 140px;
+}
+
+#api-console .api-list li .api-name {
+    text-transform: capitalize;
+}
+
+#api-console .api-list li .api-method {
+    color: #00a651;
+    margin-left: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#api-console .api-list li .api-type {
+    text-transform: uppercase;
+    color: #898989;
+    margin: 0 7px;
+    width: 35px;
+    min-width: 35px;
+}
+
+#api-console .api-list li .api-url {
+    flex: 3;
+    margin-left: 8px;
+}
+
+#api-console .custom-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+#api-console .custom-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#api-console .custom-scroll::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #aaa;
+}
+
+#api-console .custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+#api-console .api-details-container {
+    height: 0;
+    overflow: hidden;
+    transition: all .2s ease-in-out;
+}
+
+#api-console .api-details-container.expanded {
+    overflow-y: hidden;
+    height: 280px;
+}
+
+#api-console .details-header {
+    position: relative;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    height: 20px;
+}
+
+#api-console .details-header:hover {
+    background: #eee;
+}
+
+#api-console .details-header .arrow {
+    height: 15px; 
+    width: 15px;
+	border: 1px solid tomato;
+	border-width: 2px 2px 0 0;
+    transform: rotate(135deg);
+    position: absolute;
+    top: -10px; 
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+	margin: auto;
+}
+
+#api-console .details-header:hover .arrow {
+    border-color: #00a7e1;
+}
+
+#api-console .details-section {
+    box-sizing: border-box;
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 10px 15px;
+}
+
+#api-console .details-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#api-console .details-section .detail-content {
+    box-sizing: border-box;
+    height: 200px;
+    overflow: auto;
+    padding: 15px;
+    background: #f7f8f9;
+    border: 1px solid #898989;
+}
+
+#api-console .json-tree-root {
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+}

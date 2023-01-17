@@ -1,0 +1,21 @@
+root: true
+parser: babel-eslint
+env:
+  browser: true
+  es6: true
+  node: true
+  jest/globals: true
+plugins:
+  - jest
+  - import
+extends: eslint:recommended
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+  console: readonly
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+rules: {
+  "no-console": 0
+}

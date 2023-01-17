@@ -1,0 +1,1023 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> payments/payment.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>payments/payment.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {Base} from '../base';
+import {
+    _CHECKOUTJS,
+    CONFIG,
+    UTIL,
+    SHOPPERAPI,
+    PAYMENTS,
+    UNDEFINED,
+    REQUESTPAYLOAD,
+    PAYMENT,
+    CARTDATA,
+    ELEMENT
+} from "../keywords";
+
+/**
+ * The response of the payment request.
+ * @typedef PaymentRequestResponseObject
+ * @property {Object} error - The error details, which will only be populated if there are any errors.
+ * @property {PaymentSourceObject} source - The source payload details.
+ * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/reference/digital-river-payment-objects#payment-request-source-object
+ */
+
+/**
+ * The payment source object.
+ * @typedef PaymentSourceObject
+ * @property {string} type - The payment name of the source, e.g. creditCard, googlePay, applePay.
+ * @property {string} id - The unique source ID in payment services.
+ * @property {string} clientSecret - The secret key to retrieve source details.
+ * @property {string} flow
+ * @property {string} amount - The amount that will be charged.
+ * @property {string} clientId
+ * @property {string} channelId
+ * @property {string} currency
+ * @property {string} upstreamId - The cart or requisition ID in Global Commerce.
+ * @property {Boolean} reusable
+ * @property {string} state
+ * @property {Boolean} liveMode
+ * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/reference/digital-river-payment-objects#payment-request-source-object
+ */
+
+/**
+ * The payload object returned from payment services.
+ * @typedef PaymentRequestObject
+ * @property {string} type
+ * @property {string} country
+ * @property {string} currency
+ * @property {Object[]} displayItems
+ * @property {Object[]} shippingOptions
+ * @property {Object} owner
+ * @property {Boolean} requestShipping
+ * @property {Object} style
+ * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/reference/digital-river-payment-objects#payment-request-object
+ */
+
+/**
+ * The payment object, which contains the payment name and response of the payment request.
+ * @typedef PaymentObject
+ * @property {string} name - The payment name.
+ * @property {PaymentRequestResponseObject} result - The response of the payment request.
+ */
+
+/**
+ * The DigitalRiver.js options, which includes customization options.
+ * @typedef PaymentElementOptions
+ * @property {Object} style - The custom styles.
+ * @property {Object} classes - The custom classes.
+ * @example {
+    classes: {
+        base: "DRElement",
+        complete: "complete",
+        empty: "empty",
+        focus: "focus",
+        invalid: "invalid",
+        webkitAutofill: "autofill"
+    },
+    style: {
+        base: {
+            color: "#fff",
+            fontFamily: "Arial, Helvetica, sans-serif",
+            fontSize: "20px",
+            fontSmoothing: "auto",
+            fontStyle: "italic",
+            fontVariant: "normal",
+            letterSpacing: "3px"
+        },
+        empty: {
+            color: "#fff"
+        },
+        complete: {
+            color: "green"
+        },
+        invalid: {
+            color: "red",
+        }
+    }
+}
+ */
+
+
+/**
+ * @classdesc The base payment class, which contains shared functionalities for all payment methods.
+ * @class Payment
+ * @extends Base
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {string} [paymentType=''] - The payment name.
+ * @returns {Payment}
+ * @category PaymentBase
+ */
+class Payment extends Base {
+    constructor(parent, collection, name = '') {
+        super(parent, Object.assign({
+            excludeMethods: {constructor: true},
+            writableMethods: {
+                createPaymentRequest: true,
+                applySourceId: true,
+                completeSourceId: true,
+                shippingAddressChange: true,
+                shippingOptionChange: true,
+                validate: true,
+                validateElements: true,
+                click: true,
+                cancel: true,
+                routing: true,
+                getReturnUrl: true,
+                getCancelUrl: true,
+            }
+        }, collection), name);
+        /**
+         * The request payload of the payment instance.
+         * @name requestPayload
+         * @type PaymentRequestPayload
+         * @memberof Payment
+         * @instance
+         */
+        this[REQUESTPAYLOAD] = new PaymentRequestPayload(parent, {}, name, this);
+        Object.defineProperty(this, REQUESTPAYLOAD, {
+            enumerable: false,
+            configurable: false,
+            writable: true,
+        });
+
+        /**
+         * The HTML element of the payment instance.
+         * @name element
+         * @type PaymentElement
+         * @memberof Payment
+         * @instance
+         */
+        this[ELEMENT] = new PaymentElement(parent, {}, name, this);
+        Object.defineProperty(this, ELEMENT, {
+            enumerable: false,
+            configurable: false,
+            writable: true,
+        });
+    }
+
+    /**
+     * Creates the payment request payload for this payment.
+     * @returns {Promise&lt;PaymentRequestObject>}
+     */
+    async createPaymentRequest() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _util = _cjs[UTIL];
+        let cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        let paymentRequestData = await _this[REQUESTPAYLOAD].createObject(cartData);
+        return (paymentRequestData);
+    }
+
+    /**
+     * Applies the source to an active cart via Commerce API.
+     * @param {PaymentRequestResponseObject} result - The return payload from DigitalRiver.js after the source ID has been applied.
+     * @abstract
+     * @returns {Promise&lt;PaymentRequestResponseObject>}
+     */
+    async applySourceId(paymentRequestResponseObject) {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _util = _cjs[UTIL];
+        const result = paymentRequestResponseObject;
+        if (result.error) {
+            return Promise.reject(result);
+        } else {
+            const source = result.source;
+            await _util.setValue(PAYMENT, {name: _name, result: result});
+            if (source) {
+                const address = await Promise.all([
+                    _shopperApi.convertPaymentRequestAddressToShopperApiAddress(Object.assign(result.billingAddress, result.contactInformation), 'billingAddress'),
+                    _shopperApi.convertPaymentRequestAddressToShopperApiAddress(result.shippingAddress, 'shippingAddress')
+                ]);
+                await _shopperApi.applyAddressToCart(address[0], address[1]);
+                if (source.flow === 'standard' || source.flow === 'receiver') {
+                    await _shopperApi.applySourceToCart(source.id);
+                }
+            }
+            return (source);
+        }
+    }
+
+    /**
+     * This function will be triggered after the source ID has been applied.
+     * @param {PaymentRequestResponseObject} result - The return payload from DigitalRiver.js after the source ID has been applied.
+     * @abstract
+     * @returns {Promise&lt;PaymentRequestResponseObject>}
+     */
+    async completeSourceId(paymentRequestResponseObject) {
+        return (paymentRequestResponseObject);
+    }
+
+    /**
+     * This function will be triggered to update the shipping address on the cart, for one-click checkout.
+     * @param {Event} event
+     * @returns {Promise&lt;PaymentRequestObject>}
+     */
+    async shippingAddressChange(event) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const shippingAddress = event.shippingAddress;
+        return _shopperApi.convertPaymentRequestAddressToShopperApiAddress(shippingAddress, 'shippingAddress')
+            .then(function (shopperApiShippingAddress) {
+                return _shopperApi.applyAddressToCart(null, shopperApiShippingAddress);
+            }).then(async function (response) {
+                const updateObject = await _this.createPaymentRequest(await _this[REQUESTPAYLOAD].updateObject(response), 'shippingaddresschange');
+                return _this.shippingAddressChange(updateObject).then(function () {
+                    return (updateObject);
+                });
+            }).catch(async function (ex) {
+                const updateObject = await _this.createPaymentRequest(await _this[REQUESTPAYLOAD].errorObject(ex), 'shippingaddresschange');
+                return (updateObject);
+            });
+    }
+
+    /**
+     * This function will be triggered to update the shipping option on the cart, for one-click checkout.
+     * @param {Event} event
+     * @returns {Promise&lt;PaymentRequestObject>}
+     */
+    async shippingOptionChange(event) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const shippingOption = event.shippingOption;
+        const shippingOptionId = shippingOption.id;
+        return _shopperApi.updateSelectedShippingMethodOnCart(shippingOptionId)
+            .then(async function (response) {
+                const updateObject = await _this.createPaymentRequest(await _this[REQUESTPAYLOAD].updateObject(response), 'shippingoptionchange');
+                return (updateObject);
+            }).catch(async function (ex) {
+                const updateObject = await _this.createPaymentRequest(await _this[REQUESTPAYLOAD].errorObject(ex), 'shippingoptionchange');
+                return (updateObject);
+            });
+    }
+
+    /**
+     * Determines if this payment is supported on the current currency.
+     * @returns {Promise&lt;Boolean>}
+     */
+    async supportedCurrency() {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        const _supportedCurrencies = _configPayment.supportedCurrencies || [];
+        const _currentCurrency = _cjs[CONFIG].currency;
+        let supported = _supportedCurrencies.includes(_currentCurrency);
+        return ((_supportedCurrencies.length === 0) || supported);
+    }
+
+    /**
+     * Determines if this payment is supported in the current country.
+     * @returns {Promise&lt;Boolean>}
+     */
+    async supportedGeography(country) {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        const _supportedGeographies = _configPayment.supportedGeographies || [];
+        let supported = _supportedGeographies.includes(country);
+        return ((_supportedGeographies.length === 0) || supported);
+    }
+
+    async supportedRecurringPayments() {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _name = this._name;
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        let supported = true;
+        const cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        const useRecurringPayment = await _util.useRecurringPayment(cartData);
+        if(useRecurringPayment &amp;&amp; !_configPayment.supportedRecurringPayments) {
+            supported = false;
+        }
+        return supported;
+    }
+
+    /**
+     * Validates the cart before the cart is submitted or before the next step/page.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @throws Throws specific errors if the cart is not valid.
+     * @returns {Promise&lt;Boolean>}
+     */
+    async validateInfo(cartData) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _name = this._name;
+        const _payments = await _this._storefront.getPayments();
+        const _configLabels = _cjs[CONFIG].labels;
+        const country = (!!cartData &amp;&amp; !!cartData.cart.billingAddress.country) ? cartData.cart.billingAddress.country : _cjs[CONFIG].country;
+        let supported = await _payments[_name].supportedGeography(country);
+        if (!supported) {
+            return Promise.reject(new Error(_configLabels.INVALID_BILLING_COUNTRY));
+        }
+
+        if (cartData &amp;&amp; cartData.cart.billingAddress) {
+            if (_util.hasSpecialsCharacters(cartData.cart.billingAddress)) {
+                throw new Error(_configLabels.VALIDATOR_INVALID_TYPE);
+            }
+        }
+
+        if (cartData &amp;&amp; cartData.cart.shippingAddress) {
+            if (_util.hasSpecialsCharacters(cartData.cart.shippingAddress)) {
+                throw new Error(_configLabels.VALIDATOR_INVALID_TYPE);
+            }
+        }
+
+        return await _this.validate(cartData);
+    }
+
+    /**
+     * Override this function to add additional validation.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @abstract
+     * @returns {Promise&lt;Boolean>}
+     */
+    // eslint-disable-next-line no-unused-vars
+    async validate(cartData) {
+        return true;
+    }
+
+    /**
+     * This event will be triggered when the payment sheet has been cancelled, for one-click checkout.
+     * @abstract
+     * @returns {Promise}
+     */
+    async cancel() {
+    }
+
+    /**
+     * Override this function to customize the return URL for redirecting to a specific page.
+     * @abstract
+     * @returns {Promise&lt;string>}
+     */
+    async getReturnUrl() {
+    }
+
+    /**
+     * Override this function to customize the cancel URL for redirecting to a specific page.
+     * @abstract
+     * @returns {Promise&lt;string>}
+     */
+    async getCancelUrl() {
+    }
+
+    /**
+     * Customizes the behavior after the source has been applied. Return false to bypass this feature.
+     * @abstract
+     * @returns {Promise&lt;Boolean>}
+     */
+    async routing() {
+        return false;
+    }
+
+    async getActiveAcceptance(data){
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _name = this._name;
+        const _configPayment = _config[PAYMENTS][_name];
+        const _data = {
+            CHECKOUT:_config.labels.CHECKOUT
+        };
+        Object.assign(_data, data);
+        let activeAcceptance = _configPayment.activeAcceptance;
+        if(activeAcceptance) {
+            if(activeAcceptance === true) {
+                const attr = await _shopperApi.getText("PMS_"+_name.toUpperCase()+"_ACTIVEACCEPTANCE");
+                if(attr.attribute){
+                    activeAcceptance = attr.attribute.value;
+                }
+            }
+            return _util.format(activeAcceptance, data);
+        }
+    }
+
+}
+
+/**
+ * @class PaymentRequestPayload
+ * @classdesc The PaymentRequestPayload class is the generic format of a payment request payload.
+ * @extends Base
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {string} paymentType
+ * @param {Payment} payment
+ * @returns {PaymentRequestPayload}
+ * @category PaymentBase
+ */
+class PaymentRequestPayload extends Base {
+
+    constructor(parent, collection, name, payment) {
+        super(parent, Object.assign({
+            excludeMethods: {constructor: true},
+            writableMethods: {
+                createObject: true,
+                updateObject: true,
+                total: true,
+                displayItems: true,
+                shippingOptions: true,
+                shippingOption: true,
+                errorObject: true,
+                getOwner: true,
+            }
+        }, collection), name);
+
+        if (payment) {
+            Object.defineProperty(this, '_payment', {
+                value: payment,
+                configurable: false,
+                enumerable: false,
+            });
+        }
+    }
+
+    /**
+     * Creates the payment request object for DigitalRiver.js to create the source.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @abstract
+     * @returns {Promise&lt;PaymentRequestObject>}
+     * @see PaymentRequestObject
+     */
+    async createObject(cartData) {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        const country = (!!cartData &amp;&amp; !!cartData.cart.billingAddress.country) ? cartData.cart.billingAddress.country : _config.country;
+        const currency = (!!cartData &amp;&amp; !!cartData.cart.pricing.orderTotal.currency) ? cartData.cart.pricing.orderTotal.currency : _config.currency;
+        const owner = await this.getOwner(cartData);
+        const total = await this.total(cartData);
+        const displayItems = await this.displayItems(cartData);
+        const returnUrl = await this._payment.getReturnUrl();
+        const cancelUrl = await this._payment.getCancelUrl();
+        let _type = _name;
+        const useRecurringPayment = await _util.useRecurringPayment(cartData);
+        if(useRecurringPayment &amp;&amp; _configPayment.recurringName){
+            _type = _configPayment.recurringName;
+        }
+        const paymentRequestData = {
+            type: _type,
+            upstreamId: cartData.cart.id,
+            country: country,
+            currency: currency,
+            amount: total.amount,
+            owner: owner,
+            total: total,
+            displayItems: displayItems
+        };
+
+        if(cartData &amp;&amp; cartData.cart.paymentSession){
+            paymentRequestData['sessionId'] = cartData.cart.paymentSession.id;
+        }
+
+        const shippingOptions = await this.shippingOptions(cartData);
+        if (shippingOptions.length > 0) {
+            paymentRequestData['shippingOptions'] = shippingOptions;
+        }
+        paymentRequestData['requestShipping'] = shippingOptions.length > 0;
+        paymentRequestData[_type] = {
+            returnUrl: returnUrl,
+            cancelUrl: cancelUrl
+        };
+        _util.extend(paymentRequestData,_configPayment.source);
+        return (paymentRequestData);
+    }
+
+    /**
+     * Updates the payment request object after the cart has been changed.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @abstract
+     * @returns {Promise&lt;PaymentRequestObject>}
+     * @example
+     * return
+     * {
+     *   status: 'success',
+     *   error: {
+     *   },
+     *   total: {
+     *     label: "Order Total",
+     *     amount: 100,
+     *     isPending: false
+     *   },
+     *   displayItems: [
+     *     {
+     *       label: "Line Item Label (Product Name)",
+     *       amount: 100,
+     *       isPending: false
+     *     }
+     *   ]
+     * }
+     */
+    async updateObject(cartData) {
+        if (cartData) {
+            const total = await this.total(cartData);
+            const displayItems = await this.displayItems(cartData);
+            const paymentRequestData = {
+                status: "success",
+                total: total,
+                displayItems: displayItems
+            };
+
+            const shippingOptions = await this.shippingOptions(cartData);
+            if (shippingOptions.length > 0) {
+                paymentRequestData['shippingOptions'] = shippingOptions;
+            }
+            paymentRequestData['requestShipping'] = shippingOptions.length > 0;
+            return (paymentRequestData);
+        }
+        return ({});
+    }
+
+    /**
+     * Returns the cart total properties for the payment request object.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @abstract
+     * @returns {Promise&lt;Object>}
+     * @example
+     * return
+     * {
+     *   label: "Order Total",
+     *   amount: 100,
+     *   isPending: false
+     * }
+     */
+    async total(cartData) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _configLabels = _config.labels;
+        const object = {
+            label: _configLabels.TOTAL,
+            amount: !cartData ? 0 : cartData.cart.pricing.orderTotal.value
+        };
+        return (object);
+    }
+
+    /**
+     * Returns a list of cart properties for the payment request object.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @abstract
+     * @returns {Promise&lt;Object[]>}
+     * @example
+     * return
+     * [
+     *   {
+     *     label: "Line Item Label (Product Name)",
+     *     amount: 100,
+     *     isPending: false
+     *   },
+     *   {
+     *     label: "Shipping Amount",
+     *     amount: 10,
+     *     isPending: false
+     *   }
+     * ]
+     */
+    async displayItems(cartData) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _configLabels = _config.labels;
+        const lineItems = [];
+        if (cartData &amp;&amp; cartData.cart.lineItems &amp;&amp; cartData.cart.lineItems.lineItem) {
+            for (let i = 0; i &lt; cartData.cart.lineItems.lineItem.length; i++) {
+                const lineItem = cartData.cart.lineItems.lineItem[i];
+                lineItems.push({
+                    label: lineItem.product.displayName || '',
+                    amount: lineItem.pricing.salePriceWithQuantity.value
+                });
+            }
+        }
+
+        const discount = {
+            label: _configLabels.DISCOUNT,
+            amount: !cartData ? 0 : cartData.cart.pricing.discount.value
+        };
+
+        const salesTax = {
+            label: _configLabels.TAX,
+            amount: !cartData ? 0 : cartData.cart.pricing.tax.value
+        };
+
+        const shipping = {
+            label: _configLabels.ESTIMATED_SHIPPING_AND_HANDLING,
+            amount: !cartData ? 0 : cartData.cart.pricing.shippingAndHandling.value
+        };
+
+        if (discount.amount > 0) {
+            lineItems.push(discount);
+        }
+
+        if (!!cartData &amp;&amp; typeof cartData.cart.shippingOptions.shippingOption !== UNDEFINED) {
+            lineItems.push(shipping);
+        }
+        if (_config.cart.displayIncludeTax !== false &amp;&amp; salesTax.amount > 0) {
+            lineItems.push(salesTax);
+        }
+
+        return (lineItems);
+    }
+
+    /**
+     * Returns a list of shipping options for the payment request object.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @abstract
+     * @returns {Promise&lt;Object[]>}
+     * @example
+     * return
+     * [
+     *   {
+     *     id: "standard-shipping",
+     *     label: "Standard Shipping",
+     *     amount: 0,
+     *     detail: "Will arrive in 7-10 days."
+     *   },
+     *   {
+     *     id: "overnight-shipping",
+     *     label: "Overnight Shipping",
+     *     amount: 10,
+     *     detail: "Will arrive tomorrow morning"
+     *   }
+     * ]
+     */
+    async shippingOptions(cartData) {
+        const shippingOptions = [];
+        if (!!cartData &amp;&amp; typeof cartData.cart.shippingOptions.shippingOption !== UNDEFINED) {
+            const shippingMethod = cartData.cart.shippingMethod;
+            const cartShippingValue = cartData.cart.pricing.shippingAndHandling.value;
+            for (let i = 0; i &lt; cartData.cart.shippingOptions.shippingOption.length; i++) {
+                const shippingOption = cartData.cart.shippingOptions.shippingOption[i];
+                const shippingOptionObject = await this.shippingOption(shippingOption, shippingMethod, cartShippingValue);
+                if (shippingOptionObject) {
+                    shippingOptions.push(shippingOptionObject);
+                }
+            }
+        }
+        return (shippingOptions);
+    }
+
+    /**
+     * Returns the shipping option properties for the payment request object.
+     * @param {string} shippingOption - The shipping option from CartDataObject, e.g. cartData.cart.shippingOptions.shippingOption[idx]
+     * @param {string} shippingMethod - The shipping method from CartDataObject, e.g. cartData.cart.shippingMethod
+     * @abstract
+     * @returns {Promise&lt;Object>}
+     * @example
+     * return
+     * {
+     *   id: "standard-shipping",
+     *   label: "Standard Shipping",
+     *   amount: 0,
+     *   detail: "Will arrive in 7-10 days."
+     * }
+     */
+    async shippingOption(shippingOption, shippingMethod) {
+        const shippingOptionObject = {};
+        shippingOptionObject.id = shippingOption.id.toString();
+        shippingOptionObject.label = shippingOption.description;
+        shippingOptionObject.amount = shippingOption.cost.value;
+        shippingOptionObject.detail = '';
+        if (shippingOption.id === shippingMethod.code) {
+            shippingOptionObject.selected = true;
+        }
+        return (shippingOptionObject);
+    }
+
+    /**
+     * Creates an error object from an unsuccessful payment request.
+     * @param {Error} ex - The error returned from the unsuccessful payment request.
+     * @abstract
+     * @returns {Promise&lt;ErrorObject>}
+     * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/reference/digital-river-payment-objects#payment-request-details-update-error-object
+     */
+    async errorObject(ex) {
+        const _cjs = this[_CHECKOUTJS];
+        const errorMessage = await _cjs[UTIL].extractErrorMessage(ex);
+        const obj = {
+            status: 'failure',
+            error: {
+                message: errorMessage //_cjs[CONFIG].labels.error.PAYMENT_AUTHORIZATION_FAILED
+            }
+        };
+        return (obj);
+    }
+
+    /**
+     * Returns the owner properties for the payment request object.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @abstract
+     * @returns {Promise&lt;PaymentService.OwnerDataObject>}
+     * @example
+     * return
+     * {
+     *   "firstName": "firstName",
+     *   "lastName": "lastName",
+     *   "email": "email@email.org",
+     *   "referenceId": "testOrderID_payserv1",
+     *   "address": {
+     *     "line1": "1234 Fake St.",
+     *     "city": "Minnetonka",
+     *     "state": "MN",
+     *     "country": "US",
+     *     "postalCode": "55410"
+     *   }
+     * }
+     */
+    async getOwner(cartData) {
+        const _cjs = this[_CHECKOUTJS];
+        if (cartData &amp;&amp; cartData.cart) {
+            const address = cartData.cart.billingAddress;
+            let emailAddress = address.emailAddress;
+            if (!emailAddress) {
+                const shopper = await _cjs[SHOPPERAPI].getShopper();
+                emailAddress = shopper.shopper.emailAddress;
+            }
+            return ({
+                firstName: address.firstName || '',
+                lastName: address.lastName || '',
+                phoneNumber: address.phoneNumber || '',
+                email: emailAddress || '',
+                organization: address.companyName || '',
+                address: {
+                    line1: address.line1 || '',
+                    line2: address.line2 || '',
+                    city: address.city || '',
+                    state: address.countrySubdivision || '',
+                    postalCode: address.postalCode || '',
+                    country: address.country || ''
+                },
+                additionalAddressInfo: {
+                    neighborhood: address.neighborhood || '',
+                    division: address.division || '',
+                    phoneticFirstName: address.phoneticFirstName || '',
+                    phoneticLastName: address.phoneticLastName || ''
+                }
+            });
+        }
+    }
+}
+
+/**
+ * @classdesc The PaymentElement class handles additional DigitalRiver.js elements e.g. credit card number, expired year/month, CVV, bank selector, etc.
+ * @class PaymentElement
+ * @extends Base
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {string} paymentType
+ * @param {Payment} [payment]
+ * @returns {PaymentElement}
+ * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/reference/elements
+ * @category PaymentBase
+ */
+class PaymentElement extends Base {
+
+    constructor(parent, collection, name, payment) {
+        super(parent, Object.assign({
+            excludeMethods: {constructor: true},
+            writableMethods: {
+                createOption: true,
+            }
+        }, collection), name);
+
+        if (payment) {
+            Object.defineProperty(this, '_payment', {
+                value: payment,
+                configurable: false,
+                enumerable: false,
+            });
+        }
+    }
+
+    /**
+     * Creates the additional elements that need to be mounted on the page.
+     * @param {ShopperApi.CartDataObject} cartData
+     * @abstract
+     * @returns {Promise&lt;PaymentElementOptions>}
+     */
+    async createOption(cartData) {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        const country = (!!cartData &amp;&amp; !!cartData.cart.billingAddress.country) ? cartData.cart.billingAddress.country : _config.country;
+        const currency = (!!cartData &amp;&amp; !!cartData.cart.pricing.orderTotal.currency) ? cartData.cart.pricing.orderTotal.currency : _config.currency;
+
+
+        let options = {
+            style: _util.extend({}, _configPayment.style),
+            classes: _util.extend({}, _configPayment.classes),
+            [_name]: {
+                country: country,
+                currency: currency,
+            }
+        };
+        _util.extend(options, _configPayment.mountElement.options);
+
+        if(_configPayment.mountElement.required){
+            _configPayment.mountElement.required.forEach((key)=>{
+                if (options &amp;&amp; (!options[_name].hasOwnProperty(key) || options[_name][key].length === 0) ) {
+                    options = null;
+                }
+            });
+        }
+
+        return options;
+    }
+}
+/**
+ * @class Payments
+ * @classdesc A container of all payments methods.
+ * @extends Base
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @returns {Promise&lt;Payments>}
+ * @category PaymentBase
+ */
+class Payments extends Base {
+    constructor(parent, collection) {
+        super(parent, collection);
+        const _this = this;
+        return (async () => {
+            return _this;
+        })();
+    }
+
+    /**
+     * Refer to PaymentMethods section for each payment method, e.g. {@link module:creditCard|creditCard}, {@link module:applePay|applePay}.
+     * Those setting inside {@link module:Config|Config}.
+     * @name this
+     * @type { Object.&lt;string, Payment> }
+     * @memberOf Payments
+     * @instance
+     * @property {StorefrontPayment} creditCard - Credit Card Payment
+     * @property {ApplePay|ApplePayWeb|ApplePayGC} applePay - Apple Pay Payment
+     * @property {GooglePay|GooglePayWeb|GooglePayGC} googlePay - Google Pay Payment
+     * @property {KlarnaCredit|KlarnaCreditWeb} klarnaCredit - Klarna Credit Payment
+     * @property {Payment|StorefrontPayment|GlobalCommercePayment} others... - Other Payments
+     * @see {@tutorial payment-support-list}
+     */
+
+
+    /**
+     * Determines if the payment is supported or not.
+     * @param {string} payment - The payment name, e.g. creditCard, googlePay.
+     * @protected
+     * @returns {Promise&lt;Boolean>}
+     * @example checkoutJS.payments.isSupport('creditCard');
+     */
+    async isSupportPayment(payment) {
+        let _cjs = this[_CHECKOUTJS];
+        return (!_cjs[CONFIG][PAYMENTS][payment].disable);
+    }
+}
+
+export {
+    Payment,
+    Payments,
+    PaymentElement,
+    PaymentRequestPayload
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

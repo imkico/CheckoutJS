@@ -1,0 +1,936 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> config.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>config.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * The CheckoutJS configuration structure that can be customized.
+ * @module Config
+ * @category Utility
+ */
+
+/**
+  * The additional elements created by DigitalRiver.js, e.g. bank selector, credit card fields, etc.
+  * @typedef module:Config.MountElementDefinition
+  * @property {Object.&lt;string, string>} elements - The object key is the type of createElement in DigitalRiver.js and the object value is the ID of the HTMLElement placeholder that the element is mounted to.
+  * @property {string[]} [required] - The required fields for the elements.
+  * @example
+  * mountElement: {
+  *   elements: {
+  *     onlinebanking: "drjs_onlineBankingElement"
+  *   },
+  *   required: ["country","currency"]
+  *}
+ */
+
+/**
+ * The generic configurations for each payment.
+ * @typedef {Object} module:Config.PaymentConfigDefinition
+ * @property {string} name - The name of the payment method.
+ * @property {string} [recurringName] - The payment type for recurring payments.
+ * @property {string} description - The description of the payment method.
+ * @property {string} elementId - The ID of the HTMLElement.
+ * @property {Boolean} disable=true - Set this to false to enable the payment method. This is true by default.
+ * @property {Boolean} [show=false] - Set this to true to display the payment method on the page.
+ * @property {Boolean} [amountsEstimated=false] - Set this to true to support estimated amounts.
+ * @property {Boolean} [supportedRecurringPayments=false] - Set this to true to support recurring payments.
+ * @property {string[]} [supportedGeographies=[]] - The list of countries that is supported by this payment method.
+ * @property {string[]} [supportedCurrencies=[]] - The list of currencies that is supported by this payment method.
+ * @property {string} [route] - The page ID to route to after the source has been applied, e.g. cart, info, confirmOrder, thankYou.
+ * @property {Boolean} [showTC=false] - Set this to true to show the Terms and Conditions.
+ * @property {Boolean} [hidePaymentSection=false] - Set this to true to hide the payment section in gC.
+ * @property {Boolean} [preventPopupClose=false] - Set this to true to remove the close button on the overlay.
+ * @property {Object} [style={}] - The styles of the payment element.
+ * @property {Object} [class={}] - The class names of the payment element.
+ * @property {module:Config.MountElementDefinition} [mountElement]
+ * @property {module:Config.RedirectOverlayDefinition} [redirectOverlay]
+ * @property {module:Config.PaymentConfigTemplateDefinition} [template]
+ * @example
+ * directDebit: {
+ *   name: "Direct Debit",
+ *   elementId: "dr_directDebit",
+ *   disable: true,
+ *   supportedGeographies: ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IR","IT","LV","LI","LT","LU","MT","MC","NL","NO","PL","PT","RO","SM","SK","SI","ES","SE","CH","GB","VA","AD"],
+ *   supportedCurrencies: ["EUR"]
+ * }
+ */
+
+/**
+ * The customized template for the payment.
+ * @typedef module:Config.PaymentConfigTemplateDefinition
+ * @property {string} [pendingFunds] - The customized template for pending funds.
+ * @example
+ * template: {
+ *   pendingFunds:
+ *     '&lt;ul>\n' +
+ *     '    &lt;li>Bank Name: {bPay.bankName}&lt;/li>\n' +
+ *     '    &lt;li>Location: {bPay.city}, {bPay.country}&lt;/li>\n' +
+ *     '    &lt;li>Account Holder: {bPay.accountHolder}&lt;/li>\n' +
+ *     '    &lt;li>Account Number: {bPay.accountNumber}&lt;/li>\n' +
+ *     '    &lt;li>Branch Details: {bPay.additionalBankInformation}&lt;/li>\n' +
+ *     '    &lt;li>Reference ID: {bPay.referenceId}&lt;/li>\n' +
+ *     '&lt;/ul>'
+ * }
+ */
+
+/**
+ * @memberOf module:Config
+ * @property {string} apiKey - The Commerce API Key.
+ * @property {string} encryptionKey - The encryption Key for payload encryption.
+ * @property {string} authUserName
+ * @property {string} authPassword
+ * @property {string} siteId        - The Global Commerce site ID.
+ * @property {string} locale
+ * @property {string} page - The Global Commerce page name.
+ * @property {string} country
+ * @property {string} currency
+ * @property {string} drUrl - The Global Commerce hosted domain, e.g. https://store.digitalriver.com.
+ * @property {string} apiRequestUrlBase - The Digital River API endpoint.
+ * @property {string} prefixName - The prefix name of the cookie or session.
+ * @property {Boolean} init=true - When this value is set to true, initialize the layout and payments when a new instance is created.
+ * @property {Boolean} submitCartWithShopperApi=false - Creates a payment source for the cart and submits the cart via Commerce API instead of a form submit.
+ * @property {string[]} specialsCharacters - The range of UTF-8 characters to avoid when applying information to the cart, e.g. emojis.
+ * @property {Boolean} debug=false
+ */
+export const Config = {
+    apiKey: '',
+    encryptionKey: '',
+    authUserName: '',
+    authPassword: '',
+    siteId: '',
+    locale: '',
+    page: '',
+    country: 'US',
+    currency: '',
+    drUrl: '',
+    apiRequestUrlBase: "https://api.digitalriver.com",
+    //apiRequestUrlBase: "https://api-cte-ext.digitalriver.com",
+    //apiRequestUrlBase: "https://dispatch-cte.digitalriverws.net",
+    //apiRequestUrlBase: "https://dispatch-test.digitalriver.com",
+    prefixName: "dr_",
+    init: true,
+    submitCartWithShopperApi: false,
+    specialsCharacters: [
+        '[\uE000-\uF8FF]',
+        '\uD83C[\uDC00-\uDFFF]',
+        '\uD83D[\uDC00-\uDFFF]',
+        '[\u2011-\u26FF]',
+        '\uD83E[\uDD10-\uDDFF]'
+    ],
+    /**
+     * The URLs used for the checkout.
+     * @name url
+     * @memberOf module:Config
+     * @property {string} paymentCallBack - The URL to redirect back from third-party payment sites.
+     * @property {string} cart - The URL of the cart page.
+     * @property {string} info - The URL of the billing, shipping, payment information page.
+     * @property {string} confirmOrder - The URL of the confirm order or order review page.
+     * @property {string} thankYou - The URL of the order complete or thank you page.
+     * @property {string} config - The URL of the CheckoutJS configuration data.
+     * @category Utility
+     * @instance
+     */
+    url: {
+        paymentCallBack: null,
+        cart: "https://{domain}/store/{siteId}/cart",
+        info: "https://{domain}/store/{siteId}/DisplayThreePgCheckoutAddressPaymentInfoPage",
+        confirmOrder: "https://{domain}/store?Action=DisplayPage&amp;SiteID={siteId}&amp;id=ThreePgCheckoutConfirmOrderPage",
+        thankYou: "https://{domain}/store?Action=DisplayPage&amp;SiteID={siteId}&amp;id=ThankYouPage&amp;reqID={requisitionId}",
+        config: "https://{domain}/store/{siteId}/CheckoutJsConfig"
+    },
+    /**
+     * The cart settings.
+     * @name cart
+     * @memberOf module:Config
+     * @property {Boolean} displayIncludeTax=true - Set this to true to display the tax row for Apple Pay/Google Pay.
+     * @property {Boolean} updateCartInfoByApi=false - Set this to true to update the cart information via API.
+     * @category Utility
+     * @instance
+     */
+    cart: {
+        displayIncludeTax: true
+    },
+    /**
+     * The selectors used for looking up page elements.
+     * @name selector
+     * @memberOf module:Config
+     * @property {string} checkoutForm - The default checkout form, for billing, shipping and payment information.
+     * @property {string} checkoutBtn - The checkout button.
+     * @property {string} threePgCheckoutBtn - The checkout button on the cart page of the three-paged checkout flow.
+     * @property {string} errorModal - The error modal.
+     * @property {string} cloudPaySourceId - The hidden input for the CloudPay source ID.
+     * @property {string} cloudPayPayment - The CloudPay container in the payment section.
+     * @property {string} cloudPayTC - The Terms and Conditions content.
+     * @property {string} cloudPayTCContainer - The placeholder for the Terms and Conditions content.
+     * @property {string} cloudPayTermsAcceptance - The HTMLInputElement of the Terms and Conditions acceptance.
+     * @property {string} cloudPayBtn - The selector for all one-click checkout payments, e.g. applePay, googlePay, payPal.
+     * @property {Object} address - The address information section.
+     * @property {string} address.shippingContainer - The container for the shipping address.
+     * @property {string} address.billingContainer - The container for the billing address.
+     * @property {string} address.shippingDifferentThanBilling - The HTMLInputElement of the shipping is different than billing option.
+     * @property {Object} address.billingToGc - The billing address fields in gC.
+     * @property {string} address.billingToGc.firstName - The first name field in the billing section.
+     * @property {string} address.billingToGc.lastName - The last name field in the billing section.
+     * @property {string} address.billingToGc.phoneticFirstName - The phonetic first name field in the billing section.
+     * @property {string} address.billingToGc.phoneticLastName - The phonetic last name field in the billing section.
+     * @property {string} address.billingToGc.line1 - The first address line field in the billing section.
+     * @property {string} address.billingToGc.line2 - The second address line field in the billing section.
+     * @property {string} address.billingToGc.city - The city field in the billing section.
+     * @property {string} address.billingToGc.companyName - The company name field in the billing section.
+     * @property {string} address.billingToGc.division - The company division field in the billing section.
+     * @property {string} address.billingToGc.phoneNumber - The phone number field in the billing section.
+     * @property {string} address.billingToGc.countrySubdivision - The state/country subdivision field in the billing section.
+     * @property {string} address.billingToGc.postalCode - The postal code field in the billing section.
+     * @property {string} address.billingToGc.country - The country field in the billing section.
+     * @property {string} address.billingToGc.emailAddress - The e-mail address field in the billing section.
+     * @property {Object} address.shippingToGc - The shipping address fields in gC.
+     * @property {string} address.shippingToGc.firstName - The first name field in the shipping section.
+     * @property {string} address.shippingToGc.lastName - The last name field in the shipping section.
+     * @property {string} address.shippingToGc.phoneticFirstName - The phonetic first name field in the shipping section.
+     * @property {string} address.shippingToGc.phoneticLastName - The phonetic last name field in the shipping section.
+     * @property {string} address.shippingToGc.line1 - The first address line field in the shipping section.
+     * @property {string} address.shippingToGc.line2 - The second address line field in the shipping section.
+     * @property {string} address.shippingToGc.city - The city field in the shipping section.
+     * @property {string} address.shippingToGc.companyName - The company name field in the shipping section.
+     * @property {string} address.shippingToGc.division - The company division field in the shipping section.
+     * @property {string} address.shippingToGc.phoneNumber - The phone number field in the shipping section.
+     * @property {string} address.shippingToGc.countrySubdivision - The state/country subdivision field in the shipping section.
+     * @property {string} address.shippingToGc.postalCode - The postal code field in the shipping section.
+     * @property {string} address.shippingToGc.country - The country field in the shipping section.
+     * @property {string} address.shippingToGc.emailAddress - The e-mail address field in the shipping section.
+     * @property {Object} shippingEstimator - The shipping estimator section.
+     * @property {string} shippingEstimator.container - The container for the shipping estimator.
+     * @property {string} shippingEstimator.shipCountry - The HTMLInputElement of the shipping country.
+     * @property {string} shippingEstimator.shippingOptionID - The HTMLInputElement of the shipping option.
+     * @property {Object} delayedPaymentRefund - The delayed payment refund section.
+     * @property {string} delayedPaymentRefund.container - The container for the delayed payment refund.
+     * @property {string} delayedPaymentRefund.replacement - The HTMLElement to replace for rendering the DigitalRiver.js delayed payment refund element.
+     * @property {Object} confirmOrder - The confirm order section.
+     * @property {string} confirmOrder.confirmOrderForm - The confirm order form.
+     * @property {string} confirmOrder.paymentContainer - The container for the payment section of the confirm order form.
+     * @property {string} confirmOrder.replacement - The HTMLElement to replace for rendering the DigitalRiver.js elements.
+     * @property {string} confirmOrder.submitBtnProcessing - The container for the Processing Your Request message that is displayed after the checkout button is clicked.
+     * @category Utility
+     * @instance
+     */
+    selector: {
+        checkoutForm: "form[name='CheckoutAddressForm']",
+        checkoutBtn: "#checkoutButton",
+        threePgCheckoutBtn: "#dr_shoppingCartCheckoutButton",
+        errorModal: "#drjs_errorModal",
+        cloudPaySourceId: "input[name='cloudPaySourceID']",
+        cloudPayPayment: "#dr_CloudPay",
+        cloudPayTC: "#dr_cloudPayTsAndCs",
+        cloudPayTCContainer: ".dr_cloudPayTsAndCs",
+        cloudPayTCError: "#dr_cloudPayTsAndCs+.dr_error",
+        cloudPayTermsAcceptance: "input[name='cloudPayTermsAcceptance']",
+        cloudPayBtn: ".dr_cloudPayBtn",
+        address: {
+            shippingContainer: "#dr_shippingContainer",
+            billingContainer: "#dr_billingContainer",
+            shippingDifferentThanBilling: "#shippingDifferentThanBilling",
+            billingToGc: {
+                firstName: "input[name='BILLINGname1']",
+                lastName: "input[name='BILLINGname2']",
+                phoneticFirstName: "input[name='BILLINGphoneticName1']",
+                phoneticLastName: "input[name='BILLINGphoneticName2']",
+                line1: "input[name='BILLINGline1']",
+                line2: "input[name='BILLINGline2']",
+                city: "input[name='BILLINGcity'],select[name='BILLINGcity']",
+                companyName: "input[name='BILLINGcompanyName']",
+                division: "input[name='BILLINGdivision']",
+                phoneNumber: "input[name='BILLINGphoneNumber']",
+                countrySubdivision: "input[name='BILLINGstate'],select[name='BILLINGstate']",
+                postalCode: "input[name='BILLINGpostalCode']",
+                country: "input[name='BILLINGcountry'],select[name='BILLINGcountry']",
+                emailAddress: "input[name='EMAILemail'],input[name='EMAILconfirmEmail']"
+            },
+            shippingToGc: {
+                firstName: "input[name='SHIPPINGname1']",
+                lastName: "input[name='SHIPPINGname2']",
+                phoneticFirstName: "input[name='SHIPPINGphoneticName1']",
+                phoneticLastName: "input[name='SHIPPINGphoneticName2']",
+                line1: "input[name='SHIPPINGline1']",
+                line2: "input[name='SHIPPINGline2']",
+                city: "input[name='SHIPPINGcity'],select[name='SHIPPINGcity']",
+                companyName: "input[name='SHIPPINGcompanyName']",
+                division: "input[name='SHIPPINGdivision']",
+                phoneNumber: "input[name='SHIPPINGphoneNumber']",
+                countrySubdivision: "input[name='SHIPPINGstate'],select[name='SHIPPINGstate']",
+                postalCode: "input[name='SHIPPINGpostalCode']",
+                country: "input[name='SHIPPINGcountry'],select[name='SHIPPINGcountry']"
+            }
+        },
+        shippingEstimator: {
+            container: "#dr_shippingEstimator",
+            shipCountry: "input[name='selectedCountry'],select[name='selectedCountry']",
+            shippingOptionID: "input[name='shippingOptionID'],select[name='shippingOptionID']"
+        },
+        delayedPaymentRefund:{
+            container: "#dr_DelayedPaymentRefund",
+            replacement: "p:first"
+        },
+        confirmOrder: {
+            confirmOrderForm: "form[name='CheckoutConfirmOrderForm']",
+            paymentContainer: "#dr_confirmPaymentMethod",
+            replacement: "",
+            submitBtnProcessing: ".dr_submitButtonProcessing",
+            termsOfSaleAcceptance: "#dr_TermsOfSaleAcceptance"
+        }
+    },
+    elements: {
+        offlineRefund: {
+            elementId: "dr_offlineRefund",
+            style: {
+                base: {},
+                empty: {},
+                complete: {},
+                invalid: {},
+            }
+        },
+        pendingFundsInstruction:{
+            elementId: "dr_paymentInstruction",
+            emptyValueSelector: "li"
+        },
+        billingOption: {
+            elementId: "dr_billingOption"
+        }
+    },
+    /**
+     * The payment method configurations.
+     * @name payments
+     * @type { Object.&lt;string, module:Config.PaymentConfigDefinition> }
+     * @memberOf module:Config
+     * @property {module:Config.PaymentConfigDefinition} applePay - Apple Pay
+     * @property {module:Config.PaymentConfigDefinition} googlePay - Google Pay
+     * @property {module:Config.PaymentConfigDefinition} creditCard - Credit Card
+     * @category Utility
+     * @instance
+     */
+    payments: {
+        /**
+         * Credit cards supported: American Express, Diners, Discover, JCB, Maestro, MasterCard, and Visa. Details of the credit card can be found in the source.
+         * @module creditCard
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/credit-cards
+         * @category PaymentMethods
+         * @returns {module:Config.PaymentConfigDefinition}
+         */
+        creditCard: {
+            name: "Credit Card",
+            elementId: "dr_creditCard",
+            mountElement: {
+                elements: {
+                    cardnumber:{
+                        id: "dr_cardNumber"
+                    },
+                    cardexpiration:{
+                        id: "dr_cardExpiration"
+                    },
+                    cardcvv:{
+                        id: "dr_cardCvv"
+                    }
+                },
+            },
+            disable: true,
+            show: false,
+            style: {},
+            classes: {
+                base: "dr_creditCard",
+                complete: "dr_complete",
+                empty: "dr_empty",
+                focus: "dr_focus",
+                invalid: "dr_error",
+                webkitAutofill: "autofill"
+            },
+            amountsEstimated: true,
+            supportedRecurringPayments: true,
+            supportedGeographies: [],
+            supportedCurrencies: ["AED","ARS","AUD","BHD","BRL","CAD","CHF","CLP","CNY","COP","CZK","DKK","EGP","ETB","EUR","GBP","HKD","IDR","ILS","INR","JOD","JPY","KRW","KW","LBP","MXN","MYR","NOK","NZD","OMR","PHP","PLN","QAR","RUB","SAR","SEK","SGD","THB","TRY","TWD","UAH","USD","ZAR"],
+        },
+        /**
+         * Apple Pay
+         * @module applePay
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/apple-pay
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        applePay: {
+            name: "Apple Pay",
+            description: "",
+            elementId: "dr_applePayBtn",
+            disable: true,
+            show: false,
+            route: "info", //info,confirm,thankyou
+            style: {
+                buttonType: "plain",
+                buttonColor: "light-outline",
+                buttonLanguage: "en"
+            },
+            classes: {
+                base: "dr_cloudPayBtn"
+            },
+            supportedRecurringPayments: false,
+            supportedGeographies: ["AE","AT","AU","BE","BG","BR","CA","CH","CN","CY","CZ","DE","DK","EE","ES","FI","FO","FR","GB","GG","GL","GR","HK","HR","HU","IE","IM","IS","IT","JE","JP","KZ","LI","LT","LU","LV","MC","MO","MT","NL","NO","NZ","PL","PT","RO","RU","SA","SE","SG","SI","SK","SM","TW","UA","US"],
+            supportedCurrencies: ["AED","ARS","AUD","BHD","BRL","CAD","CHF","CLP","CNY","COP","CZK","DKK","EGP","ETB","EUR","GBP","HKD","IDR","ILS","INR","JOD","JPY","KRW","KWD","LBP","MXN","MYR","NOK","NZD","OMR","PHP","PLN","QAR","RUB","SAR","SEK","SGD","THB","TRY","TWD","UAH","USD","ZAR"]
+        },
+        /**
+         * Google Pay
+         * @module googlePay
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/google-pay
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        googlePay: {
+            name: "Google Pay",
+            description: "",
+            elementId: "dr_googlePayBtn",
+            disable: true,
+            show: false,
+            route: "info", //info,confirm,thankyou
+            style: {
+                buttonType: "long",
+                buttonColor: "light",
+                buttonLanguage: "en"
+            },
+            classes: {
+                base: "dr_cloudPayBtn"
+            },
+            supportedRecurringPayments: true,
+            supportedGeographies: ["AE","AR","AS","AT","AU","BE","BG","BH","BR","CA","CH","CL","CO","CZ","DE","DK","EE","EG","ES","FI","FR","GB","GR","HK","HR","ID","IE","IL","IN","IT","JO","JP","KW","LB","LT","LU","MX","MY","NL","NO","NZ","OM","PA","PE","PH","PL","PT","QA","RO","RU","SA","SE","SG","SK","TH","TR","TW","UA","UM","US","ZA"],
+            supportedCurrencies: ["AED","ARS","AUD","BHD","BRL","CAD","CHF","CLP","CNY","COP","CZK","DKK","EGP","ETB","EUR","GBP","HKD","IDR","ILS","INR","JOD","JPY","KRW","KWD","LBP","MXN","MYR","NOK","NZD","OMR","PHP","PLN","QAR","RUB","SAR","SEK","SGD","THB","TRY","TWD","UAH","USD","ZAR"]
+        },
+        /**
+         * Direct Debit
+         * @module directDebit
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/direct-debit
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        directDebit: {
+            name: "Direct Debit",
+            elementId: "dr_directDebit",
+            disable: true,
+            show: false,
+            supportedRecurringPayments: true,
+            supportedGeographies: ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LV","LI","LT","LU","MT","MC","NL","NO","PL","PT","RO","SM","SK","SI","ES","SE","CH","GB","VA","AD"],
+            supportedCurrencies: ["EUR"]
+        },
+        /**
+         * Direct Debit GB
+         * @module directDebitGB
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/direct-debit
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        directDebitGb: {
+            name: "Direct Debit",
+            elementId: "dr_directDebitGb",
+            disable: true,
+            show: false,
+            supportedRecurringPayments: true,
+            supportedGeographies: ["GB"],
+            supportedCurrencies: ["GBP"]
+        },
+        /**
+         * Wire Transfer
+         * @module wireTransfer
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/wire-transfer
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        wireTransfer: {
+            name: "Wire Transfer",
+            elementId: "dr_wireTransfer",
+            disable: true,
+            show: false,
+            supportedGeographies: ["AT","AU","BE","BH","CA","CH","CY","CZ","DE","EE","ES","FI","FR","GB","GR","HK","HU","IE","IT","JP","KW","LU","LV","MT","MY","NL","NO","NZ","PL","PT","QA","RO","RU","SE","SG","SI","SK","TH","US","ZA"],
+            supportedCurrencies: ["AUD","BHD","CAD","CHF","CZK","DKK","EUR","GBP","HKD","HUF","JPY","KWD","MYR","NOK","NZD","PLN","QAR","RUB","SEK","SGD","THB","USD","ZAR"]
+        },
+        /**
+         * PayPal
+         * @module payPal
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/paypal
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        payPal: {
+            name: "PayPal",
+            recurringName: "payPalBilling",
+            elementId: "dr_payPalBtn",
+            disable: true,
+            show: false,
+            route: "confirm", //info,confirm,thankyou
+            style: {
+                layout: "horizontal",
+                label: "checkout",
+                size: "responsive",
+                color: "gold",
+                shape: "rect",
+                tagline: "false"
+            },
+            classes: {
+                base: "dr_cloudPayBtn"
+            },
+            button: {
+                funding: {
+                    allowed: ["card"], //Global.paypal.FUNDING.CARD
+                    disallowed: ["credit"] //Global.paypal.FUNDING.CREDIT
+                },
+            },
+            amountsEstimated: true,
+            supportedRecurringPayments: true,
+            supportedGeographies: ["AE","AS","AT","AU","BD","BE","BG","BR","BV","CA","CC","CH","CK","CX","CY","CZ","DE","DK","EC","EE","ES","FI","FM","FO","FR","GB","GF","GL","GR","GS","GU","HK","HM","HU","IE","IL","IO","IT","JP","KI","LI","LT","LU","LV","MC","MH","MP","MT","MX","NF","NL","NO","NU","NZ","PA","PE","PH","PL","PM","PN","PR","PT","RE","RO","RU","SE","SG","SI","SJ","SK","SM","SV","SH","TC","TH","TK","TV","TW","UM","US","VA","VE"],
+            supportedCurrencies: ["AUD","BRL","CAD","CHF","CZK","DKK","EUR","GBP","HKD","HUF","ILS","JPY","MXN","NOK","NZD","PHP","PLN","RUB","SEK","SGD","THB","TWD","USD"],
+            redirectOverlay: {
+                type: "open"
+            }
+        },
+        /**
+         * Korean - Payco
+         * @module payco
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/korea-bank-transfer
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        payco: {
+            name: "PAYCO",
+            elementId: "dr_payco",
+            disable: true,
+            show: false,
+            //oneTimeRedirect: true,
+            supportedGeographies: ["KR"],
+            supportedCurrencies: ["KRW"]
+        },
+        /**
+         * Korean - Bank Transfer
+         * @module bankTransfer
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/korea-bank-transfer
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        bankTransfer: {
+            name: "Bank Transfer",
+            elementId: "dr_bankTransfer",
+            disable: true,
+            show: false,
+            //oneTimeRedirect: true,
+            supportedGeographies: ["KR"],
+            supportedCurrencies: ["KRW"]
+        },
+        /**
+         * bPay
+         * @module bPay
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/bpay
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        bPay: {
+            name: "BPAY",
+            elementId: "dr_bPay",
+            disable: true,
+            show: false,
+            supportedGeographies: ["AU"],
+            supportedCurrencies: ["AUD"]
+        },
+        /**
+         * Internet Bank Payment (IBP)
+         * @module onlineBanking
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/internet-bank-payment-ibp
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        onlineBanking: {
+            name: "Online Banking - IBP",
+            elementId: "dr_onlineBanking",
+            mountElement: {
+                elements: {
+                    onlinebanking: {
+                        id: "drjs_onlineBankingElement"
+                    }
+                },
+                required: ["country","currency"]
+            },
+            disable: true,
+            show: false,
+            classes: {
+                base: "dr_cloudPay",
+                complete: "dr_complete",
+                empty: "dr_empty",
+                focus: "dr_focus",
+                invalid: "dr_error"
+            },
+            supportedGeographies: ["AT","DE","FI","NL","PL","SE"],
+            supportedCurrencies: ["EUR","PLN","SEK"]
+        },
+        /**
+         * Konbini
+         * @module konbini
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/konbini-1
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        konbini: {
+            name: "コンビニ決済",
+            elementId: "dr_konbini",
+            mountElement: {
+                elements: {
+                    konbini: {
+                        id:"drjs_konbiniElement"
+                    }
+                },
+                required: ["country","currency"]
+            },
+            disable: true,
+            show: false,
+            classes: {
+                base: "dr_cloudPay",
+                complete: "dr_complete",
+                empty: "dr_empty",
+                focus: "dr_focus",
+                invalid: "dr_error"
+            },
+            supportedGeographies: ["JP"],
+            supportedCurrencies: ["JPY"]
+        },
+        /**
+         * Klarna
+         * @module klarnaCredit
+         * @see https://developers.digitalriver.com/payment-integrations/digitalriver.js/payment-methods/klarna
+         * @category PaymentMethods
+         * @type {module:Config.PaymentConfigDefinition}
+         */
+        klarnaCredit: {
+            name: "Klarna",
+            recurringName: "klarnaCreditRecurring",
+            elementId: "dr_klarnaCredit",
+            disable: true,
+            show: false,
+            supportedRecurringPayments: true,
+            supportedGeographies: ["AT","DK","FI","DE","NL","NO","SE","GB","US"],
+            supportedCurrencies: ["DKK","EUR","GBP","NOK","SEK","USD"],
+            activeAcceptance: true,
+            saveAsPaymentOption: false
+        },
+    },
+    labels: {
+        DETAILS: "details",
+        CLOSE: "Close",
+        DISCOUNT: "Discount",
+        TAX: "Tax",
+        SHIPPING_AND_HANDLING: "Shipping and Handling",
+        ESTIMATED_SHIPPING_AND_HANDLING: "Estimated Shipping and Handling",
+        PMT_REDIRECT_NOTICE: "You are being redirected to the {0} site to complete payment.",
+        CLICKHERE: "Click here",
+        BACK_TO_CART: "Back To Shopping Cart",
+        INVALID_BILLING_COUNTRY: "Invalid Billing Country",
+        SUB_TOTAL: "Sub Total",
+        TOTAL: "Total",
+        CHECKOUT_PAYMENT_COMPLETED: "Payment Completed",
+        VALIDATOR_INVALID_TYPE: "Enter a valid value.",
+        CHECKOUT: "Checkout",
+        error: {
+            "PAYMENT_AUTHORIZATION_FAILED":"Payment Authorization Failed",
+            "restricted-ship-to-country": "Invalid Shipping Country",
+            "restricted-bill-to-country": "Invalid Billing Country",
+            "cart-payment-failure": "Payment Authorization Failed",
+            "apply-payment-failure": "Payment Authorization Failed"
+        }
+    },
+    /**
+     * The template container.
+     * @typedef module:Config.TemplateDefinition
+     * @property {string} error - The template for the error dialog.
+     * @property {string} payment - The template for the payment in the payment section.
+     * @example
+     * template: {
+     *   error: '&lt;script type="text/template">' +
+     *     '&lt;div class="modal fade in" id="drjs_errorModal" role="dialog" aria-hidden="true">' +
+     *     '&lt;div class="modal-dialog modal-lg modal-content" role="document">' +
+     *     '&lt;div class="modal-body">' +
+     *     '&lt;code class="dr_error">{error}&lt;/code>' +
+     *     '&lt;/div>' +
+     *     '&lt;div class="modal-footer">' +
+     *     '&lt;button type="button" class="btn btn-default btn-secondary" data-dismiss="modal">{close}&lt;/button>' +
+     *     '&lt;/div>' +
+     *     '&lt;/div>' +
+     *     '&lt;/div>' +
+     *     '&lt;/script>',
+     *   payment: '&lt;script type="text/template" id="dr_paymentTemplate">' +
+     *     '&lt;div class="dr_paymentMethodBlock" id="dr_{paymentId}">' +
+     *     '&lt;div class="dr_billingColumn" id="dr_{paymentId}RadioSelect">' +
+     *     '&lt;div class="radio radio-wide">' +
+     *     '&lt;input type="radio" name="paymentMethodID" id="drjs_{paymentId}" />' +
+     *     '&lt;label class="dr_label_paymentMethodName" for="drjs_{paymentId}">' +
+     *     '&lt;strong class="dr_paymentOptionItem">{name}&lt;/strong>' +
+     *     '&lt;span class="dr_expandDetails">(&lt;a href="#" data-expand-section="dr_ExpandPaymentDetailsdrjs_{paymentId}">{details}&lt;/a>)&lt;/span>' +
+     *     '&lt;/label>' +
+     *     '&lt;/div>' +
+     *     '&lt;/div>' +
+     *     '&lt;div class="dr_ExpandPaymentDetailsSection" id="dr_ExpandPaymentDetailsdrjs_{paymentId}" style="display: none;">{description}&lt;div id="drjs_{paymentId}Element">&lt;/div>' +
+     *     '&lt;/div>' +
+     *     '&lt;/script>'
+     * }
+     */
+    template: {
+        error: '&lt;script type="text/template">' +
+            '&lt;div class="modal fade in" id="drjs_errorModal" role="dialog" aria-hidden="true">' +
+            '&lt;div class="modal-dialog modal-lg modal-content" role="document">' +
+            '&lt;div class="modal-body">' +
+            '&lt;code class="dr_error">{error}&lt;/code>' +
+            '&lt;/div>' +
+            '&lt;div class="modal-footer">' +
+            '&lt;button type="button" class="btn btn-default btn-secondary" data-dismiss="modal">{close}&lt;/button>' +
+            '&lt;/div>' +
+            '&lt;/div>' +
+            '&lt;/div>' +
+            '&lt;/script>',
+        payment: '&lt;script type="text/template" id="dr_paymentTemplate">' +
+            '&lt;div class="dr_paymentMethodBlock" id="dr_{paymentId}">' +
+            '&lt;div class="dr_billingColumn" id="dr_{paymentId}RadioSelect">' +
+            '&lt;div class="radio radio-wide">' +
+            '&lt;input type="radio" name="paymentMethodID" id="drjs_{paymentId}" />' +
+            '&lt;label class="dr_label_paymentMethodName" for="drjs_{paymentId}">' +
+            '&lt;strong class="dr_paymentOptionItem">{name}&lt;/strong>' +
+            '&lt;span class="dr_expandDetails">(&lt;a href="#" data-expand-section="dr_ExpandPaymentDetailsdrjs_{paymentId}">{details}&lt;/a>)&lt;/span>' +
+            '&lt;/label>' +
+            '&lt;/div>' +
+            '&lt;/div>' +
+            '&lt;div class="dr_ExpandPaymentDetailsSection" id="dr_ExpandPaymentDetailsdrjs_{paymentId}" style="display: none;">{description}&lt;div id="drjs_{paymentId}Element">&lt;/div>' +
+            '&lt;/div>' +
+            '&lt;/script>',
+        legalFooter: '&lt;div>' +
+            '&lt;p class="dr_legalResellerStatement">{resellerDisclosure.localizedText}&lt;/p>' +
+            '&lt;p class="dr_legalPolicyLinks">' +
+            '&lt;a href="{privacyPolicy.url}" target="_blank">{privacyPolicy.localizedText}&lt;/a>' +
+            '&lt;a href="{cookiePolicy.url}" target="_blank">{cookiePolicy.localizedText}&lt;/a>' +
+            '&lt;a href="{legalNotice.url}" target="_blank">{legalNotice.localizedText}&lt;/a>' +
+            '&lt;a href="{warrantyInformation.url}" target="_blank">{warrantyInformation.localizedText}&lt;/a>' +
+            '&lt;a href="{termsOfSale.url}" target="_blank">{termsOfSale.localizedText}&lt;/a>' +
+            '&lt;a href="{californiaPrivacyRights.url}" target="_blank">{californiaPrivacyRights.localizedText}&lt;/a>' +
+            '&lt;a href="{cancellationRights.url}" target="_blank">{cancellationRights.localizedText}&lt;/a>' +
+            '&lt;/p>' +
+            '&lt;/div>'
+    },
+    /**
+     * The redirect overlay.
+     * @typedef module:Config.RedirectOverlayDefinition
+     * @property {string} id - The ID of the overlay.
+     * @property {string} [type] - The type of overlay: 'open' will popup a new window/tab, 'iframe' will embed an iframe inside the overlay.
+     * @property {string} [inlineStyle] - The styles to override the default styles of the overlay.
+     * @property {string} [buttonClass] - The class name of the button in the overlay.
+     * @property {int} [timeout] - The number of milliseconds to wait before checking the status.
+     * @property {int} [iframePadding] - The padding of the iframe.
+     * @example
+     * redirectOverlay: {
+     *   id: "drjs_overlay",
+     *   type: "open", //iframe,open
+     *   buttonClass: "dr_button",
+     *   inlineStyle: "#drjs_overlay{display: block;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(1,1,1,0.85);} #drjs_overlay>div{position: absolute; text-align: center; width: 100%;} #drjs_overlay>div.drjs_open{top: 40%;} #drjs_overlay>div.drjs_iframe{padding-top:50px} #drjs_overlay h4 {color:#eee;margin:4px;} #drjs_overlay iframe {width:98%; border:0; } #drjs_overlay .drjs_backToCart { position: absolute; right: 10px; top: 8px; color: #eee; } #drjs_overlay .drjs_close { position: absolute; right: 10px; top: 8px; width: 32px; height: 32px; opacity: 0.3;z-index:10000; } #drjs_overlay .drjs_close:hover { opacity: 1;}#drjs_overlay .drjs_close:before,#drjs_overlay .drjs_close:after { position: absolute; left: 15px; content: ' '; height: 33px; width: 2px;background-color: #fff; } #drjs_overlay .drjs_close:before { transform: rotate(45deg); } #drjs_overlay .drjs_close:after {   transform: rotate(-45deg); }",
+     *   timeout: 5000,
+     *   iframePadding: 60
+     * }
+     */
+    redirectOverlay: {
+        id: "drjs_overlay",
+        type: "open", //iframe,open
+        buttonClass: "dr_button",
+        inlineStyle: "#drjs_overlay{display: block;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(1,1,1,0.85);} #drjs_overlay>div{position: absolute; text-align: center; width: 100%;} #drjs_overlay>div.drjs_open{top: 40%;} #drjs_overlay>div.drjs_iframe{padding-top:50px} #drjs_overlay h4 {color:#eee;margin:4px;} #drjs_overlay iframe {width:98%; border:0; } #drjs_overlay .drjs_backToCart { position: absolute; right: 10px; top: 8px; color: #eee; } #drjs_overlay .drjs_close { position: absolute; right: 10px; top: 8px; width: 32px; height: 32px; opacity: 0.3;z-index:10000; } #drjs_overlay .drjs_close:hover { opacity: 1;}#drjs_overlay .drjs_close:before,#drjs_overlay .drjs_close:after { position: absolute; left: 15px; content: ' '; height: 33px; width: 2px;background-color: #fff; } #drjs_overlay .drjs_close:before { transform: rotate(45deg); } #drjs_overlay .drjs_close:after {   transform: rotate(-45deg); }",
+        timeout: 5000,
+        iframePadding: 60
+    },
+    /**
+     * The options for AXIOS.
+     * @name apiOption
+     * @type {Object}
+     * @memberOf module:Config
+     * @instance
+     * @property {int} [maxRedirects=0]
+     * @property {string} [responseType='json']
+     * @property {int} [timeout=250000]
+     * @property {Object} [headers={}]
+     * @property {Object} [params={expand:'all',format:'json'}] - The default parameters.
+     */
+    apiOption: {
+        maxRedirects: 0,
+        responseType: 'json',
+        timeout: 250000,
+        headers: {},
+        params: {
+            expand: 'all',
+            format: 'json'
+        }
+    },
+    /**
+     * The external libraries used.
+     * @name lib
+     * @type {Object}
+     * @memberOf module:Config
+     * @instance
+     * @property {Object} drjs
+     * @property {Boolean} drjs.disable=false
+     * @property {Boolean} drjs.url=https://js.digitalriver.com/v1/DigitalRiver.js
+     * @property {string} jQuery
+     * @property {Boolean} jQuery.disable=true - Enable if there is a jQuery conflict or if a legacy version was loaded.
+     * @property {string} jQuery.url=https://ui1.img.digitalrivercontent.net/Storefront/jquery/jquery-3.3.1.min.js
+     * @property {string} paypal
+     * @property {string} paypal.url=https://www.paypalobjects.com/api/checkout.js - The PayPal API SDK.
+     * @property {string} gibberishAES
+     * @property {string} gibberishAES.url=https://cdnjs.cloudflare.com/ajax/libs/gibberish-aes/1.0.0/gibberish-aes.min.js - The library for payload encryption.
+     */
+    lib: {
+        drjs: {
+            disable: false,
+            url: "https://js.digitalriver.com/v1/DigitalRiver.js",
+            options: {}
+        },
+        jQuery: {
+            disable: true,
+            url: "https://ui1.img.digitalrivercontent.net/Storefront/jquery/jquery-3.3.1.min.js"
+        },
+        paypal: {
+            url: "https://www.paypalobjects.com/api/checkout.js"
+        },
+        gibberishAES: {
+            url: "https://cdnjs.cloudflare.com/ajax/libs/gibberish-aes/1.0.0/gibberish-aes.min.js"
+        }
+    },
+    cloudPayPayload: {},
+    entity: {
+        code: '',
+        legalFooter: ''
+    },
+    debug: false,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

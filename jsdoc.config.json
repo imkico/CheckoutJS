@@ -1,0 +1,43 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": "src",
+    "includePattern": "\\.(js)$",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": [
+    "plugins/markdown",
+    "jsdoc-mermaid",
+    "node_modules/better-docs/category"
+  ],
+  "opts": {
+    "template": "node_modules/better-docs",
+    "encoding": "utf8",
+    "destination": "docs/",
+    "readme": "./readme.md",
+    "tutorials": "./tutorials",
+    "recurse": true,
+    "verbose": false
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "better-docs": {
+      "name": "CheckoutJS Documentation",
+      "logo": "https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png",
+      "hideGenerator": true,
+      "navigation": [
+        {
+          "label": "Github",
+          "href": "https://github.digitalriverws.net/ProfessionalServices/CheckoutJS"
+        },
+        {
+          "label": "Demo Application",
+          "href": "https://github.digitalriverws.net/pages/ProfessionalServices/CheckoutJS/demo/index.html"
+        }
+      ]
+    }
+  }
+}

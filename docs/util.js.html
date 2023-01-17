@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> util.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>util.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import axios from 'axios';
+import parseurl from 'parseurl';
+import {Base} from './base';
+import {Shopper} from "./shopper";
+import {_CHECKOUTJS, LOGGING, SHOPPER, CONFIG, UTIL, SHOPPERAPI, UNDEFINED, PAYMENTS, CARTDATA} from "./keywords";
+
+const Global = (typeof window !== UNDEFINED ? window : global);
+
+const isBrowser = typeof window !== UNDEFINED &amp;&amp; typeof window.document !== UNDEFINED;
+
+/* eslint-disable no-restricted-globals */
+const isWebWorker =
+    typeof self === 'object' &amp;&amp;
+    self.constructor &amp;&amp;
+    self.constructor.name === 'DedicatedWorkerGlobalScope';
+
+/* eslint-enable no-restricted-globals */
+const isNode =
+    typeof process !== UNDEFINED &amp;&amp;
+    process.versions != null &amp;&amp;
+    process.versions.node != null;
+/**
+ * @class Util
+ * @classdesc The base utility class.
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {Session} [session]
+ * @category Utility
+ */
+class Util extends Base {
+
+    constructor(parent, collection, session) {
+        super(parent,Object.assign({
+            excludeMethods:{ constructor:true },
+            writableMethods:{
+                log:true,
+                errorMessage:true,
+                extractErrorMessage:true,
+                encryptPayload:true,
+                hasSpecialsCharacters:true,
+                useRecurringPayment:true,
+                getSourcePaymentType:true,
+                axios:true,
+                error:true
+            }
+        },collection));
+        const _this = this[_CHECKOUTJS];
+        this.extend = extend;
+        this.isBrowser = isBrowser;
+        this.isWebWorker = isWebWorker;
+        this.isNode = isNode;
+
+        /**
+         * The HTTP client library for API requests.
+         * @name axios
+         * @type Axios
+         * @memberof Util
+         * @instance
+         * @see https://github.com/axios/axios
+         */
+        this.axios = Global.axios?Global.axios:axios;
+
+        this.axios.interceptors.response.use((response) =>{
+            if(response) {
+                response.config.runningTimes = 1;
+            }
+            return response;
+        }, async (error) => {
+            if(error.config &amp;&amp; !error.config.runningTimes) error.config.runningTimes = 1;
+            if (error.response &amp;&amp; 401 === error.response.status &amp;&amp; error.config.runningTimes&lt;2) {
+                error.config.runningTimes++;
+                if(!error.config.skipError) {
+                    await parent[SHOPPERAPI].refreshToken();
+                    return _this[UTIL].axios.request(error.config);
+                }
+            }
+            return Promise.reject(error);
+        });
+
+        session = session || {};
+        const cache = {};
+
+        /**
+         * Stores the value for the specified key in the session.
+         * @param {string} name - The property name.
+         * @param {string} value - The property value.
+         * @returns {Promise&lt;void>}
+         */
+        this.setValue = async (name, value) => {
+            const _cjs = parent;
+            const _shopper = _cjs[SHOPPER];
+            if(_shopper &amp;&amp; _cjs[CONFIG].siteId) {
+                const prefix = await _shopper.getPrefix();
+                name = prefix + name;
+                if (value &amp;&amp; typeof value === 'object') {
+                    try {
+                        session[name] = JSON.stringify(value);
+                    }catch(ex){
+                        console.error(ex);
+                        console.dir(value);
+                    }
+                } else if (!value) {
+                    delete session[name];
+                } else {
+                    session[name] = value;
+                }
+            }
+        };
+
+        /**
+         * Returns the value of the specified key from the session.
+         * @param {string} name - The property name.
+         * @returns {Promise&lt;Object|null>}
+         */
+        this.getValue = async (name) => {
+            const _cjs = parent;
+            const _shopper = _cjs[SHOPPER];
+            if(_shopper) {
+                const prefix = await _shopper.getPrefix();
+                name = prefix + name;
+                let _value = session[name];
+                if (_value) {
+                    try {
+                        _value = JSON.parse(session[name]);
+                        // eslint-disable-next-line no-empty
+                    } catch (ex) {
+                    }
+                    return (_value);
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Deletes the specified key and its associated value from the session.
+         * @param {string} name - The property name.
+         * @returns {Promise&lt;void>}
+         */
+        this.removeValue = async (name) => {
+            const _cjs = parent;
+            const prefix = await _cjs[SHOPPER].getPrefix();
+            name = prefix + name;
+            delete session[name];
+        };
+
+        /**
+         * Stores the value for the specified key in the internal cache object.
+         * @param {string} name - The property name.
+         * @param {string} value - The property value.
+         * @returns {Promise&lt;void>}
+         */
+        this.setCache = async (name, value) => {
+            cache[name] = value;
+        };
+
+        /**
+         * Returns the value of the specified key from the internal cache object.
+         * @param {string} name - The property name.
+         * @returns {Promise&lt;Object|null>}
+         */
+        this.getCache = async (name) => {
+            return (name?cache[name]:cache);
+        };
+
+        /**
+         * Deletes the specified key and its associated value from the internal cache object.
+         * @param {string} name - The property name.
+         * @returns {Promise&lt;void>}
+         */
+        this.removeCache = async (name) => {
+            delete cache[name];
+        };
+
+    }
+
+    parseURL(url, originalUrl) {
+        const _url = parseurl({
+            originalUrl: originalUrl,
+            url: url
+        });
+
+        let match;
+        const pl     = /\+/g,
+              search = /([^&amp;=]+)=?([^&amp;]*)/g,
+              decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+              queryParams = {};
+        // eslint-disable-next-line no-cond-assign
+        while (match = search.exec(_url.query)) {
+            queryParams[decode(match[1])] = decode(match[2]);
+        }
+        _url.queryParams = queryParams;
+        return _url;
+    }
+
+    format(txt, obj, replaceElement = false) {
+        if (obj) {
+            txt = txt.replace(/{([\w.]+)}/g, function (prop) {
+                const k = prop.substr(1, prop.length - 2);
+                let innerObj = obj;
+                k.split('.').forEach((n)=>{
+                    if (innerObj &amp;&amp; innerObj.hasOwnProperty(n)) {
+                        innerObj = innerObj[n] || '';
+                    }else{
+                        innerObj = null;
+                    }
+                });
+                if (innerObj!==null)
+                    return innerObj || '';
+                else if(replaceElement)
+                    return '';
+                else
+                    return prop;
+            });
+        }
+        return txt;
+    }
+
+    error() {
+        const _cjs = this[_CHECKOUTJS];
+        const _error = _cjs[CONFIG].debug ? console.error.bind(Global.console) : Global.console.error;
+        _error.apply(_cjs, arguments);
+    }
+
+    replaceErrors(key, value) {
+        if (value instanceof Error) {
+            const error = {};
+            Object.getOwnPropertyNames(value).forEach(function (key) {
+                error[key] = value[key];
+            });
+            return error;
+        }
+        return value;
+    }
+
+    removeTag(html, emptyValueSelector='*', match = /{([\w.]+)}/g) {
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(html, 'text/html');
+        if(emptyValueSelector &amp;&amp; emptyValueSelector.length) {
+            [...doc.querySelectorAll(emptyValueSelector)]
+                .filter(a => a.innerHTML.match(match))
+                .forEach(a => a.remove());
+        }
+        return doc.body.innerHTML;
+    }
+
+    async _initConfig(cfg) {
+        const _cjs = this[_CHECKOUTJS];
+        let _cfg = {};
+        if(typeof cfg === 'string') {
+            try {
+                _cfg = JSON.parse(cfg);
+                return (_cfg);
+            } catch (e) {
+                const urlParam =_cjs[UTIL].parseURL(cfg).path.split('/');
+                if(urlParam &amp;&amp; urlParam[1]==="store" &amp;&amp; urlParam.length>=2) {
+                    _cjs[CONFIG].siteId = urlParam[2];
+                }
+            }
+        }
+        await new Shopper(_cjs);
+        if(cfg &amp;&amp; (!_cfg.apiKey || _cfg.apiKey.length === 0)  &amp;&amp; typeof cfg === "string" &amp;&amp; _cjs[CONFIG].apiKey.length === 0 &amp;&amp; Object.keys(_cfg).length === 0) {
+            _cfg = await _cjs[UTIL].updateConfig(cfg);
+        }
+        return (_cfg);
+    }
+
+    async updateConfig(url, refresh) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _shopper = _cjs[SHOPPER];
+        if(_config.drCheckoutJS !== false) {
+            const options = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                responseType: 'json',
+                timeout: 10000,
+                method: refresh ? 'post' : 'get',
+                data: `locale=${_config.locale}&amp;currency=${_config.currency}`,
+                url: url,
+                withCredentials: true
+            };
+
+            await _shopper.applyHeaders(options);
+
+            const response = await _util.axios(options);
+
+            if (response.data) {
+                const _cfg = response.data;
+                if (_cfg &amp;&amp; typeof _cfg.apiKey === 'object' &amp;&amp; _cfg.apiKey.apiKey &amp;&amp; typeof _cfg.apiKey.apiKey === 'string' ) {
+                    _util.extend(_cfg, _cfg.apiKey);
+                }
+                _util.log('UpdateConfig', _cfg);
+                await _shopper.setShopper({
+                    locale: _cfg.locale,
+                    currency: _cfg.currency,
+                    //isAuthenticated: _cfg.isAuthenticated,
+                    gcCookies: response.headers ? response.headers['set-cookie'] : null
+                });
+                return _cfg;
+            }
+            return response.data;
+        }
+    }
+
+    async APIRequest(options,callback) {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const log = {
+            id: _util.getTime(),
+            api:options.api,
+            method:options.callby,
+            requestParams: options.params || {},
+            requestBody: options.data || {},
+            type:options.method,
+            url:options.url
+        };
+        _cjs.emit(LOGGING,log);
+        try {
+            const response = await _util.axios(options);
+            if (response) {
+                log.responseBody = response.data;
+                if(callback) {
+                    const callBackResponse = await callback(log, response);
+                    if (callBackResponse) {
+                        log.responseBody = callBackResponse;
+                    }
+                }
+                _cjs.emit(LOGGING, log);
+                return log.responseBody;
+            }
+        }catch(ex){
+            log.error = ex;
+            _cjs.emit(LOGGING,log);
+            throw ex;
+        }
+    }
+
+    async log() {
+        const _cjs = this[_CHECKOUTJS];
+        const _log = _cjs[CONFIG].debug ? console.log.bind(Global.console) : Global.console.log;
+        _log.apply(_cjs, arguments);
+    }
+
+    async trace() {
+        const _cjs = this[_CHECKOUTJS];
+        const _trace = _cjs[CONFIG].debug ? console.trace.bind(Global.console) : Global.console.trace;
+        _trace.apply(_cjs, arguments);
+    }
+
+    async errorMessage() {
+        const _cjs = this[_CHECKOUTJS];
+        const _error = _cjs[CONFIG].debug ? console.error.bind(Global.console) : Global.console.error;
+        _error.apply(_cjs, arguments);
+    }
+
+    async extractErrorMessage(ex) {
+        const _cjs = this[_CHECKOUTJS];
+        let message;
+        if(ex) {
+            message = ex.message;
+            if (ex &amp;&amp; ex.response &amp;&amp; ex.response.data &amp;&amp; ex.response.data.errors &amp;&amp; ex.response.data.errors.error.code) {
+                message = ex.response.data.errors.error.code;
+                if (_cjs[CONFIG].labels.error[message]) {
+                    message = _cjs[CONFIG].labels.error[message];
+                }
+            } else if (ex.response &amp;&amp; ex.response.data &amp;&amp; ex.response.data.errors) {
+                message = ex.response.data.errors.error[0].code;
+                if (_cjs[CONFIG].labels.error[message]) {
+                    message = _cjs[CONFIG].labels.error[message];
+                } else {
+                    message = ex.response.data.errors.error[0].description;
+                }
+            } else if (ex.response &amp;&amp; ex.response.data &amp;&amp; ex.response.data.error &amp;&amp; ex.response.data.error_description) {
+                message = ex.response.data.error_description;
+                if (_cjs[CONFIG].labels.error[ex.response.data.error]) {
+                    message = _cjs[CONFIG].labels.error[ex.response.data.error];
+                }
+            } else if (ex.error &amp;&amp; ex.error.errors) {
+                message = ex.error.errors[0].message;
+            } else if (ex.errors) {
+                message = ex.errors[0].message;
+            } else if (ex.message) {
+                message = ex.message;
+            }
+        }
+        return (message);
+    }
+
+    async extractErrorId(ex) {
+        //const _cjs = this[_CHECKOUTJS];
+        let message = {};
+        if(ex) {
+            if (ex &amp;&amp; ex.response &amp;&amp; ex.response.headers) {
+                ['x_request_id','x-dr-requestid'].forEach(function(key){
+                    if(ex.response.headers[key]) {
+                        message[key] = ex.response.headers[key];
+                    }
+                });
+            }
+        }
+        return (message);
+    }
+
+    async encryptPayload(text) {
+        const _cjs = this[_CHECKOUTJS];
+        const AESKey = _cjs[CONFIG].encryptionKey;
+        const crypto = require('crypto');
+        const payload = {
+            original: text,
+            message: text
+        };
+        let AESSetting = {
+            'algorithm':'aes-128-cbc',
+            'iv_type':'NO_IV',
+            'iv':null
+        };
+
+        const stringPadding = function(str, blockSize, padder, format) {
+            str = Global.Buffer.from(str,'utf8').toString(format);
+            let bitLength = str.length*8;
+
+            if(bitLength &lt; blockSize) {
+                for(let i=bitLength;i&lt;blockSize;i+=8) {
+                    str += padder;
+                }
+            } else if(bitLength > blockSize) {
+                while((str.length*8)%blockSize !== 0) {
+                    str+= padder;
+                }
+            }
+            return Global.Buffer.from(str, format).toString('utf8');
+        };
+
+        if (AESKey &amp;&amp; AESKey.length) {
+            let iv=Global.Buffer.alloc(16);
+            let key=Global.Buffer.alloc(16);
+
+            if(AESSetting.iv_type === 'NO_IV'){
+                iv = Global.Buffer.concat([Global.Buffer.from(AESKey )], iv.length);
+                key = Global.Buffer.concat([Global.Buffer.from(AESKey)], key.length);
+            }else if (AESSetting.iv_type === 'STATIC_IV'){
+                iv = Global.Buffer.from(stringPadding(AESSetting.iv,128,0x0,"utf8"));
+                key = Global.Buffer.concat([Global.Buffer.from(AESKey)], key.length);
+            }else if(AESSetting.iv_type === 'DYNAMIC_IV'){
+                iv = crypto.randomBytes(16);
+                key = Global.Buffer.concat([Global.Buffer.from(AESKey)], key.length);
+            }
+
+            const cipher = crypto.createCipheriv(AESSetting.algorithm, key, iv);
+            cipher.setAutoPadding(true);
+            if (AESSetting.iv_type === 'STATIC_IV') {
+                let count = Global.Buffer.byteLength(payload.original);
+                let add = Global.Buffer.byteLength(iv) - (count % Global.Buffer.byteLength(iv));
+                if (add > 0)
+                    payload.original += ' '.repeat(add) + payload.original;
+            }
+
+            let encrypted = cipher.update(payload.original, 'utf8', 'base64');
+            encrypted += cipher.final('base64');
+            payload.message = encrypted;
+        }
+        return (payload.message);
+    }
+
+    async useRecurringPayment(cartData) {
+        const _cjs = this[_CHECKOUTJS];
+        //const _shopper = _cjs[SHOPPER];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _config = _cjs[CONFIG];
+        if(!cartData){
+            cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        }
+
+        let useRecurringPayment = false;
+        if(_config.useRecurringPayment){
+            useRecurringPayment = true;
+        } else {
+            if (cartData &amp;&amp; cartData.cart.lineItems &amp;&amp; cartData.cart.lineItems.lineItem) {
+                const lineItems = cartData.cart.lineItems.lineItem.find((lineItem) => {
+                    const attributes = lineItem.product.customAttributes.attribute.find((attribute) => {
+                        return (
+                            //(attribute.name === "subscriptionType") ||
+                            (attribute.name === "isAutomatic" &amp;&amp; attribute.value === "true")
+                            //(attribute.name === "subscriptionSource")
+                        );
+                    });
+                    return !!attributes;
+                });
+                if (lineItems) {
+                    useRecurringPayment = true;
+                }
+            }
+        }
+        return useRecurringPayment;
+    }
+
+    getSourcePaymentType(type){
+        let _type = type;
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+
+        if(!_config[PAYMENTS][_type]) {
+            let keys = Object.keys(_config[PAYMENTS]);
+            for (let i = 0; i &lt; keys.length; i++) {
+                const payment = _config[PAYMENTS][keys[i]];
+                if(payment &amp;&amp; _type === payment.recurringName) {
+                    _type = keys[i];
+                    break;
+                }
+            }
+        }
+        return _type;
+    }
+
+    isGCPage(cfg) {
+        const _cjs = this[_CHECKOUTJS];
+        if(cfg &amp;&amp; cfg.page){
+            return cfg.page &amp;&amp; cfg.page.length !== 0;
+        }else {
+            return _cjs[CONFIG].page &amp;&amp; _cjs[CONFIG].page.length !== 0;
+        }
+    }
+
+    getUUID() {
+        let d = Date.now();
+        if (typeof performance !== UNDEFINED &amp;&amp; typeof performance.now === 'function'){
+            d += performance.now();
+        }
+        return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            let r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c === 'x' ? r : (r &amp; 0x3 | 0x8)).toString(16);
+        });
+    }
+
+    base64Encode(text) {
+        if(isBrowser){
+            return Global.btoa(text);
+        }else if(isNode) {
+            //return Global.Buffer.from(text).toString('base64');
+        }
+    }
+
+    base64Decode(text) {
+        if(isBrowser){
+            return Global.atob(text);
+        }else if(isNode) {
+            //return Global.Buffer.from(text, 'base64').toString();
+        }
+    }
+
+    isIE() {
+        const userAgent = window.navigator.userAgent;
+        const msie = userAgent.indexOf('MSIE ');
+        if (msie > 0) {
+            return parseInt(userAgent.substring(msie + 5, userAgent.indexOf('.', msie)), 10);
+        }
+
+        const trident = userAgent.indexOf('Trident/');
+        if (trident > 0) {
+            const rv = userAgent.indexOf('rv:');
+            return parseInt(userAgent.substring(rv + 3, userAgent.indexOf('.', rv)), 10);
+        }
+
+        const edge = userAgent.indexOf('Edge/');
+        if (edge > 0) {
+            return parseInt(userAgent.substring(edge + 5, userAgent.indexOf('.', edge)), 10);
+        }
+        return false;
+    }
+
+    hasSpecialsCharacters(value) {
+        const _cjs = this[_CHECKOUTJS];
+        const _this = this;
+        const ranges =_cjs[CONFIG].specialsCharacters;
+        if (!value || typeof value === UNDEFINED)
+            return false;
+        if (Array.isArray(value)) {
+            let _value = false;
+            value.forEach(function(item){
+                if(_this.hasSpecialsCharacters(item)){
+                    _value = true;
+                }
+            });
+            return _value;
+        }else if(typeof value === 'object'){
+            let _value = false;
+            Object.getOwnPropertyNames(value).forEach(function (key) {
+                if(_this.hasSpecialsCharacters(value[key])){
+                    _value = true;
+                }
+            });
+            return _value;
+        }else {
+            return (typeof value === 'string' &amp;&amp; value.match(ranges.join('|')) !== null);
+        }
+    }
+
+    isReadySubmitState(state){
+        return ['chargeable','pending_funds','consumed'].includes(state);
+    }
+
+    isChargeable(state){
+        return ['chargeable'].includes(state);
+    }
+
+    getTime() {
+        return new Date().getTime();
+    }
+}
+
+export function extend(out) {
+    out = out || {};
+    for (let i = 1; i &lt; arguments.length; i++) {
+        let obj = arguments[i];
+        if (typeof obj === UNDEFINED)
+            continue;
+        if(typeof obj === 'object') {
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    const desc = Object.getOwnPropertyDescriptor(out, key);
+                    if (!desc || desc.writable || desc.set) {
+                        if (Array.isArray(obj[key])) {
+                            if (!out[key]) out[key] = [];
+                            out[key] = [...out[key], ...obj[key]];
+                        } else if (typeof obj[key] === 'object') {
+                            out[key] = extend(out[key], obj[key]);
+                        } else if (typeof obj === 'string') {
+                            out[key] = obj;
+                        } else {
+                            out[key] = obj[key];
+                        }
+                    } else {
+                        extend(out[key], obj[key]);
+                    }
+                }
+            }
+        }else{
+            return obj;
+        }
+    }
+    return out;
+}
+
+export {
+    Util,
+    Global,
+    isBrowser,
+    isNode,
+    isWebWorker,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

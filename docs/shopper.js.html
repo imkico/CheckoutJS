@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> shopper.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>shopper.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {Base} from './base';
+import {_CHECKOUTJS, CONFIG, UTIL, SHOPPER, CJS, SHOPPERAPI, CARTDATA, PAYMENT} from "./keywords";
+
+/**
+ * @class Shopper
+ * @extends Base
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @returns {Promise&lt;Shopper>}
+ * @category CommerceAPI
+ */
+class Shopper extends Base {
+
+    constructor(parent, collection) {
+        super(parent, Object.assign({
+            excludeMethods: {constructor: true},
+            writableMethods: {
+                getPrefix: true,
+                applyHeaders: true,
+                getAccessToken: true,
+                getSessionToken: true
+            }
+        }, collection));
+        /**
+         * The locale used by the shopper.
+         * @name locale
+         * @type String
+         * @memberOf Shopper
+         * @instance
+         * @example en_US
+         */
+        this.locale = parent[CONFIG].locale;
+        /**
+         * The currency used by the shopper.
+         * @name currency
+         * @type String
+         * @memberOf Shopper
+         * @instance
+         * @example USD
+         */
+        this.currency = parent[CONFIG].currency;
+        parent[SHOPPER] = this;
+        return (async () => {
+            const checkoutJS = await parent[UTIL].getValue(CJS);
+            if (checkoutJS) {
+                parent[UTIL].extend(parent, checkoutJS);
+            }
+            return parent[SHOPPER];
+        })();
+    }
+
+    /**
+     * Updates the shopper's session data from the response of a refresh request.
+     * @param {Object} shopper
+     * @param {string[]} [shopper.gcCookies] - The session cookie from Global Commerce.
+     * @param {Object} [shopper.sessionToken] - The access token payload.
+     * @param {string} [shopper.sessionToken.access_token] - The access token.
+     * @param {int} [shopper.sessionToken.expires_in] - The time in seconds until this token expires.
+     * @param {string} [shopper.sessionToken.refresh_token] - Use the refresh token to obtain new access tokens.
+     * @param {string} [shopper.sessionToken.token_type] - The type of token.
+     * @returns {Promise&lt;void>}
+     * @readonly
+     */
+    async setShopper(shopper) {
+        const _cjs = this[_CHECKOUTJS];
+        try {
+            if(!this.locale) this.locale = _cjs[CONFIG].locale;
+            if(!this.currency) this.currency = _cjs[CONFIG].currency;
+            if (shopper &amp;&amp; Object.keys(shopper).length > 0) {
+                if (typeof shopper === 'string') {
+                    shopper = JSON.parse(shopper);
+                }
+                if (Array.isArray(shopper.gcCookies) &amp;&amp; shopper.gcCookies.length > 0) {
+                    const _cookie = {};
+                    shopper.gcCookies.forEach(function (part, index) {
+                        this[index] = this[index].split(';')[0];
+                        let cookieItem = this[index].split('=');
+                        _cookie[cookieItem[0]] = cookieItem[1];
+                    }, shopper.gcCookies);
+                    shopper.gcCookies = _cookie;
+                }
+                _cjs[UTIL].extend(_cjs[SHOPPER], shopper);
+                await _cjs[UTIL].setValue(CJS, _cjs.toJSON(true));
+                /**
+                 * This event will be triggered after the shopper has been updated.
+                 * @memberof CheckoutJS
+                 * @event shopperUpdated
+                 * @category Events
+                 * @example checkoutJS.on('shopperUpdated',function(shopper){
+                 *     console.dir(shopper);
+                 * })
+                 */
+                _cjs.emit ? _cjs.emit('shopperUpdated', _cjs[SHOPPER]) : null;
+            }
+        }catch(ex){
+            return Promise.reject(ex);
+        }
+    }
+
+    async getPrefix() {
+        const _cjs = this[_CHECKOUTJS];
+        return (_cjs[CONFIG].prefixName + _cjs[CONFIG].siteId + '_');
+    }
+
+    /**
+     * Retrieves a new access token via Commerce API for the shopper or return an existing one.
+     * @param {Object} [setting={}]
+     * @param {Boolean} setting.authentication - Set to true if an access token is required.
+     * @returns {Promise&lt;string>}
+     */
+    async getAccessToken(setting={}) {
+        const _cjs = this[_CHECKOUTJS];
+        const _shopper = _cjs[SHOPPER];
+        if (_shopper.sessionToken &amp;&amp; _shopper.sessionToken.access_token) {
+            return _shopper.sessionToken.access_token;
+        }
+        if(setting.authentication){
+
+            if(_cjs[CONFIG].entity &amp;&amp; _cjs[CONFIG].entity.code.length === 0 &amp;&amp; _cjs[CONFIG].drUrl.length !== 0) {
+                const url = _cjs[UTIL].parseURL(_cjs[CONFIG].drUrl);
+                const newUrl = _cjs[UTIL].format(_cjs[CONFIG].url.config, {
+                    domain: url.hostname,
+                    siteId: _cjs[CONFIG].siteId
+                });
+                try {
+                    await _cjs[UTIL].updateConfig(newUrl, true);
+                }catch(ex){
+                    _cjs[CONFIG].drCheckoutJS = false;
+                }
+            }
+            let sessionToken;
+            if(_cjs[CONFIG].drUrl.length === 0) {
+                sessionToken = await _cjs[SHOPPERAPI].getShopperAccessToken();
+                await _cjs[SHOPPERAPI].updateShopper({},{locale:_cjs[CONFIG].locale,currency:_cjs[CONFIG].currency});
+            } else {
+                const format = (_cjs[CONFIG].page.length === 0)?'jsonp':'json';
+                sessionToken = await _cjs[SHOPPERAPI].getSessionToken({apiKey:_cjs[CONFIG].apiKey,format:format});
+            }
+            return (sessionToken?sessionToken.access_token:null);
+        }
+    }
+
+    async applyHeaders(options) {
+        const _cjs = this[_CHECKOUTJS];
+        const _shopper = _cjs[SHOPPER];
+        if(_cjs[UTIL].isNode) {
+            if (_shopper.gcCookies &amp;&amp; Array.isArray(_shopper.gcCookies)) {
+                options.headers.Cookie = _shopper.gcCookies.join("; ");
+            } else if (_shopper.gcCookies &amp;&amp; typeof (_shopper.gcCookies) === 'object') {
+                const cookies = [];
+                Object.entries(_shopper.gcCookies).forEach(([key, value]) => {
+                    cookies.push(encodeURIComponent(key)+"="+encodeURIComponent(value));
+                });
+                options.headers.Cookie = cookies.join("; ");
+            }
+        }
+    }
+
+    /**
+     * Destroys the shopper instance.
+     * @param {Object} [options={}]
+     * @param {Boolean} [options.disableCache] - When this value is set to false, the shopper data will not be removed from the shopper instance.
+     * @param {Boolean} [options.disableStorage] - When this value is set to false, the shopper data will not be removed from the session storage.
+     * @returns {Promise&lt;void>}
+     */
+    async destroy(options) {
+        options = options || {};
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        if(options.disableCache !== true) {
+            delete this.sessionToken;
+            delete this.gcCookies;
+            delete this.tokenInfo;
+            delete this.isAuthenticated;
+            delete this.locale;
+            delete this.currency;
+        }
+        if(options.disableStorage !== true) {
+            await _util.removeValue(CJS);
+            await _util.removeValue(CARTDATA);
+            await _util.removeValue(PAYMENT);
+            await _util.removeValue('businessEntityCode');
+        }
+        _cjs.emit('shopperUpdated', _cjs[SHOPPER]);
+    }
+
+    toJSON(deep){
+        const _cjs = this[_CHECKOUTJS];
+        const shopper = _cjs[SHOPPER];
+        const result = { };
+        for (let x in shopper) {
+            if (shopper.hasOwnProperty(x) &amp;&amp; !(deep &amp;&amp; PROTECTED_LIST.includes(x)) )
+            {
+                result[x] = shopper[x];
+            }
+        }
+        return result;
+    }
+}
+const PROTECTED_LIST = ['gcCookies'];
+export {Shopper};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

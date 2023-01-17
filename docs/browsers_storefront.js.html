@@ -1,0 +1,895 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browsers/storefront.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browsers/storefront.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {Base} from '../base';
+import {ApplePayWeb} from './payments/applePay';
+import {GooglePayWeb} from './payments/googlePay';
+import {PayPalWeb} from './payments/payPal';
+import {KlarnaCreditWeb} from "./payments/klarnaCredit";
+import {Payments} from '../payments/payment';
+import {Global} from '../util';
+import {
+    LOGGING,
+    _CHECKOUTJS,
+    DRJS,
+    CONFIG,
+    UTIL,
+    SHOPPERAPI,
+    PAYMENTS,
+    CJS,
+    UNDEFINED,
+    PAYMENT,
+    CARTDATA,
+    REDIRECT_COMPLETED, SHOPPER
+} from '../keywords';
+import {BrowserUtil} from "./browserUtil";
+import {StorefrontPayment} from "./payment";
+
+/**
+ * @class Storefront
+ * @classdesc The Storefront class handles the storefront layout and logic.
+ * @extends Base
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} collection
+ * @returns {Promise&lt;Storefront>}
+ * @see GlobalCommerce
+ * @category Browser
+ */
+class Storefront extends Base {
+
+    constructor(parent, collection) {
+        super(parent, Object.assign({
+            excludeMethods: {constructor: true},
+            writableMethods: {
+                validateInfo: true,
+                afterOverlay: true,
+                updateSourceData: true,
+                liveInstrumentOverlay: true,
+                createNewWindowRedirectOverlay: true,
+                createIframeRedirectOverlay: true,
+                createShopperPaymentOptionSelector: true,
+                updateTC: true
+            }
+        }, collection));
+        const _this = this;
+        _this['elements'] = {};
+        Object.defineProperty(_this, 'elements', {
+            enumerable: true,
+            configurable: false,
+            writable: false,
+        });
+        return (async () => {
+            await _this._verifySettings();
+            await _this.initDigitalRiverJS();
+            Object.defineProperties(parent, {
+                "drjs": {
+                    writable: true,
+                    enumerable: true,
+                    configurable: false
+                }
+            });
+            return _this;
+        })();
+    }
+
+    /**
+     * Updates the DigitalRiver.js (CloudPay) Terms and Conditions acceptance to the cart, for one-click checkout.
+     * @returns {Promise&lt;CartDataObject>}
+     * @example checkoutJS.storefront.updateTC();
+     */
+    async updateTC() {
+        const _cjs = this[_CHECKOUTJS];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const cloudPayTermsAcceptanceInput = document.getElementsByName('cloudPayTermsAcceptance');
+        let checked = false;
+        if (cloudPayTermsAcceptanceInput &amp;&amp; cloudPayTermsAcceptanceInput.length &amp;&amp; cloudPayTermsAcceptanceInput[0].checked) {
+            checked = true;
+        }
+        return _shopperApi.updateCart({
+            cart: {
+                customAttributes: {
+                    attribute: [
+                        {name: 'cloudPayTermsAcceptance', value: checked},
+                        {name: 'cloudPayTermsAcceptanceTime', value: (new Date()).toISOString()}
+                    ]
+                }
+            }
+        });
+    }
+
+    /**
+     * Loads and initializes the DigitalRiver.js library on the current page.
+     * @protected
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.storefront.initDigitalRiverJS();
+     */
+    async initDigitalRiverJS() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        if (!_cjs.drjs) {
+            const apiKey = _config.apiKey;
+            const drjsApiKey = _config.drjsApiKey ? _config.drjsApiKey : apiKey;
+            if (drjsApiKey) {
+                try {
+                    const options = _util.extend({}, _config.lib.drjs.options, {locale: _config.locale.replace('_', '-').toLowerCase()});
+                    if (typeof Global.DigitalRiver === UNDEFINED &amp;&amp; !_config.lib.drjs.disable) {
+                        await _util.loadScript(_config.lib.drjs.url);
+                        await BrowserUtil.ready(async () => {
+                            _cjs.drjs = new Global.DigitalRiver(drjsApiKey, options);
+                        });
+                        return;
+                    } else {
+                        if (typeof Global.DigitalRiver !== UNDEFINED) {
+                            await BrowserUtil.ready(async () => {
+                                _cjs.drjs = new Global.DigitalRiver(drjsApiKey, options);
+                            });
+                        }
+                        return;
+                    }
+                } catch (ex) {
+                    return Promise.reject(ex);
+                }
+            }
+        }
+    }
+
+    /**
+     * Validates the payment source.
+     * @param {PaymentSourceObject} source
+     * @returns {Promise&lt;Boolean>}
+     * @example checkoutJS.storefront.validateSource(source);
+     */
+    async validateSource(source) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _payments = await _this.getPayments();
+        const cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        if(!source){
+            const _payment = (await _util.getValue(PAYMENT) || {});
+            if (_payment &amp;&amp; _payment.result &amp;&amp; _payment.result.source) {
+                source = _payment.result.source;
+            }
+        }
+        if (source &amp;&amp; source.type &amp;&amp; cartData &amp;&amp; cartData.cart &amp;&amp; cartData.cart.pricing) {
+            const _paymentType = await _this._getBasePaymentType(source);
+            const _name = await _util.getSourcePaymentType(_paymentType);
+            const _configPayment = _config[PAYMENTS][_name];
+            if (source.id &amp;&amp; source.clientSecret) {
+                const result = await _cjs[DRJS].retrieveSource(source.id, source.clientSecret);
+                source = result.source;
+                await _util.setValue(PAYMENT, {name: _name, result: result});
+            }
+            const useRecurringPayment = await _util.useRecurringPayment(cartData);
+            const supportedRecurringPayments = await _payments[_name].supportedRecurringPayments();
+
+            const validatedInfo = await _payments[_name].validateInfo(cartData);
+            if (validatedInfo &amp;&amp;
+                _util.isReadySubmitState(source.state) &amp;&amp;
+                (useRecurringPayment===false || (useRecurringPayment===true &amp;&amp; supportedRecurringPayments===true) ) &amp;&amp;
+                ((_configPayment.amountsEstimated!==true &amp;&amp; parseFloat(source.amount) === parseFloat(cartData.cart.pricing.orderTotal.value)) || _configPayment.amountsEstimated===true) &amp;&amp;
+                source.currency === cartData.cart.pricing.orderTotal.currency
+            ) {
+                return source;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Event to trigger after the overlay is complete and about to be closed.
+     * @abstract
+     * @returns {Promise}
+     */
+    async afterOverlay() {
+    }
+
+    async redirectFlow(payment, source, redirectOverlay) {
+        const _this = this;
+        const _cjs = _this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        if (source &amp;&amp; source.flow === 'redirect' &amp;&amp; source.redirect &amp;&amp; (['pending_redirect', 'pending_funds'].includes(source.state))) {
+            redirectOverlay = redirectOverlay || _util.extend({}, _config.redirectOverlay, _config.payments[payment].redirectOverlay);
+            if (redirectOverlay.type === 'open') {
+                return _this._newWindowRedirectFlow(payment, source, redirectOverlay);
+            } else {
+                return _this._iframeRedirectFlow(payment, source, redirectOverlay);
+            }
+        }
+        return (source);
+    }
+
+    async _iframeRedirectFlow(payment, source, redirectOverlay) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _name = payment;
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const overlay = await this.createIframeRedirectOverlay(payment, source, redirectOverlay);
+        return new Promise(function (resolve) {
+            let hasResolved = false;
+            _cjs.emit(LOGGING, {
+                id: _util.getTime(),
+                api: CJS,
+                method: 'redirectLocation',
+                url: source.redirect.redirectUrl
+            });
+
+            const iframeResize = function () {
+                const padding = redirectOverlay.iframePadding;
+                const iframe = overlay.getElementsByTagName('iframe');
+                if (iframe &amp;&amp; iframe.length) {
+                    iframe[0].setAttribute('height', Global.innerHeight - padding);
+                }
+            };
+            Global.addEventListener('resize', iframeResize, false);
+            iframeResize();
+
+            const message = async function (e) {
+                _cjs.emit(LOGGING, {
+                    id: _util.getTime(),
+                    api: CJS,
+                    method: 'message',
+                    url: e.data
+                });
+                if (e.data &amp;&amp; e.data.sourceId &amp;&amp; e.data.urlParams) {
+                    if (e.data.urlParams.return === 'success') {
+                        _cjs.emit(REDIRECT_COMPLETED);
+                    } else {
+                        _cjs.emit(REDIRECT_COMPLETED);
+                    }
+                }
+            };
+            Global.addEventListener('message', message, false);
+
+            const complete = function () {
+                if (!hasResolved) {
+                    hasResolved = true;
+
+                    _cjs.emit(LOGGING, {
+                        id: _util.getTime(),
+                        api: CJS,
+                        method: REDIRECT_COMPLETED,
+                        url: source.redirect.redirectUrl
+                    });
+                    if (overlay &amp;&amp; overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+
+                    Global.removeEventListener('message', message);
+                    Global.removeEventListener('resize', iframeResize);
+
+                    _cjs.removeListener(REDIRECT_COMPLETED, complete);
+                    resolve();
+                }
+            };
+            _cjs.on(REDIRECT_COMPLETED, complete);
+
+            if (_config[PAYMENTS][_name].liveInstrument) {
+                _this.liveInstrument(_name, overlay);
+            }
+
+            _this.afterOverlay(_name, overlay);
+        });
+    }
+
+    async createIframeRedirectOverlay(payment, source, redirectOverlay) {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = payment;
+        redirectOverlay = redirectOverlay || _cjs[UTIL].extend({}, _cjs[CONFIG].redirectOverlay, _cjs[CONFIG][PAYMENTS][_name].redirectOverlay);
+
+        const overlay = document.createElement('div');
+        overlay.id = redirectOverlay.id;
+        const container = document.createElement('div');
+        container.className = "drjs_iframe";
+        const style = document.createElement('style');
+        style.innerHTML = redirectOverlay.inlineStyle;
+        overlay.append(style);
+
+        if (_cjs[CONFIG][PAYMENTS][_name].preventPopupClose !== true) {
+            const close = document.createElement('a');
+            close.className = "drjs_close";
+            close.onclick = function () {
+                _cjs.emit(REDIRECT_COMPLETED);
+            };
+            overlay.append(close);
+        }
+
+        const iframe = document.createElement('iframe');
+        iframe.src = source.redirect.redirectUrl;
+        container.append(iframe);
+        _cjs.emit(LOGGING, {
+            id: _cjs[UTIL].getTime(),
+            api: CJS,
+            method: 'redirectLocation',
+            url: source.redirect.redirectUrl
+        });
+
+        overlay.append(container);
+        document.body.append(overlay);
+
+        return (overlay);
+    }
+
+    async _newWindowRedirectFlow(payment, source, redirectOverlay) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _name = payment;
+        const _this = this;
+        const overlay = await this.createNewWindowRedirectOverlay(payment, source, redirectOverlay);
+        return new Promise(function (resolve) {
+            let hasResolved = false;
+
+            const newWindowRedirectButton = function () {
+                _cjs.emit(LOGGING, {
+                    id: _util.getTime(),
+                    api: CJS,
+                    method: 'redirectLocation',
+                    url: source.redirect.redirectUrl
+                });
+                const opener = Global.open(source.redirect.redirectUrl);
+                let timer;
+
+                const checkOpener = () => {
+
+                    if (!_util.isIE()) {
+                        if ((!opener || opener.closed) &amp;&amp; _config[PAYMENTS][_name].preventPopupClose !== true) {
+                            _cjs[DRJS].retrieveSource(source.id, source.clientSecret).then((result) => {
+                                if (result &amp;&amp; result.source &amp;&amp; _util.isChargeable(result.source.state)) {
+                                    cancelAnimationFrame(timer);
+                                    source = result.source;
+                                    _cjs.emit(REDIRECT_COMPLETED, opener);
+                                }
+                            });
+                        } else {
+                            timer = requestAnimationFrame(checkOpener);
+                        }
+                    } else {
+                        _cjs[DRJS].retrieveSource(source.id, source.clientSecret).then((result) => {
+                            if (result &amp;&amp; result.source &amp;&amp; _util.isChargeable(result.source.state)) {
+                                cancelAnimationFrame(timer);
+                                source = result.source;
+                                _cjs.emit(REDIRECT_COMPLETED, opener);
+                            } else {
+                                setTimeout(function () {
+                                    timer = requestAnimationFrame(checkOpener);
+                                }, _config.redirectOverlay.timeout);
+                            }
+                        }).catch(() => {
+                            setTimeout(function () {
+                                timer = requestAnimationFrame(checkOpener);
+                            }, _config.redirectOverlay.timeout);
+                        });
+                    }
+                };
+                checkOpener();
+
+                const message = async function (e) {
+                    _cjs.emit(LOGGING, {
+                        id: _util.getTime(),
+                        api: CJS,
+                        method: 'message',
+                        url: e.data
+                    });
+                    if (e.data &amp;&amp; e.data.sourceId &amp;&amp; e.data.urlParams) {
+                        if (e.data.urlParams.return === 'success') {
+                            clearInterval(timer);
+                            _cjs.emit(REDIRECT_COMPLETED, opener);
+                        } else {
+                            _cjs.emit(REDIRECT_COMPLETED, opener);
+                        }
+                        Global.removeEventListener('message', message);
+                    }
+                };
+                Global.addEventListener('message', message, false);
+            };
+            _cjs.on('newWindowRedirectButton', newWindowRedirectButton);
+
+            const complete = function (opener) {
+                if (!hasResolved) {
+                    hasResolved = true;
+
+                    _cjs.emit(LOGGING, {
+                        id: _util.getTime(),
+                        api: CJS,
+                        method: REDIRECT_COMPLETED,
+                        responseBody: source
+                    });
+
+                    if (opener) {
+                        opener.close();
+                    }
+                    if (overlay &amp;&amp; overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+
+                    _cjs.removeListener(REDIRECT_COMPLETED, complete);
+                    _cjs.removeListener('newWindowRedirectButton', newWindowRedirectButton);
+                    resolve();
+                }
+            };
+
+            _cjs.on(REDIRECT_COMPLETED, complete);
+
+            if (_config[PAYMENTS][_name].liveInstrument) {
+                _this.liveInstrument(_name, overlay);
+            }
+
+            _this.afterOverlay(_name, overlay);
+        });
+    }
+
+    async createNewWindowRedirectOverlay(payment, source, redirectOverlay) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _name = payment;
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        redirectOverlay = redirectOverlay || _util.extend({}, _config.redirectOverlay, _configPayment.redirectOverlay);
+
+        const overlay = document.createElement('div');
+        overlay.id = redirectOverlay.id;
+        const container = document.createElement('div');
+        container.className = "drjs_open";
+        const style = document.createElement('style');
+        style.innerHTML = redirectOverlay.inlineStyle;
+        overlay.append(style);
+
+        if (_configPayment.preventPopupClose !== true) {
+            const close = document.createElement('a');
+            close.className = "drjs_close";
+            close.onclick = function () {
+                _cjs.emit(REDIRECT_COMPLETED);
+            };
+            overlay.append(close);
+        }
+
+        const title = document.createElement('h4');
+        const redirectNotice = _util.format(_config.labels.PMT_REDIRECT_NOTICE, {
+            '0': `&lt;span class='drjs_${_name}'>${_configPayment.name}&lt;/span>`
+        });
+        title.innerHTML = redirectNotice;
+        container.append(title);
+
+        const button = document.createElement('button');
+        button.className = redirectOverlay.buttonClass;
+        button.id = 'drjs_clickhere';
+        button.appendChild(document.createTextNode(_config.labels.CLICKHERE));
+        button.onclick = function () {
+            if (_configPayment.oneTimeRedirect) {
+                button.disabled = true;
+            }
+            _cjs.emit('newWindowRedirectButton');
+        };
+        container.append(button);
+
+        overlay.append(container);
+        document.body.append(overlay);
+        _util.loadingOverlay(true);
+
+        return (overlay);
+    }
+
+    /**
+     * Triggers the pending funds redirect flow on the order complete or thank you page.
+     * @returns {Promise&lt;PaymentObject>}
+     * @example checkoutJS.storefront.pendingFundsRedirectFlow();
+     */
+    async pendingFundsRedirectFlow(source) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _drjs = _cjs[DRJS];
+        const _payment = await this.getSelectedPayment();
+        if(!source) {
+            source = await _this.getSelectedSource();
+        }
+        if (source &amp;&amp; source.state === 'pending_funds' &amp;&amp; source.flow === 'redirect' &amp;&amp; source.redirect) {
+            let _type = _util.getSourcePaymentType(source.type);
+            await this.redirectFlow(_type, source);
+            let result = await _drjs.retrieveSource(source.id, source.clientSecret);
+            await _util.setValue(PAYMENT, {name: _type, result: result});
+            return result;
+        }
+        return _payment;
+    }
+
+    /**
+     * Triggers the pending funds receiver flow on the order complete or thank you page.
+     * @returns {Promise&lt;PaymentObject>}
+     * @example checkoutJS.storefront.pendingFundsReceiver();
+     */
+    async pendingFundsReceiver(source) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _payment = await _this.getSelectedPayment();
+        if(!source) {
+            source = await _this.getSelectedSource();
+        }
+        if (source &amp;&amp; source.state === 'pending_funds' &amp;&amp; source.flow === 'receiver') {
+            const elementPlacement = document.getElementById(_cjs[CONFIG].elements.pendingFundsInstruction.elementId);
+            if(elementPlacement) {
+                const template = await _this.getPendingFundsInstruction();
+                elementPlacement.innerHTML = template;
+            }
+        }
+        return _payment;
+    }
+
+    /**
+     * Returns the instruction HTML from pending fund payments, which may be shown on order complete or thank you page.
+     * @protected
+     * @returns {Promise&lt;string>}
+     * @example checkoutJS.storefront.getPendingFundsInstruction();
+     *
+     */
+    async getPendingFundsInstruction() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _payment = (await _util.getValue(PAYMENT) || {});
+        if (_payment.result &amp;&amp; _payment.result.source) {
+            const _configPayment = _config[PAYMENTS][_payment.name];
+            const order = await _shopperApi.getOrder(_payment.result.source.upstreamId);
+            const payload = _util.extend({},_payment.result.source,order);
+            let pendingFunds;
+            if(_configPayment.template &amp;&amp; _configPayment.template.pendingFunds) {
+                pendingFunds = _configPayment.template.pendingFunds;
+            }
+            if(!pendingFunds) {
+                try {
+                    const _textAttributeName = 'PMS_' + _payment.name.toUpperCase() + '_INSTRUCTION'
+                    const attr = await _shopperApi.getText(_textAttributeName);
+                    if(attr.attribute){
+                        pendingFunds = attr.attribute.value;
+                    }
+                    // eslint-disable-next-line no-empty
+                }catch(ex){
+
+                }
+            }
+            if(pendingFunds) {
+                let text = _util.format(pendingFunds, payload);
+                return _util.removeTag(text, _config.elements.pendingFundsInstruction.emptyValueSelector);
+            }
+            return JSON.stringify(_payment.result.source[_payment.name], _util.replaceErrors, 2);
+        }
+    }
+
+    /**
+     * Retrieves the selected payment.
+     * @protected
+     * @returns {Promise&lt;PaymentObject>}
+     * @example checkoutJS.storefront.getSelectedPayment();
+     */
+    async getSelectedPayment() {
+        const _cjs = this[_CHECKOUTJS];
+        //const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        let _payment = (await _util.getValue(PAYMENT) || {});
+        return _payment;
+    }
+
+    async getSelectedSource() {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _drjs = _cjs[DRJS];
+        const _payment = await this.getSelectedPayment();
+        let _source = _payment.result ? _payment.result.source : {};
+        if(_source.id &amp;&amp; _source.clientSecret) {
+            let result = await _drjs.retrieveSource(_source.id, _source.clientSecret);
+            let _type = _util.getSourcePaymentType(result.source.type);
+            await _util.setValue(PAYMENT, {name: _type, result: result});
+            return result.source;
+        }
+    }
+
+    /**
+     * Retrieves the Payments object from the checkoutJS instance.
+     * @protected
+     * @returns {Promise&lt;Payments>}
+     * @example checkoutJS.storefront.getPayments();
+     */
+    async getPayments() {
+        const _cjs = this[_CHECKOUTJS];
+        return _cjs[PAYMENTS];
+    }
+
+    /**
+     * Updates the payment request source before creating the source from DigitalRiver.js.
+     * @param {PaymentRequestObject} sourceData
+     * @returns {Promise&lt;PaymentRequestObject>}
+     * @example checkoutJS.gC.updateSourceData(source);
+     */
+    async updateSourceData(sourceData) {
+        return sourceData;
+    }
+
+    async liveInstrument(payment, overlay) {
+        return overlay;
+    }
+
+    async createShopperPaymentOptionSelector() {
+
+    }
+
+    async createPaymentOptionToShopper() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _shopper = _cjs[SHOPPER];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _util = _cjs[UTIL];
+        const _payment = await _util.getValue(PAYMENT);
+        const nickName = await _util.getValue('nickname');
+        if(_shopper.isAuthenticated &amp;&amp; _payment &amp;&amp; _payment.result &amp;&amp; nickName) {
+            let _paymentType = await _util.getSourcePaymentType(_payment.result.source.type);
+            if(_config[PAYMENTS][_paymentType].supportedRecurringPayments &amp;&amp; _config[PAYMENTS][_paymentType].saveAsPaymentOption!==false){
+                await _shopperApi.applySourceToShopper(_payment.result.source.id,nickName);
+            }
+        }
+    }
+
+    async _createPayments(parent) {
+        const _cjs = parent;
+        /**
+         * All enabled payment instances e.g. creditCard, applePay, googlePay.
+         * @name payments
+         * @type Payments
+         * @memberof CheckoutJS
+         * @instance
+         * @readonly
+         * @see {@tutorial payment-support-list}
+         */
+        const _payments = _cjs[PAYMENTS] = await new Payments(parent);
+        for (let payment in _cjs[CONFIG][PAYMENTS]) {
+            if (_cjs[CONFIG][PAYMENTS].hasOwnProperty(payment) &amp;&amp; !_cjs[CONFIG][PAYMENTS][payment].disable) {
+                try {
+                    switch (payment) {
+                        case 'applePay':
+                            _payments[payment] = new ApplePayWeb(_cjs);
+                            break;
+                        case 'googlePay':
+                            _payments[payment] = new GooglePayWeb(_cjs);
+                            break;
+                        case 'payPal':
+                            _payments[payment] = new PayPalWeb(_cjs);
+                            break;
+                        case 'klarnaCredit':
+                            _payments[payment] = new KlarnaCreditWeb(_cjs, {}, payment);
+                            break;
+                        default:
+                            _payments[payment] = new StorefrontPayment(_cjs, {}, payment);
+                            break;
+                    }
+                    const prop = {};
+                    prop[payment] = {
+                        writable: true,
+                        enumerable: _cjs[CONFIG][PAYMENTS][payment].enumerable !== false,
+                        configurable: false
+                    };
+                    Object.defineProperties(_payments, prop);
+                } catch (ex) {
+                    await _cjs[UTIL].errorMessage(ex);
+                }
+            }
+        }
+    }
+
+    async _initPayments() {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _payments = _cjs[PAYMENTS];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        if (_cjs[DRJS]) {
+            for (let payment in _cjs[CONFIG][PAYMENTS]) {
+                if (_payments[payment]) {
+                    const _configPayment = _cjs[CONFIG][PAYMENTS][payment];
+                    const supportedCurrency = await _payments[payment].supportedCurrency();
+                    const supportedRecurringPayments = await _payments[payment].supportedRecurringPayments();
+                    const supportedGeography = await _payments[payment].supportedGeography(cartData.cart.billingAddress.country);
+                    if (_payments.hasOwnProperty(payment) &amp;&amp; _payments[payment] &amp;&amp; supportedCurrency &amp;&amp; supportedRecurringPayments &amp;&amp; _configPayment.supported!==false) {
+                        try {
+                            await _payments[payment].initPayment(payment);
+                        } catch (ex) {
+                            await _util.errorMessage(ex);
+                        }
+                    } else {
+                        _configPayment.show = false;
+                    }
+                    _configPayment.supported = supportedCurrency &amp;&amp; supportedRecurringPayments &amp;&amp; supportedGeography;
+                }
+            }
+        }
+    }
+
+    async _destroyPayments() {
+        const _cjs = this[_CHECKOUTJS];
+        for (let payment in _cjs[CONFIG][PAYMENTS]) {
+            const _configPayment = _cjs[CONFIG][PAYMENTS][payment];
+            if (_cjs[PAYMENTS].hasOwnProperty(payment) &amp;&amp; _cjs[PAYMENTS][payment] &amp;&amp; _cjs[PAYMENTS][payment].destroy) {
+                try {
+                    await _cjs[PAYMENTS][payment].destroy(payment);
+                } catch (ex) {
+                    await _cjs[UTIL].errorMessage(ex);
+                }
+            }
+            _configPayment.show = false;
+            _configPayment.supported = UNDEFINED;
+        }
+    }
+
+    async _initPaymentMethod() {
+
+    }
+
+    async _verifySettings() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        if (_config.siteId.length === 0 ||
+            _config.locale.length === 0 ||
+            _config.currency.length === 0
+        ) {
+            const siteData = await _cjs[SHOPPERAPI].getSiteInfo();
+            _config.siteId = siteData.site.id;
+            _config.locale = siteData.site.defaultLocale;
+            const localOption = siteData.site.localeOptions.localeOption.filter(function (localOption) {
+                return localOption.locale === siteData.site.defaultLocale
+            });
+            if (localOption &amp;&amp; localOption.length) {
+                _config.currency = localOption[0].primaryCurrency;
+            }
+        }
+    }
+
+    async _getBasePaymentType(source) {
+        return source.type;
+    }
+
+
+}
+
+export {Storefront};
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

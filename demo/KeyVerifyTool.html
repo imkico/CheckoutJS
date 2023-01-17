@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API Key Verify Tool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="https://drh.img.digitalriver.com/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <!--[if IE]-->
+        <script src="../dist/polyfills.js"></script>
+        <!--[endif]-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.51.0/codemirror.min.js" integrity="sha256-nSKfNYsl/gyXisZDZFKVh+LvOHEz65JIhgjYfwaqGDE=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.51.0/mode/javascript/javascript.min.js" integrity="sha256-XwdVFEt5gyn2u5S/DCAx+9fFAeoX/rbKtguS0Al4wUo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.51.0/addon/lint/json-lint.min.js" integrity="sha256-mWRA+eRb2A3v8WLC4QSEVKYYgWuy1jYrLoi4+tbWrnU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha256-Fk/Cwcnq8KA6qN/bhV6C5BpcaSL7rYuzI4EWIH4mvvc=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.51.0/codemirror.min.css" integrity="sha256-vZ3SaLOjnKO/gGvcUWegySoDU6ff33CS5i9ot8J9Czk=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.51.0/addon/lint/lint.min.css" integrity="sha256-h8ssETVF7g7LAuYcBn+6AQDL1DLfLVwuiBrLrk3yHks=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.51.0/theme/ambiance.min.css" integrity="sha256-XkpQJvUWez5zVFHMRprEmjXK/c4Fo9GS3lpKfwrckIk=" crossorigin="anonymous" />
+        <style>
+            main {
+                padding-bottom: 80px;
+            }
+            .step,.next {
+                display: none;
+                margin-top:10px;
+            }
+            .progress {
+                visibility: hidden;
+                height:35px;
+                z-index:1033;
+            }
+            .spinner-border,#drUrl {
+                display: none;
+            }
+            body.loading .spinner-border {
+                display: inline-block;
+            }
+            body.loading,
+            body.loading *{
+                cursor: wait;
+            }
+            #progress {
+                cursor: pointer;
+            }
+            #cartPayload,#step-5 {
+                min-height: 250px;
+            }
+        </style>
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a target="dispatch" class="nav-link btn" href="https://dispatch-dashboard.digitalriverws.net/admin/keys">Dispatch Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn" id="keys" href="javascript:">History</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link btn dropdown-toggle" href="#" id="navbarQRCode" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        QRCode
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarQRCode">
+                        <div class="ml-2">Please scan QR Code with iPhone/Android to verify ApplePay/GooglePay</div>
+                        <div class="dropdown-divider"></div>
+                        <div id="QRCode" class="text-center"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="container">
+        <div class="row">
+            <h1></h1>
+            <div class="col-md-12">
+                <form novalidate>
+                    <input id="localeValue" type="hidden" />
+                    <input id="currencyValue" type="hidden" />
+                    <div class="form-group">
+                        <label for="dispatchenv">Dispatch Environment</label>
+                        <span class="badge badge-secondary" id="apiRequestUrlBase">Test Live (<em></em>)</span>
+
+                        <select class="form-control form-control-sm" id="dispatchenv">
+                            <option value="https://api.digitalriverws.com" data-gc="https://gc.digitalriver.com/">Production</option>
+                            <option value="https://api-cte-ext.digitalriver.com" data-gc="https://drhadmin-cte.digitalriver.com/">CTE</option>
+                            <option value="https://dispatch-test.digitalriver.com" data-gc="https://drhadmin-sys-drx.drextenv.net/">TEST</option>
+                            <option value="https://dispatch-lte.digitalriverws.net" data-gc="https://drhadmin-lte.drextenv.net/">LTE</option>
+                            <option value="https://dispatch-pte.digitalriverws.net" data-gc="https://drhadmin-pte-drx.drextenv.net/">PTE</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Dispatch Environment invalid.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apiKey">Commerce API Public Key</label>
+                        <input type="text" class="form-control form-control-sm" id="apiKey" placeholder="For public type API key" value="" required>
+                        <div class="invalid-feedback">
+                            Please provide Commerce API Public Key.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apiKey">Commerce API Confidential Key (Auth Username)</label>
+                        <input type="text" class="form-control form-control-sm" id="authUserName" placeholder="For confidential type only" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="apiKey">Commerce API Confidential Secret (Auth Password)</label>
+                        <input type="text" class="form-control form-control-sm" id="authPassword" placeholder="For confidential type only" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="apiEncryptionKey">Commerce API Encryption Key</label>
+                        <input type="text" class="form-control form-control-sm" id="apiEncryptionKey" placeholder="For confidential type only" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="drjskey">DR.js API Key (Security Token)</label>
+                        <input type="text" class="form-control form-control-sm" id="drjskey" placeholder="(e.g. pk_XXXXXX)" value="" required>
+                        <div class="invalid-feedback">
+                            Please provide DR.js API Key.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="dropin" name="dropin" value="true">
+                            <label class="custom-control-label" for="dropin">Use Dropin</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="gc" name="gc" value="true">
+                            <label class="custom-control-label" for="gc">Get AccessToken via GC SessionToken</label>
+                            <span class="badge badge-secondary" id="drUrl">Test Live (<em></em>)</span>
+                            <div class="invalid-feedback">
+                                GC Environment invalid.
+                            </div>
+                            <footer class="blockquote-footer">Please check this box for GC hosted site</footer>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cartPayload">Testing Cart Payload</label>
+<textarea type="text" class="form-control form-control-sm" id="cartPayload" placeholder="">{
+  "cart": {
+    "billingAddress": {
+      "firstName": "Digital",
+      "lastName": "River",
+      "emailAddress": "tester@digitalriver.com",
+      "phoneNumber": "+987654321",
+      "line1": "10380 Bren Road West",
+      "line2": "",
+      "city": "Minnetonka",
+      "countrySubdivision": "MN",
+      "country": "",
+      "postalCode": "55343"
+    },
+    "shippingAddress": {
+      "firstName": "Digital",
+      "lastName": "River",
+      "emailAddress": "tester@digitalriver.com",
+      "phoneNumber": "+987654321",
+      "line1": "10380 Bren Road West",
+      "line2": "",
+      "city": "Minnetonka",
+      "countrySubdivision": "MN",
+      "country": "",
+      "postalCode": "55343"
+    },
+    "testOrder": true
+  }
+}</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary btn-block" id="verify">Verify</button>
+                        </div>
+                        <div class="col">
+                            <button type="reset" class="btn btn-light btn-block" id="reset">Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-1">
+                        <div class="card-header bg-success text-white">Site Info</div>
+                        <div class="card-body form-group">
+                            <label for="siteid">Site ID</label>
+                            <input type="text" id="siteid" class="form-control form-control-sm" readonly />
+                            <label>Response</label>
+                            <textarea></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-2">
+                        <div class="card-header bg-success text-white">Access Token</div>
+                        <div class="card-body form-group">
+                            <label>Response</label>
+                            <textarea></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-3">
+                        <div class="card-header bg-success text-white">Products</div>
+                        <div class="card-body form-group">
+                            <label for="productid">Product ID</label>
+                            <input type="text" id="productid" class="form-control form-control-sm" />
+                            <label>Response</label>
+                            <textarea></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-4">
+                        <div class="card-header bg-success text-white">
+                            Cart
+                        </div>
+                        <div class="card-body form-group">
+                            <label>Response</label>
+                            <textarea></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-5">
+                        <div class="card-header bg-success text-white">
+                            Update Cart info
+                            <span class="float-right">
+                                <select id="shipping"></select>&nbsp;
+                                <select id="locale"></select>
+                            </span>
+                        </div>
+                        <div class="card-body form-group">
+                            <label for="cartid">Cart ID</label>
+                            <input type="text" id="cartid" class="form-control form-control-sm" readonly />
+                            <label for="recurringPayment">Recurring Payment Only</label>
+                            <input type="text" id="recurringPayment" class="form-control form-control-sm" readonly />
+                            <label>Response</label>
+                            <textarea contenteditable="true"></textarea>
+                            <div class="form-control-sm">
+                                <button type="button" class="float-right btn btn-primary" id="updateCart">Update Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-6">
+                        <div class="card-header bg-success text-white">Payment</div>
+                        <div class="card-body">
+                            <div class="form-group" id="paymentContainer">
+                                <span class="dr_cloudPayTsAndCs"></span>
+                                <div class="custom-control custom-radio" id="creditCardContainer">
+                                    <input class="custom-control-input" type="radio" name="payment" value="creditCard" id="creditCardRadio" />
+                                    <div class="invalid-feedback text-center"><strong>Please select payment method.</strong></div>
+                                    <label class="custom-control-label" data-toggle="collapse" data-parent="#step-4" data-target="#paymentCreditCard:not(.show)" for="creditCardRadio">Credit Card</label>
+                                    <div class="collapse mt-2" id="paymentCreditCard">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div id="dr_cardNumber" class="m-1 form-control form-control-lg"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div id="dr_cardExpiration" class="m-1 form-control form-control-lg"></div>
+                                            </div>
+                                            <div class="col">
+                                                <div id="dr_cardCvv" class="m-1 form-control form-control-lg"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-7">
+                        <div class="card-header bg-success text-white">Payment Source</div>
+                        <div class="card-body form-group">
+                            <label for="sourceid">Source ID</label>
+                            <input type="text" id="sourceid" class="form-control form-control-sm" readonly />
+                            <label for="clientsecret">Source Client Secret</label>
+                            <input type="text" id="clientsecret" class="form-control form-control-sm" readonly />
+                            <label for="sourcetype">Source Type</label>
+                            <input type="text" id="sourcetype" class="form-control form-control-sm" readonly />
+                            <label>Response</label>
+                            <textarea></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-8">
+                        <div class="card-header bg-success text-white">Submit Cart</div>
+                        <div class="card-body form-group">
+                            <label>Response</label>
+                            <textarea></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card step" id="step-10">
+                        <div class="card-header bg-success text-white">Result</div>
+                        <div class="card-body form-group">
+                            <label></label>
+                            <textarea></textarea>
+                        </div>
+                    </div>
+
+                    <div id="progress" class="progress fixed-bottom">
+                        <div class="progress-bar progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                            <span></span>
+                        </div>
+                        <div class="spinner-border text-primary float-right" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="next">
+                        <button type="button" class="float-right btn btn-primary" id="next">Next</button>
+                    </div>
+
+                    <div class="modal fade" id="logModal">
+                        <div class="h-100 modal-dialog modal-xl modal-content" role="document">
+                            <div class="modal-header">Logging Console</div>
+                            <div class="modal-body">
+                                <textarea type="text" id="log"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+    <nav class="navbar fixed-bottom navbar-expand-sm navbar-light bg-light text-center d-none d-sm-block">
+        <span class="text-muted mx-auto">&#169; 2020&nbsp; Digital River, Inc. Digital River&#174; is a registered trademark of Digital River, Inc. <a href="http://www.digitalriver.com/" target="_blank">www.digitalriver.com</a></span>
+    </nav>
+
+    <div class="modal fade" id="historyModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Keys</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Site Id</th>
+                            <th scope="col">Env</th>
+                            <th scope="col">API Key</th>
+                            <th scope="col">#</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="dr_paymentTemplate">
+        <div class="custom-control custom-radio">
+            <input class="custom-control-input" type="radio" name="payment" value="{paymentId}" id="{paymentId}Radio" required/>
+            <label class="custom-control-label" data-toggle="collapse" data-parent="#step-4" data-target="#payment{paymentId}:not(.show)" for="{paymentId}Radio">{name} [{paymentId}]</label>
+            <div class="collapse mt-2" id="payment{paymentId}">
+                <div id="dr_{paymentId}Btn"></div>
+                {description}
+                <div id="drjs_{paymentId}Element" class="row"></div>
+                <a href="javascript:void(0);" class="row text-right" data-toggle="collapse" data-target="#payment{paymentId}collapse" aria-expanded="false" aria-controls="payment{paymentId}collapse">
+                    Country/Currency limitation
+                </a>
+                <div class="collapse" id="payment{paymentId}collapse">
+                    <div class="card card-body">
+                        <blockquote class="blockquote">Countries: <pre class="blockquote-footer">{supportedGeographies}</pre></blockquote>
+                        <blockquote class="blockquote">Currencies: <pre class="blockquote-footer">{supportedCurrencies}</pre></blockquote>
+                        <blockquote class="blockquote">Settings: <pre class="blockquote-footer">{supportedSettings}</pre></blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
+    <script src="../dist/CheckoutJS.js" ></script>
+    <script>
+
+        let _step=0,checkoutJS = null, lastStep = $('.step').last().attr('id').replace('step-','')+0, siteInfo, isRunning = false;
+        Object.defineProperty(window,'step',{
+           get: function(){return _step;},
+           set: function(v){
+               _step = v;
+               let progress = Math.round((step/lastStep)*1000,0);
+               $('#progress .progress-bar').removeClass('bg-warning bg-success bg-danger');
+               $('#progress .progress-bar').css('width',progress+'%').attr('aria-valuenow',progress);
+               $('#progress span').html(progress+'%');
+               $('html,body').animate({scrollTop:$(document).height()},'slow');
+
+               if(progress>=100){
+                   $('#progress .progress-bar').addClass('bg-success');
+                   $('#verify').prop("disabled", false);
+                   $('#locale,#shipping').prop("disabled", true);
+                   $('#progress span').html(progress+'% Done!');
+                   $('.card-header').removeClass('bg-dark');
+               }
+
+           }
+        });
+        $(document).on('click','#reset', function(e){
+            reset();
+        });
+        $(document).on('click','#verify', function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            reset();
+            var form = $('form')[0];
+            $(form).addClass('was-validated');
+            if(form.checkValidity() === false){
+                return false;
+            }
+            $(this).prop("disabled", true);
+            $('#progress').css('visibility','visible');
+            $('#verify').trigger('loading',true);
+            $('input[name="payment"]:checked').prop('checked',false);
+            $('#log').empty().trigger('change');
+            step = 0.1;
+
+            function expressClick(){
+                return Promise.resolve();
+            }
+
+            function expressCompleteSourceId(source,response){
+                $('#next').trigger('click');
+                return Promise.resolve();
+            }
+            if(checkoutJS instanceof CheckoutJS) {
+                checkoutJS.destroy();
+            }
+            window.checkoutJS = {
+                payments: {
+                    googlePay: {
+                        click: expressClick,
+                        completeSourceId : expressCompleteSourceId,
+                    },
+                    applePay: {
+                        click: expressClick,
+                        completeSourceId : expressCompleteSourceId,
+                    },
+                    payPal: {
+                        click: expressClick,
+                        completeSourceId : expressCompleteSourceId,
+                    }
+                },
+                util:{
+                    errorMessage: function(ex){
+                        if(ex) {
+                            console.error(ex,this);
+                            $('#progress .progress-bar').addClass('bg-danger');
+                            $('#verify').prop("disabled", false);
+                            $('#locale,#shipping').prop("disabled", true);
+                            $('#verify').trigger('loading',false);
+                            var _cjs = _checkoutJS;
+                            if(window.checkoutJS instanceof CheckoutJS){
+                                _cjs = this.checkoutJS;
+                            }
+                            _cjs.util.extractErrorId(ex).then(function(errorId){
+                                _cjs.util.extractErrorMessage(ex).then(function(errorMessage){
+                                    if(!errorMessage || errorMessage.length===0 ) {
+                                        errorMessage = ex;
+                                    }
+                                    var errorJson = JSON.stringify(ex, _cjs.util.replaceErrors, 2);
+                                    var template = _cjs.util.format($(_cjs.config.template.error).html(), {
+                                        error: errorMessage+' - '+JSON.stringify(errorId)+'\r\n'+errorJson,
+                                        errorJson: errorJson,
+                                        close: _cjs.config.labels.CLOSE
+                                    });
+                                    $('body').append(template);
+                                    $(_cjs.config.selector.errorModal).on('hidden.bs.modal', function () {
+                                        $(_cjs.config.selector.errorModal).remove();
+                                    }).modal('show');
+                                });
+                            });
+                        }
+                    }
+                }
+            };
+            console.log("Initize CheckoutJS");
+            var useDropin = $('#dropin').is(':checked');
+            var _payments = {
+                creditCard: {
+                    style:{
+                        base:{
+                            height: '28px'
+                        }
+                    }
+                }
+            };
+            Object.keys(_checkoutJS.config.payments).forEach(function(payment){
+                var p = {};
+                if(useDropin) {
+                    p[payment] = {
+                        disable: true
+                    };
+                }else if(payment!=='dropin') {
+                    p[payment] = {
+                        disable: false
+                    };
+                }
+                _checkoutJS.util.extend(_payments,p);
+            });
+            if(useDropin) {
+                _payments.dropin.disable = false;
+            }
+
+            var _cjsSetting = getSettings();
+            Promise.resolve().then(function(){
+                return $.ajax({
+                    url : _cjsSetting.apiRequestUrlBase,
+                    method : "GET",
+                    complete :function(xhr, data){
+                        if (xhr.status !== 0)
+                            $('#apiRequestUrlBase').addClass('badge-success');
+                        else {
+                            $('#apiRequestUrlBase').addClass('badge-danger');
+                            $('#dispatchenv').addClass('is-invalid');
+                            $('#verify').trigger('loading',false);
+                        }
+                    }
+                }).catch(function(){
+                    if($('#apiRequestUrlBase').hasClass('badge-danger')){
+                        return Promise.reject();
+                    }
+                });
+            }).then(function(){
+                if(_cjsSetting.drUrl && _cjsSetting.drUrl.length) {
+                    return $.ajax({
+                        url: _cjsSetting.drUrl+'/store/defaults/SessionToken',
+                        method: "GET",
+                        dataType: "json",
+                        crossDomain:true,
+                        complete :function(xhr, data){
+                            if (xhr.status !== 0)
+                                $('#drUrl').addClass('badge-success');
+                            else {
+                                $('#drUrl').addClass('badge-danger');
+                                $('#gc').addClass('is-invalid');
+                                $('#verify').trigger('loading',false);
+                            }
+                        }
+                    }).catch(function(){
+                        if($('#drUrl').hasClass('badge-danger')){
+                            return Promise.reject();
+                        }
+                    });
+                }
+            }).then(function(){
+                return (new CheckoutJS(Object.assign({
+                    "init":false,
+                    "url": {
+                        "paymentCallBack": (function() {
+                            var a;
+                            return function(url) {
+                                if(!a) a = document.createElement('a');
+                                a.href = url;
+                                return a.href;
+                            }
+                        })()('../dist/paymentCallBack.html')
+                    },
+                    "payments": _payments,
+                    "apiOption": {
+                        "timeout":180000
+                    },
+                    "redirectOverlay": {
+                        "buttonClass": "dr_button btn btn-primary"
+                    }
+                },_cjsSetting)))
+            }).then(function(_checkoutJS){
+                checkoutJS = _checkoutJS;
+                console.log('checkoutJS',checkoutJS);
+                //checkoutJS.emit("destroyPayments");
+                checkoutJS.on('logging', function(logData){
+                    try {
+                        $('#log').prepend('\r\n--------------------------------------------\r\n')
+                            .prepend(JSON.stringify(logData, checkoutJS.util.replaceErrors, 0)).trigger('change');
+                    }catch(ex){}
+                });
+                checkoutJS.on('cartUpdated',function(cartData){
+
+                });
+                return Promise.resolve(checkoutJS);
+            }).then(function(){
+                console.log("Running Step");
+                return running();
+            }).catch(window.checkoutJS.util.errorMessage);
+        }).on('loading','#verify',function(event,show){
+            if(show) {
+                $('body').addClass('loading');
+            }else{
+                $('body').removeClass('loading');
+            }
+        });
+
+        $(document).on('click','#next', function(e){
+            e.preventDefault();
+            if(!isRunning) {
+                $('.next').hide();
+                $('#verify').trigger('loading',true);
+                running();
+            }
+        }).on('change','#next',function(){
+            $('#progress .progress-bar').addClass('bg-warning');
+            $('#verify').remove("disabled");
+            $('.next').show();
+            $('#verify').trigger('loading',false);
+        }).on('change','input[name=payment]',function(e){
+            $('html,body').animate({scrollTop:$(document).height()},'slow');
+        }).on('click','#updateCart',function(e){
+            e.preventDefault();
+            if(!isRunning) {
+                $('#verify').trigger('loading',true);
+                var cart = JSON.parse($('#step-5 textarea').val());
+                //$('#step-5 textarea').html('').trigger('change');
+                hold = false;
+                step = 5;
+                checkoutJS.shopperApi.updateCart(cart).then(function(cartData){
+                    $('#step-5').trigger('show').each(function () {
+                        $(this).find('textarea').val(JSON.stringify(cartData, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                    });
+                    running();
+                });
+            }
+        });
+
+        $(document).on('click','#progress', function(e){
+            $('#logModal').modal('show');
+        });
+
+        $(document).on('show','.card', function(){
+            $(this).fadeIn(800);
+            $('.card-header').removeClass('bg-dark');
+        });
+
+        function running() {
+            isRunning = true;
+            let chain = Promise.resolve();
+            let hold = false;
+            let cartData;
+            chain.then(function(){
+                if(!hold && step<1) {
+                    return checkoutJS.shopperApi.getSiteInfo().then(function (_siteInfo) {
+                        siteInfo = _siteInfo;
+                        console.log("SiteInfo", siteInfo);
+                        $('#siteid').val(siteInfo.site.id);
+                        $('#step-1').trigger('show').each(function () {
+                            $(this).find('textarea').val(JSON.stringify(siteInfo, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                        });
+                        step = 1;
+                        saveSetting();
+                    });
+                }
+            }).then(function(){
+                if(!hold && step<2) {
+                    var getToken = checkoutJS.shopper.getAccessToken({authentication:true});//$('#gc').is(':checked')?checkoutJS.shopperApi.getSessionToken():checkoutJS.shopperApi.getShopperAccessToken();
+                    return getToken.then(function (accessToken) {
+                        console.log("AccessToken", accessToken);
+                        $('#step-2').trigger('show').each(function () {
+                            $(this).find('textarea').val(JSON.stringify(accessToken, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                        });
+                        step = 2;
+                    }).then(function(){
+                        if(checkoutJS.shopperApi.loginByReferenceId){
+                            return checkoutJS.shopperApi.loginByReferenceId('');
+                        }
+                    });
+                }
+            }).then(function(){
+                if(!hold && step<3) {
+                    var productId= $('#productid').val();
+                    return checkoutJS.shopperApi.getProducts( {pageSize: 10}).then(function (productData) {
+                        console.log("Products", productData);
+                        $('#step-3').trigger('show').each(function () {
+                            $(this).find('textarea').val(JSON.stringify(productData.products, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                        });
+                        step = 3;
+                        //if(productId.length!==0) return Promise.resolve(productId);
+                        if (productData.products && productData.products.product && productData.products.product[0].id) {
+                            var products = productData.products.product.filter(function(product){
+                                return product.companyId === siteInfo.site.companyId;
+                            });
+                            var hasVarProduct = products.filter(function(product) {
+                                return product.baseProduct === 'true';
+                            }).length !== 0;
+
+                            if (products && products.length) {
+                                productId = products[0].id;
+                            }
+
+                            var filterProduct = function (product) {
+                                return product.purchasable === 'true' && product.pricing && product.pricing.listPrice.value > 0 &&
+                                    product.customAttributes.attribute.filter(function (attr) {
+                                        return (attr.name === 'isAutomatic');
+                                    }).length === 0;
+                                /*
+                              && product.productType !== 'OTHER'
+                              && product.customAttributes.attribute.filter(function(attr){
+                                  return (attr.name === 'ProductType' && (attr.value ==='Renew AR' || attr.value === 'Renewal')) ||
+                                         (attr.name ==='isAutomatic'  );
+                              }).length===0;
+                               */
+                            };
+
+                            if (hasVarProduct) {
+                                var varProducts = [];
+                                var _products = products.filter(function (product) {
+                                    return product.baseProduct === 'true' &&
+                                        product.variations &&
+                                        product.variations.product &&
+                                        product.variations.product.filter(filterProduct).length > 0;
+                                });
+                                _products.forEach(function (product) {
+                                    varProducts = varProducts.concat(product.variations.product.filter(filterProduct));
+                                });
+                                if (varProducts && varProducts.length > 0) {
+                                    products = varProducts;
+                                }else if(_products && _products.length > 0) {
+                                    products = _products;
+                                }
+                            }
+                            if (products && products.length > 0) {
+                                products = products.filter(filterProduct);
+                            }
+                            if (products && products.length) {
+                                productId = products[0].id;
+                            }
+                            $('#productid').val(productId);
+                            return Promise.resolve(productId);
+                        }
+                    }).catch(function(ex){
+                        $('#step-3').trigger('show').each(function(){
+                            $(this).find('textarea').addClass('border border-danger').html(JSON.stringify(ex, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                        });
+                        step=3;
+                        return Promise.resolve($('#productid').val());
+                    });
+                }else {
+                    return Promise.resolve($('#productid').val());
+                }
+
+            }).then(function(productid){
+                if(!hold && step<4){
+                    return checkoutJS.shopperApi.getProduct(productid).then(function(productData){
+
+                            return checkoutJS.shopperApi.addToCart({
+                                productID: productData.product.id,
+                                quantity: productData.product.minimumQuantity || 1
+                            }).then(function (_cartData) {
+                                cartData = _cartData;
+                                console.log("Cart", cartData);
+                                step = 4;
+                                $('#cartid').val(cartData.cart.id);
+                                $('#step-4').trigger('show').each(function () {
+                                    $(this).find('textarea').val(JSON.stringify(cartData, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                                });
+                            });
+
+                    }).catch(function(){
+                        hold = true;
+                        $('#next').trigger('change');
+                    });
+                }
+            }).then(function(){
+                if(!hold && step<5){
+                    $("#locale,#shipping").trigger('update');
+                    var _chain = Promise.resolve();
+                    var _locale = ($('#localeValue').val()+'-'+$('#currencyValue').val());
+                    if(  _locale !== $('#locale').val() && $('#locale option[value='+_locale+']').length>0 ){
+                        $('#locale').val(_locale);
+                        _chain = checkoutJS.updateLocaleAndCurrency($('#localeValue').val(),$('#currencyValue').val());
+                    }
+                    return _chain.then(function(){
+                        step = 5;
+                        let cartPayload = JSON.parse($('#cartPayload').val());
+                        if(cartPayload && cartPayload.cart.billingAddress.hasOwnProperty('country') && cartPayload.cart.billingAddress.country.length === 0 ){
+                            cartPayload.cart.billingAddress.country = checkoutJS.shopper.locale.split('_')[1];
+                        }
+                        if(cartPayload && cartPayload.cart.shippingAddress.hasOwnProperty('country') && cartPayload.cart.shippingAddress.country.length === 0 ){
+                            cartPayload.cart.shippingAddress.country = checkoutJS.shopper.locale.split('_')[1];
+                        }
+                        return checkoutJS.shopperApi.updateCart(
+                            cartPayload
+                        );
+                    }).then(function(_cartData){
+                        cartData = _cartData;
+                        console.log("Cart", cartData);
+                        $('#step-5').trigger('show').each(function () {
+                            $(this).find('textarea').val(JSON.stringify(cartData, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                        });
+                        return checkoutJS.util.useRecurringPayment(_cartData).then(function(useRecurringPayment){
+                            $('#recurringPayment').val(useRecurringPayment);
+                        });
+                    }).catch(function(ex){
+                        hold=true;
+                        step = 4;
+                        $('#step-5').trigger('show').each(function () {
+                            $(this).find('textarea').val(JSON.stringify(ex, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                        });
+                        $('#next').trigger('change');
+                    });
+                }
+            }).then(function(){
+                if(!hold && step<6){
+                    $('#step-6').trigger('show');
+                    let payment = $('input[name="payment"]:checked').val();
+                    if(!payment) {
+                        hold = true;
+                        $("#creditCardContainer").toggle(!$('#dropin').is(':checked'));
+                        Object.keys(checkoutJS.payments).map(function (_name) {
+                            var _payment = checkoutJS.config.payments[_name];
+                            if(!_payment.disable) {
+                                var $payment = $('input[name=payment][value=' + _name + ']');
+                                if ($payment && $payment.length === 0) {
+                                    var template = checkoutJS.util.format($('#dr_paymentTemplate').html(), {
+                                        paymentId: _name,
+                                        name: checkoutJS.config.payments[_name].name,
+                                        description: checkoutJS.config.payments[_name].description,
+                                        details: checkoutJS.config.labels.DETAILS,
+                                        supportedGeographies: checkoutJS.config.payments[_name].supportedGeographies ? checkoutJS.config.payments[_name].supportedGeographies.join(',') : null,
+                                        supportedCurrencies: checkoutJS.config.payments[_name].supportedCurrencies ? checkoutJS.config.payments[_name].supportedCurrencies.join(',') : null,
+                                        supportedSettings: checkoutJS.config.payments[_name].supportedSettings ? JSON.stringify(checkoutJS.config.payments[_name].supportedSettings, null, 2) : null,
+                                    });
+                                    $('#paymentContainer').append(template);
+                                }
+                            }
+                        });
+                        $('input[name=payment]').prop('required',true);
+                        return checkoutJS.emit('initializePayments').then(function () {
+                            Object.keys(checkoutJS.payments).map(function (_name) {
+                                var $payment = $('input[name=payment][value='+_name+']');
+                                $payment.prop("disabled",!checkoutJS.config.payments[_name].supported);
+                            });
+                            $('#next').trigger('change');
+                        });
+                    }else{
+                        $('#verify').trigger('loading',false);
+                        return checkoutJS.payments[payment].applySourceId(payment).then(function(paymentSource){
+                            $('#verify').trigger('loading',true);
+                            if(!paymentSource || !checkoutJS.util.isReadySubmitState(paymentSource.state)) {
+                                $('input[name="payment"]:checked').prop('checked',false);
+                                hold = true;
+                                $('#next').trigger('change');
+                                return;
+                            }else{
+                                step = 6;
+                                return paymentSource;
+                            }
+                        });
+                    }
+                }else{
+
+                }
+            }).then(function(paymentSource) {
+                if (!hold && step < 7 && paymentSource) {
+                    $('#step-7').trigger('show').each(function () {
+                        $('#sourceid').val(paymentSource.id);
+                        $('#clientsecret').val(paymentSource.clientSecret);
+                        $('#sourcetype').val(paymentSource.type);
+                        $(this).find('textarea').val(JSON.stringify(paymentSource, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                        step = 7;
+                    });
+                }
+            }).then(function(){
+                if(!hold && step<8){
+                    return checkoutJS.shopperApi.submitCart().then(function(submitCart){
+                        $('#step-8').trigger('show').each(function () {
+                            $(this).find('textarea').val(JSON.stringify(submitCart, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                            step = 8;
+                        });
+                    });
+                }
+            }).then(function(){
+                if(!hold && step<9){
+                    return checkoutJS.storefront.pendingFundsRedirectFlow().then(function(){
+                        step = 9;
+                    });
+                }
+            }).then(function(){
+                if(!hold && step<10) {
+                    return checkoutJS.storefront.getSelectedPayment().then(function(payment){
+                        var settings = JSON.parse(JSON.stringify(getSettings(),function(key,value){if(key.startsWith('_')){ return;} return value;},2));
+                        var summary = {
+                            orderId: $('#cartid').val(),
+                            SiteSetting_Public_API_Key: settings,
+                            payment: payment,
+                        };
+                        $('#step-10').trigger('show').each(function () {
+                            $(this).find('textarea').val(JSON.stringify(summary, checkoutJS.util.replaceErrors, 2)).trigger('change');
+                        });
+                        step = 10;
+                    });
+                }
+            }).catch(checkoutJS.util.errorMessage)
+            .then(function(){
+                if(!hold) {
+                    checkoutJS.emit('destroyPayments');
+                }else{
+                    checkoutJS.shopper.destroy({disableCache:true});
+                }
+                isRunning = false;
+                $('html,body').animate({scrollTop:$(document).height()},'slow');
+                $('#verify').trigger('loading',false);
+            });
+
+            $(document).off("update","#locale").on("update","#locale",function(){
+                $(this).empty();
+                var $localeSelector = this;
+                $.each(siteInfo.site.localeOptions.localeOption, function( index ) {
+                    var localeOption = siteInfo.site.localeOptions.localeOption[index];
+                    $.each(localeOption.supportedCurrencies.currency, function( currencyIndex ) {
+                        var currency = localeOption.supportedCurrencies.currency[currencyIndex];
+                        var o = new Option(localeOption.locale+"-"+currency, localeOption.locale+"-"+currency);
+                        if(checkoutJS.shopper.locale === localeOption.locale && checkoutJS.shopper.currency === currency ) {
+                            o.selected = true;
+                        }
+                        $localeSelector.append(o);
+                    });
+                });
+            }).off("change","#locale").on("change","#locale",function(e){
+                var $this = $(this);
+                $('input[name="payment"]:checked').prop('checked',false);
+                hold = true;
+                if($this.val()) {
+                    //checkoutJS.emit("destroyPayments");
+                    $('#verify').trigger('loading',true);
+                    $('#step-5 textarea').html('').trigger('change');
+                    hold = false;
+                    step = 4;
+                    var array = $(this).val().split('-');
+                    $('#localeValue').val(array[0]);
+                    $('#currencyValue').val(array[1]);
+                    saveSetting();
+                    return checkoutJS.updateLocaleAndCurrency(array[0], array[1]).then(function(){
+                        return checkoutJS.shopperApi.getCart().then(function(cartData){
+                            if(!cartData.cart.lineItems.lineItem || cartData.cart.lineItems.lineItem.length===0){
+                                step = 2;
+                            }
+                        });
+                    }).then(function () {
+                        $('#next').trigger('click');
+                    });
+                }
+            });
+
+            $(document).off("update","#shipping").on("update","#shipping",function(){
+                var _this = this;
+                $(this).empty();
+                $(this).hide();
+                var $shippingSelector = this;
+                if(cartData && cartData.cart) {
+                    $.each(cartData.cart.shippingOptions.shippingOption, function (index) {
+                        var shippingOption = cartData.cart.shippingOptions.shippingOption[index];
+                        var o = new Option(shippingOption.description, shippingOption.id);
+                        if (cartData.cart.shippingMethod && cartData.cart.shippingMethod.code === shippingOption.id) {
+                            o.selected = true;
+                        }
+                        $shippingSelector.append(o);
+                        $(_this).show();
+                    });
+                }
+            }).off("change","#shipping").on("change","#shipping",function(e){
+                var $this = $(this);
+                $('input[name="payment"]:checked').prop('checked',false);
+                hold = true;
+                if($this.val()) {
+                    //checkoutJS.emit("destroyPayments");
+                    $('#verify').trigger('loading',true);
+                    $('#step-5 textarea').html('').trigger('change');
+                    hold = false;
+                    step = 4;
+                    checkoutJS.shopperApi.updateSelectedShippingMethodOnCart($this.val()).then(function () {
+                        $('#next').trigger('click');
+                    });
+                }
+            }).off("input propertychange","#productid").on("input propertychange","#productid",function(){
+                hold = false;
+                step = 3;
+                saveSetting();
+                $('#next').trigger('click');
+            });
+
+            return chain;
+        }
+
+        function reset() {
+            step = 0;
+            $('#locale,#shipping').prop("disabled", false);
+            $('.step').hide();
+            $('#progress').css('visibility','hidden');
+            $('.next').hide();
+            $('#verify').prop("disabled", false);
+            $('input[name=payment]').prop('required',false);
+            $('form').removeClass('was-validated');
+            $('body').removeClass('loading');
+            $('.badge').removeClass('badge-success badge-danger');
+            $('#dispatchenv,#gc').removeClass('is-invalid');
+            $('textarea').removeClass('border border-danger');
+            location.hash ='';
+        }
+
+        function getSettings() {
+            return {
+                "apiKey": $('#apiKey').val(),
+                "authUserName": $('#authUserName').val(),
+                "authPassword": $('#authPassword').val(),
+                "drjsApiKey": $('#drjskey').val(),
+                "apiRequestUrlBase": $('#dispatchenv').val(),
+                "encryptionKey": $('#apiEncryptionKey').val(),
+                "drUrl": ($('#gc').is(':checked')?$('#dispatchenv option:checked').attr('data-gc'):''),
+                "_locale": $('#localeValue').val(),
+                "_currency": $('#currencyValue').val(),
+                "_productid": $('#productid').val()
+            };
+        }
+
+        function selectSetting(key) {
+            console.log('Key',key);
+            $('#apiKey').val(key.apiKey);
+            $('#authUserName').val(key.authUserName);
+            $('#authPassword').val(key.authPassword);
+            $('#drjskey').val(key.drjsApiKey);
+            $('#dispatchenv').val(key.apiRequestUrlBase).trigger("change");
+            $('#apiEncryptionKey').val(key.encryptionKey);
+            $('#gc').prop('checked',(key.drUrl && key.drUrl.length!==0)).trigger('change');
+            $('#localeValue').val(key._locale || '');
+            $('#currencyValue').val(key._currency || '');
+            $('#productid').val(key._productid || '');
+            updateState(key);
+        }
+
+        function saveSetting(settings) {
+            var keys = (window.localStorage["keys"]? JSON.parse(window.localStorage["keys"]) : {});
+            if(!settings) {
+                settings = getSettings();
+                settings["env"] = $('#dispatchenv option:checked').text();
+                settings["siteId"] = siteInfo.site.id;
+                if (settings.apiKey && settings.apiKey.length) {
+                    settings._timestamp = new Date();
+                    keys[settings.apiKey] = settings;
+                }
+            }
+            console.table(keys);
+            window.localStorage["keys"] = JSON.stringify(keys);
+            updateState(settings);
+        }
+
+        function updateState(settings) {
+            const hash = btoa(JSON.stringify(settings));
+            try {
+                history.pushState(null, null, location.pathname+'#'+hash);
+                $(window).trigger('hashchange');
+                return;
+            } catch(e) {}
+            location.hash = '#' + hash;
+        }
+
+        new CheckoutJS().then(function(_checkoutJS){
+            window._checkoutJS = _checkoutJS;
+        });
+
+        $(document).on('change','#dispatchenv', function(){
+            console.log($(this).val());
+            $('#drUrl em').html($('#dispatchenv option:checked').attr('data-gc'));
+            $('#apiRequestUrlBase em').html($(this).val());
+        });
+
+        $(document).on('click',"#keys",function(){
+            $('#historyModal').modal('show');
+        });
+
+        $(document).on("render","#historyModal",function(){
+            var keys = (window.localStorage["keys"]? JSON.parse(window.localStorage["keys"]) : {});
+            var currentKey = $('#apiKey').val();
+            var $tbody = $('#historyModal .tbody').empty();
+            $.each(keys, function(apiKey, key) {
+                var _class = apiKey===currentKey?'text-info':'';
+                $tbody.append(
+                    $('<tr class="'+_class+'" />')
+                        .append("<td>"+key.siteId+"</td>")
+                        .append("<td>"+key.env+"</td>")
+                        .append("<td>"+apiKey+"</td>")
+                        .append(
+                            $("<td/>").append(
+                                $("<a class='btn btn-link' href='javascript:'>Select</a>").click(function(){
+                                    reset();
+                                    selectSetting(key);
+                                    $("#historyModal").modal('hide');
+                                })
+                            ).append($("<a class='btn btn-link' href='javascript:'>Delete</a>").click(function(){
+                                if(confirm('Sure?')) {
+                                    delete keys[apiKey];
+                                    window.localStorage["keys"] = JSON.stringify(keys);
+                                    $("#historyModal").trigger("render");
+                                }
+                            })
+                        )
+                ));
+            });
+        });
+
+        $(document).on('show.bs.modal','#historyModal', function (event) {
+            $(this).trigger("render");
+        });
+
+        $(document).on('shown.bs.modal','#logModal', function (event) {
+            $('#log').trigger('change').trigger('resize');
+        });
+
+        $(document).on('change','#gc',function(){
+            if($(this).is(':checked')){
+                $("#drUrl").show();
+            } else {
+                $("#drUrl").hide();
+            }
+        });
+
+        $(window).on('hashchange', function() {
+            var typeNumber = 0;
+            var errorCorrectionLevel = 'M';
+            var qr = qrcode(typeNumber, errorCorrectionLevel);
+            qr.addData(window.location.href);
+            qr.make();
+            document.getElementById('QRCode').innerHTML = qr.createImgTag();
+        }).trigger('hashchange');
+
+        (function(){
+
+            var hash = location.hash.substring(1);
+            if(hash && hash.length){
+                try{
+                    var key = JSON.parse(atob(hash));
+                    selectSetting(key);
+                }catch(ex){
+
+                }
+            }else {
+                var keys = (window.localStorage["keys"] ? JSON.parse(window.localStorage["keys"]) : {});
+                if (keys && Object.keys(keys).length) {
+                    var apiKey = Object.keys(keys).map(function (k) {
+                        return keys[k];
+                    }).sort(function (a, b) {
+                        return new Date(b._timestamp).getTime() - new Date(a._timestamp).getTime();
+                    })[0].apiKey;
+                    var key = keys[apiKey];
+                    selectSetting(key);
+                }
+            }
+            $("#cartPayload").each(function() {
+                var textarea = this;
+                var cm = CodeMirror.fromTextArea(textarea, {
+                    theme: 'default',
+                    lineNumbers: true,
+                    mode: "application/ld+json",
+                });
+                cm.on('change',function(){
+                    cm.save();
+                });
+                $(textarea).bind('change', function(){
+                    if($(textarea).hasClass())
+                    cm.setValue($(textarea).val());
+                    cm.refresh();
+                });
+            });
+
+            $(".step textarea, #log").each(function(){
+                var textarea = this;
+                var readOnly = true;
+                var theme = 'ambiance';
+                if($(this).attr("contenteditable")==="true"){
+                    readOnly = false;
+                    theme = 'default';
+                }
+                var cm = CodeMirror.fromTextArea(textarea, {
+                    theme: theme,
+                    mode: "application/ld+json",
+                    lineWrapping: false,
+                    lineNumbers: true,
+                    matchBrackets: true,
+                    styleActiveLine: true,
+                    autoCloseBrackets: true,
+                    readOnly: readOnly,
+                });
+                cm.on('change',function(){
+                    cm.save();
+                });
+                $(textarea).bind('change', function(){
+                    cm.setValue($(textarea).val());
+                    cm.refresh();
+                    $(cm.display.wrapper).addClass($(textarea).attr('class'));
+                });
+                $(textarea).bind('resize', function(){
+                    cm.setSize("100%","80%");
+                    cm.refresh();
+                });
+            });
+        })();
+        $('#dispatchenv').trigger("change");
+
+    </script>
+    </body>
+</html>

@@ -1,0 +1,1765 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browsers/globalCommerce.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browsers/globalCommerce.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {Global} from "../util";
+import {
+    LOGGING,
+    DRJS,
+    _CHECKOUTJS,
+    CONFIG,
+    UTIL,
+    SHOPPERAPI,
+    PAYMENTS,
+    CJS,
+    UNDEFINED,
+    FAIL_TO_APPLY_SOURCE,
+    PAYMENT,
+    CARTDATA,
+    REQUESTPAYLOAD, SHOPPER
+} from "../keywords";
+import {Storefront} from './storefront';
+import {Shopper} from '../shopper';
+import {ApplePayGC} from './payments/applePay';
+import {GooglePayGC} from './payments/googlePay';
+import {CreditCardGC} from './payments/creditCard';
+import {PayPalGC} from "./payments/payPal";
+import {KlarnaCreditWeb} from "./payments/klarnaCredit";
+import {Payments} from '../payments/payment';
+import {StorefrontPayment} from "./payment";
+import {OfflineRefund} from "./offlinerefund";
+
+const document = Global.document;
+const GCSTOREFRONT = 'gcStorefront';
+const NICKNAME = 'nickname';
+let $ = typeof Global.$ !== UNDEFINED ? Global.$ : null;
+
+/**
+ * @class GlobalCommerce
+ * @classdesc The GlobalCommerce class is the storefront module for Global Commerce (gC) hosted sites, including gC-specific payment methods.
+ * @extends Storefront
+ * @param {CheckoutJS} parent
+ * @returns {Promise&lt;GlobalCommerce>}
+ * @category Browser
+ */
+class GlobalCommerce extends Storefront {
+
+    constructor(parent) {
+        super(parent, {
+            excludeMethods: {constructor: true},
+            writableMethods: {
+                getBillingAddress: true,
+                getShippingAddress: true,
+                getAddressValues: true,
+                getAddress: true,
+                getCreditCard: true,
+                getSelectedCloudPayPayment: true,
+                createSourceToCloudPay: true,
+                applyShippingCountry: true,
+                applyShippingOption: true,
+                applyAddress: true,
+                submitCheckoutForm: true,
+                initCart: true,
+                initCheckout:true,
+                initConfirmOrder:true,
+                initThankYou:true,
+                initOfflineRefund:true,
+                checkTC: true
+            }
+        }, false);
+        let _this = this;
+        return (async () => {
+            _this = await _this;
+            parent.gC = _this;
+            if (!parent[CONFIG].lib.jQuery.disable) {
+                const _jQuery = Global.jQuery;
+                await parent.util.loadScript(parent[CONFIG].lib.jQuery.url).then(() => {
+                    $ = Global.jQuery.noConflict();
+                    parent.$ = $;
+                    Global.jQuery = _jQuery;
+                });
+            }
+            if (parent[CONFIG].init) {
+                await _this.initPageLoad();
+            }
+            return _this;
+        })();
+    }
+
+    /**
+     * Retrieves the selected payment.
+     * @returns {Promise&lt;{name:type,result:drJsPayload}>}
+     * @example checkoutJS.gC.getSelectedPayment()
+     */
+    async getSelectedPayment() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        let _payment = (await _util.getValue(PAYMENT) || {});
+        if (Object.keys(_payment).length === 0) {
+            _payment = _config.cloudPayPayload || {};
+            if (_payment.type &amp;&amp; _payment.details) {
+                _payment = {name: _payment.type, result: {
+                        source:{
+                            type: _payment.type,
+                            id: _payment.id,
+                            clientSecret: _payment.details.clientSecret
+                        }
+                }};
+            }
+        }
+        return _payment;
+    }
+
+    async getPayments() {
+        const _cjs = this[_CHECKOUTJS];
+        return _cjs.gC[PAYMENTS];
+    }
+
+    async liveInstrument(payment, overlay) {
+        const _cjs = this[_CHECKOUTJS];
+
+        const backToCart = document.createElement('a');
+        backToCart.className = "drjs_backToCart";
+        backToCart.appendChild(document.createTextNode(_cjs[CONFIG].labels.BACK_TO_CART));
+        backToCart.onclick = async function () {
+            _cjs.emit('backToCart');
+        };
+        overlay.append(backToCart);
+
+        const close = overlay.getElementsByClassName('drjs_close');
+        if (close &amp;&amp; close.length) {
+            overlay.removeChild(close[0]);
+        }
+
+        const cartPageLink = async function () {
+            const link = await _cjs[SHOPPERAPI].getCartPageLink();
+            Global.location.href = link;
+        };
+
+        _cjs.on('backToCart', cartPageLink);
+
+        return (overlay);
+    }
+
+    /**
+     * Validate the payment source
+     * @returns {Promise&lt;PaymentSourceObject|false>}
+     * @example checkoutJS.gC.validateSource(source)
+     */
+    async validateSource(source) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        //const _gC = _cjs.gC;
+        if(!source){
+            const _payment = (await _util.getValue(PAYMENT) || {});
+            if (_payment &amp;&amp; _payment.result &amp;&amp; _payment.result.source) {
+                source = _payment.result.source;
+            }
+        }
+        let _paymentType = await _this._getBasePaymentType(source);
+        let _name = await _util.getSourcePaymentType(_paymentType);
+        if (source &amp;&amp; source.type === GCSTOREFRONT &amp;&amp; _config[PAYMENTS][_name][GCSTOREFRONT] === false )
+        {
+            return false;
+        }
+        source = _cjs.storefront.validateSource.call(_this,source);
+        return source;
+    }
+
+    async _createPayments(parent) {
+        const _cjs = parent;
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        /**
+         * All enabled payment instances for gC.
+         * @name payments
+         * @type Payments
+         * @memberof GlobalCommerce
+         * @override
+         * @see Payments
+         * @instance
+         * @readonly
+         * @example checkoutJS.gC.payments;
+         */
+        const _gcPayments = _cjs.gC[PAYMENTS] = await new Payments(parent);
+        let _gcStorefront = true;
+        if(_cjs[CONFIG].page &amp;&amp; _cjs[CONFIG].page.indexOf('ConfirmOrderPage')!==-1) {
+             _gcStorefront = false;
+        }
+        for (let payment in _config[PAYMENTS]) {
+            let _configPayment = _config[PAYMENTS][payment];
+            if (_config[PAYMENTS].hasOwnProperty(payment) &amp;&amp; !_configPayment.disable) {
+                if(_configPayment[GCSTOREFRONT]!==false) {
+                    _configPayment[GCSTOREFRONT] = _gcStorefront;
+                    _configPayment.liveInstrument = !_gcStorefront;
+                    if(_gcStorefront === true){
+                        delete _configPayment.mountElement;
+                    }
+                }
+                try {
+                    switch (payment) {
+                        case 'creditCard':
+                            _gcPayments[payment] = new CreditCardGC(_cjs);
+                            break;
+                        case 'applePay':
+                            _gcPayments[payment] = new ApplePayGC(_cjs);
+                            break;
+                        case 'googlePay':
+                            _gcPayments[payment] = new GooglePayGC(_cjs);
+                            break;
+                        case 'payPal':
+                            _gcPayments[payment] = new PayPalGC(_cjs);
+                            break;
+                        case 'klarnaCredit':
+                            _gcPayments[payment] = new KlarnaCreditWeb(_cjs, {}, payment, 'gC');
+                            break;
+                        default:
+                            _gcPayments[payment] = new StorefrontPayment(_cjs, {}, payment, 'gC');
+                            break;
+                    }
+                    const prop = {};
+                    prop[payment] = {
+                        writable: true,
+                        enumerable: _configPayment.enumerable !== false,
+                        configurable: false
+                    };
+                    Object.defineProperties(_cjs.gC[PAYMENTS], prop);
+                } catch (ex) {
+                    await _util.errorMessage(ex);
+                }
+            }
+        }
+    }
+
+    async _initPayments() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _gC = _cjs.gC;
+        const _gcPayments = _gC[PAYMENTS];
+        const cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        if (_cjs[DRJS]) {
+            const enablePayments = [];
+            for (let payment in _config[PAYMENTS]) {
+                if (_cjs[PAYMENTS][payment]) {
+                    const _configPayment = _cjs[CONFIG][PAYMENTS][payment];
+                    const supportedCurrency = await _gcPayments[payment].supportedCurrency();
+                    const supportedRecurringPayments = await _gcPayments[payment].supportedRecurringPayments();
+                    const supportedGeography = await _gcPayments[payment].supportedGeography(cartData.cart.billingAddress.country);
+                    if (_gcPayments.hasOwnProperty(payment) &amp;&amp; _cjs[PAYMENTS][payment] &amp;&amp; _gcPayments[payment] &amp;&amp; supportedCurrency &amp;&amp; supportedRecurringPayments &amp;&amp; _configPayment.supported!==false) {
+                        try {
+                            if (_gcPayments[payment].createPaymentInfo) {
+                                await _gcPayments[payment].createPaymentInfo(payment);
+                            }
+                            enablePayments.push(payment);
+                        } catch (ex) {
+                            _util.errorMessage(ex);
+                        }
+                    } else {
+                        _configPayment.show = false;
+                    }
+                    _configPayment.supported = supportedCurrency &amp;&amp; supportedRecurringPayments &amp;&amp; supportedGeography;
+                }
+            }
+            for (let index in enablePayments) {
+                const payment = enablePayments[index];
+                const _gCPayment = _gcPayments[payment];
+                try {
+                    if (_gCPayment.initPayment) {
+                        await _gCPayment.initPayment(payment);
+                    }
+                } catch (ex) {
+                    _util.errorMessage(ex);
+                }
+                if (_gCPayment.completePaymentInfo) {
+                    await _gCPayment.completePaymentInfo(payment);
+                }
+            }
+            await _gC.initTC();
+        }
+    }
+
+    async _initPaymentMethod() {
+        const _this = this;
+        Object.getOwnPropertyNames(PaymentGC).forEach(function (key) {
+            if (!_this[key]) {
+                Object.defineProperty(_this, key, {
+                    value: PaymentGC[key],
+                    enumerable: false,
+                    configurable: false,
+                    writable: true,
+                });
+            }
+        });
+    }
+
+    async _getBasePaymentType(source) {
+        if(source) {
+            if (source.type === GCSTOREFRONT) {
+                if (source[GCSTOREFRONT]) {
+                    return source[GCSTOREFRONT].type;
+                } else if (source.details) {
+                    return source.details.type;
+                }
+            }
+            return source.type;
+        }
+    }
+
+    /**
+     * Submits the checkout form or updates the page information, which includes billing, shipping and payment information, via CommerceAPI then redirects to the confirm order page.
+     * @param {PaymentSourceObject} source
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.submitCheckoutForm()
+     */
+    async submitCheckoutForm(/*source*/) {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+        const _selector = _config.selector;
+        const _shopperApi = _cjs[SHOPPERAPI];
+        _cjs.emit(LOGGING, {
+            id: _util.getTime(),
+            api: CJS,
+            method: 'submitCheckoutForm'
+        });
+        if (!_config.submitCartWithShopperApi) {
+            $(_selector.checkoutForm)[0].submit();
+        } else {
+            const billingAddress = await _cjs.gC.getBillingAddress();
+            const shippingAddress = await _cjs.gC.getShippingAddress();
+            const address = await Promise.all([
+                _shopperApi.convertPaymentRequestAddressToShopperApiAddress(
+                    billingAddress, 'billingAddress'
+                ), _shopperApi.convertPaymentRequestAddressToShopperApiAddress(
+                    shippingAddress, 'shippingAddress'
+                )]);
+
+            // eslint-disable-next-line no-unused-vars
+            const addressResponse = await _shopperApi.applyAddressToCart(address[0], address[1]);
+
+            const sourceId = $(_selector.cloudPaySourceId).val();
+            if (sourceId) {
+                await _shopperApi.applySourceToCart(sourceId);
+            }
+            const link = await _shopperApi.getConfirmOrderPageLink();
+            Global.location.href = link;
+        }
+    }
+
+    /**
+     * Creates the payment source from DigitalRiver.js then apply the source ID to the CloudPay payment method's hidden field.
+     * @param {string} name - The payment name.
+     * @param {PaymentRequestObject} sourceData
+     * @returns {Promise&lt;PaymentSourceObject>}
+     * @deprecated
+     * @example checkoutJS.gC.createSourceToCloudPay('creditCard',paymentRequest);
+     */
+    async createSourceToCloudPay(name, sourceData) {
+        const _cjs = this[_CHECKOUTJS];
+        const result = await _cjs[DRJS].createSource(sourceData);
+        await _cjs[UTIL].setValue(PAYMENT, {name: name, result: result});
+        if (result.error) {
+            if (result.error.state === 'failed') {
+                return Promise.reject(new Error(_cjs[CONFIG].labels.error.PAYMENT_AUTHORIZATION_FAILED));
+            }
+            return Promise.reject(result);
+        } else if (result.source) {
+            await this.applySourceToCloudPay(result.source);
+        }
+        return (result.source);
+    }
+
+    /**
+     * Tries to re-create a new source from the existing CartData.
+     * @param {PaymentSourceObject} source
+     * @returns {Promise&lt;PaymentSourceObject>}
+     * @example checkoutJS.gC.retryCreateSource(source);
+     */
+    async retryCreateSource(source){
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _drjs = _cjs[DRJS];
+        const _name = _util.getSourcePaymentType(source.type);
+        const _payments = await _this.getPayments();
+        const _payment = _payments[_name];
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        const cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        const sourceData = await _payment[REQUESTPAYLOAD].createObject(cartData);
+        _util.extend(source,sourceData);
+        let sourceArgs = [];
+        if(_configPayment.mountElement &amp;&amp; _configPayment.element) {
+            let _element = _configPayment.element;
+            if( !(_element.id &amp;&amp; _element.key) ){
+                _element = Object.values(_element)[0];
+            }
+            sourceArgs.push(_element);
+        }
+        sourceArgs.push(source);
+        const result = await _drjs.createSource.apply(_drjs,sourceArgs);
+        if (result.source) {
+            _cjs.emit(LOGGING, {
+                id: _util.getTime(),
+                api: DRJS,
+                method: 'retryCreateSource',
+                type: 'options',
+                payment: _name,
+                options: result,
+            });
+            source = result.source;
+            if (source) {
+                if (_util.isReadySubmitState(source.state)) {
+                    await _util.setValue(PAYMENT, {name: _name, result: result});
+                    return source;
+                }
+            }
+        }
+    }
+
+    /**
+     * Applies the source ID to the CloudPay payment method's hidden field.
+     * @param {PaymentSourceObject} source
+     * @returns {Promise&lt;PaymentSourceObject>}
+     * @example checkoutJS.gC.applySourceToCloudPay(source);
+     */
+    async applySourceToCloudPay(source) {
+        if (source &amp;&amp; source.id) {
+            const _cjs = this[_CHECKOUTJS];
+            const source_id = source.id;
+            $(_cjs[CONFIG].selector.cloudPaySourceId).val(source_id);
+            return source;
+        }
+        return Promise.reject();
+    }
+
+    /**
+     * Updates the payment request source before creating the source from DigitalRiver.js and wraps it with a gcStorefront payment method as a placeholder for CloudPay.
+     * @param {PaymentRequestObject} sourceData
+     * @returns {Promise&lt;PaymentRequestObject>}
+     * @example checkoutJS.gC.updateSourceData(source);
+     */
+    async updateSourceData(sourceData) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        let _type = _util.getSourcePaymentType(sourceData.type);
+        if(_config[PAYMENTS][_type][GCSTOREFRONT]) {
+            sourceData = {
+                type: GCSTOREFRONT,
+                currency: sourceData.currency,
+                amount: sourceData.amount,
+                gcStorefront: sourceData
+            }
+        }
+        return sourceData;
+    }
+
+    /**
+     * Retrieves the billing address data and returns it as a payment service owner data object.
+     * @returns {Promise&lt;{PaymentService.OwnerDataObject}>}
+     * @example checkoutJS.gC.getBillingAddress();
+     */
+    async getBillingAddress() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _selectorAddress = _config.selector.address;
+        if ($(_selectorAddress.billingContainer).is(':visible')) {
+            return _this.getAddressValues();
+        }
+    }
+
+    /**
+     * Retrieves the shipping address data and returns it as payment service owner data
+     * @returns {Promise&lt;{PaymentService.OwnerDataObject}>}
+     * @example checkoutJS.gC.getShippingAddress();
+     */
+    async getShippingAddress() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _selectorAddress = _config.selector.address;
+        if (!$(_selectorAddress.shippingDifferentThanBilling).is(":checked") || !$(_selectorAddress.shippingContainer).is(':visible'))
+            return;
+        return _this.getAddressValues('shippingToGc');
+    }
+
+    /**
+     * Retrieves the billing or shipping address data and returns it as a payment service owner data object.
+     * @param {string} [type='billingToGc']
+     * @returns {Promise&lt;{PaymentService.OwnerDataObject}>}
+     * @example checkoutJS.gC.getAddressValues();
+     */
+    async getAddressValues(type='billingToGc') {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _selectorAddress = _config.selector.address[type];
+        const address = {
+            firstName: $(_selectorAddress.firstName).val(),
+            lastName: $(_selectorAddress.lastName).val(),
+            phone: $(_selectorAddress.phoneNumber).val(),
+            email: $(_selectorAddress.emailAddress).val(),
+            organization: $(_selectorAddress.companyName).val(),
+            address: {
+                line1: $(_selectorAddress.line1).val(),
+                line2: $(_selectorAddress.line2).val(),
+                city: $(_selectorAddress.city).val(),
+                state: $(_selectorAddress.countrySubdivision).val(),
+                postalCode: $(_selectorAddress.postalCode).val(),
+                country: $(_selectorAddress.country).val()
+            },
+            additionalAddressInfo: {
+                division: $(_selectorAddress.division).val(),
+                phoneticFirstName: $(_selectorAddress.phoneticFirstName).val(),
+                phoneticLastName: $(_selectorAddress.phoneticLastName).val()
+            }
+        };
+
+        return address;
+    }
+
+    /**
+     * Retrieves the shoppers billing address first and then the shipping address, if the billing address is not present.
+     * @returns {Promise&lt;{PaymentService.OwnerDataObject}>}
+     * @example checkoutJS.gC.getAddress();
+     */
+    async getAddress() {
+        const _this = this;
+        let address = await _this.getBillingAddress();
+        if (!address) {
+            return await _this.getShippingAddress();
+        }
+    }
+
+    /**
+     * Retrieves the selected DigitalRiver.js payment method type.
+     * @returns {Promise&lt;{string}>}
+     * @example checkoutJS.gC.getAddress();
+     */
+    async getSelectedCloudPayPayment() {
+        const $paymentMethod = $("input[name='paymentMethodID'][data-type]:checked");
+        if ($paymentMethod &amp;&amp; $paymentMethod.length &amp;&amp; !$paymentMethod.attr('data-disabled')) {
+            return ($paymentMethod.attr('data-type'));
+        }
+    }
+
+    /**
+     * Applies billing and shipping address to existing checkout form fields.
+     * @param {ShopperApi.AddressObject} billingAddress
+     * @param {ShopperApi.AddressObject} shippingAddress
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.applyAddress(billingAddress, billingAddress);
+     */
+    async applyAddress(billingAddress, shippingAddress) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _selectorAddress = _config.selector.address;
+        if (_config.page.length) {
+            if (shippingAddress) {
+                let addressNames = null;
+                if ($(_selectorAddress.shippingContainer).is(':visible')) {
+                    addressNames = _selectorAddress.shippingToGc;
+                } else if ($(_selectorAddress.billingContainer).is(':visible')) {
+                    addressNames = _selectorAddress.billingToGc;
+                }
+                if (addressNames) {
+                    for (let key in shippingAddress) {
+                        if (addressNames.hasOwnProperty(key) &amp;&amp; shippingAddress.hasOwnProperty(key)) {
+                            $(addressNames[key]).val(shippingAddress[key]);
+                        }
+                    }
+                }
+            }
+            if (billingAddress) {
+                let addressNames = null;
+                if ($(_selectorAddress.billingContainer).is(':visible')) {
+                    addressNames = _selectorAddress.billingToGc;
+                }
+                if (addressNames) {
+                    for (let key in billingAddress) {
+                        if (addressNames.hasOwnProperty(key) &amp;&amp; billingAddress.hasOwnProperty(key)) {
+                            $(addressNames[key]).val(billingAddress[key]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Changes the shipping estimator's country value.
+     * @param {string} shippingCountry
+     * @returns {Promise&lt;jQueryObject>}
+     * @example checkoutJS.gC.applyShippingCountry('GB');
+     */
+    async applyShippingCountry(shippingCountry) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _selectorShippingEstimator = _config.selector.shippingEstimator;
+        if (_config.page.length) {
+            if ($(_selectorShippingEstimator.container).is(':visible')) {
+                const $shippingCountry = $(_selectorShippingEstimator.container).find(_selectorShippingEstimator.shipCountry);
+                if ($shippingCountry &amp;&amp; $shippingCountry.length) {
+                    $shippingCountry.val(shippingCountry);
+                    return ($shippingCountry);
+                }
+            }
+        }
+    }
+
+    /**
+     * Changes the shipping estimator's shipping option value.
+     * @param {string} shippingOptionId
+     * @returns {Promise&lt;jQueryObject>}
+     * @example checkoutJS.gC.applyShippingOption('1111111');
+     */
+    async applyShippingOption(shippingOptionId) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _selectorShippingEstimator = _config.selector.shippingEstimator;
+        if (_config.page.length) {
+            if ($(_selectorShippingEstimator.container).is(':visible')) {
+                const $shippingOptionID = $(_selectorShippingEstimator.container).find(_selectorShippingEstimator.shippingOptionID);
+                if ($shippingOptionID &amp;&amp; $shippingOptionID.length) {
+                    let _changeEstimatedShipping = Global.changeEstimatedShipping;
+                    if (_changeEstimatedShipping) {
+                        Global.changeEstimatedShipping = function (zoneList, optionID, shippingForm) {
+                            if (zoneList.selectedIndex !== 0) {
+                                shippingForm.shippingOptionID.value = optionID;
+                                shippingForm.country.value = zoneList.options[zoneList.selectedIndex].value;
+                            }
+                        };
+                    }
+                    if ($shippingOptionID.length === 1) {
+                        $shippingOptionID.val(shippingOptionId);
+                    } else {
+                        const $selectShippingOptionID = $shippingOptionID.filter(function () {
+                            return ($(this).val() === shippingOptionId);
+                        }).trigger('click');
+                        if (!$selectShippingOptionID.length) {
+                            $shippingOptionID.first().trigger('change');
+                        }
+                    }
+                    if (_changeEstimatedShipping) {
+                        Global.changeEstimatedShipping = _changeEstimatedShipping;
+                    }
+                    return $shippingOptionID;
+                }
+            }
+        }
+    }
+
+    /**
+     * After loading GlobalCommerce, this function will trigger the specific functions for each page e.g. {@link initCheckout}, {@link initConfirmOrder}, {@link initThankYou}.
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.initPageLoad();
+     */
+    async initPageLoad() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+
+        await _this.initCheckout();
+
+        if (_config.page.indexOf('ConfirmOrderPage')>0) {
+            await _this.initConfirmOrder();
+        }
+
+        if (_config.page === 'ThankYouPage') {
+            await _this.initThankYou();
+        }
+
+        if (_config.page === 'DelayedPaymentRefundPage') {
+            const url = _cjs[UTIL].parseURL(Global.location.href);
+            const refundToken = url.queryParams['informationToken'];
+            _cjs.on('initializeElements',async function() {
+                await _this.initOfflineRefund(refundToken);
+            });
+        }
+
+        await _util.removeValue(CARTDATA);
+    }
+
+    /**
+     * After loading GlobalCommerce, this function will be triggered to see if the gC checkout form exists on the page.
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.initCheckout();
+     */
+    async initCheckout() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        //const _shopper = _cjs[SHOPPER];
+        const _selector = _config.selector;
+        const _gC = _cjs.gC;
+        const $form = $(_selector.checkoutForm);
+        if ($form &amp;&amp; $form.length) {
+            if ($form.find(_selector.cloudPaySourceId).length === 0) {
+                $form.prepend("&lt;input type='hidden' name='cloudPaySourceID' />");
+            }
+            $form.find(_selector.cloudPayPayment).hide();
+            if (_config.cloudPayPayload.id) {
+                $form.find(_selector.cloudPaySourceId).val(_config.cloudPayPayload.id);
+            }
+            let payment = await _util.getValue(PAYMENT);
+            if(!payment &amp;&amp; _config.cloudPayPayload.id){
+                const result = await _cjs[DRJS].retrieveSource(_config.cloudPayPayload.id, _config.cloudPayPayload.details.clientSecret);
+                let _paymentType = await _this._getBasePaymentType(result.source);
+                await _util.setValue(PAYMENT, {name: _paymentType, result: result});
+            }
+            $form.submit(function (e) {
+                if ((!$form.valid || $form.valid()) &amp;&amp; (typeof (Global._doneWithRTAV) === UNDEFINED || Global._doneWithRTAV)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return (async () => {
+                        const selectedPayment = await _gC.getSelectedCloudPayPayment();
+                        if (selectedPayment) {
+                            _util.loadingOverlay();
+                            try {
+                                await _gC.syncShopperInfo();
+                                const cloudPayPaymentMethodID = $('#CloudPay').val();
+                                const $paymentMethod = $("input[name='paymentMethodID']:checked");
+                                let applySource = null;
+                                if ($paymentMethod &amp;&amp; $paymentMethod.length) {
+                                    $paymentMethod.val(cloudPayPaymentMethodID);
+                                    const sourceId = $paymentMethod.attr('data-source-id');
+                                    if (sourceId &amp;&amp; sourceId.length > 0) {
+                                        const source = await _gC.validateSource();
+                                        if(source) {
+                                            applySource = Promise.resolve(source);
+                                        }
+                                    }
+                                }
+                                if (applySource == null) {
+                                    const validateElements = await _gC.validateElements();
+                                    const _payment = _gC[PAYMENTS][selectedPayment];
+                                    const validatePaymentElements = await _payment.validateElements();
+                                    if(!validateElements || !validatePaymentElements) {
+                                        _util.loadingOverlay(true);
+                                        return;
+                                    }
+                                    if(_config.cart.updateCartInfoByApi === true){
+                                        const _cart = { cart:{} };
+                                        let billingAddress = await _gC.getBillingAddress();
+                                        let shippingAddress = await _gC.getShippingAddress();
+                                        if(!shippingAddress &amp;&amp; billingAddress) {
+                                            shippingAddress = billingAddress;
+                                        }
+                                        if(!billingAddress &amp;&amp; shippingAddress) {
+                                            billingAddress = shippingAddress;
+                                        }
+                                        if(billingAddress &amp;&amp; shippingAddress) {
+                                            _cart.cart.billingAddress = await _shopperApi.convertPaymentRequestAddressToShopperApiAddress(billingAddress, 'billingAddress');
+                                            _cart.cart.shippingAddress = await _shopperApi.convertPaymentRequestAddressToShopperApiAddress(shippingAddress, 'shippingAddress');
+                                            await _shopperApi.updateCart(_cart);
+                                        }
+                                    }
+                                    applySource = _payment.applySourceId(false);
+                                }
+                                applySource.then(_gC.applySourceToCloudPay.bind(_this)).then(_gC.submitCheckoutForm.bind(_this)).catch(function (ex) {
+                                    _util.setValue(PAYMENT, {name: selectedPayment});
+                                    if (ex) {
+                                        _util.errorMessage(ex);
+                                    }
+                                    _util.loadingOverlay(true);
+                                });
+                            } catch (ex) {
+                                if (ex) {
+                                    _util.errorMessage(ex);
+                                }
+                                _util.loadingOverlay(true);
+                            }
+                        } else {
+                            _util.loadingOverlay(true);
+                            $form[0].submit();
+                        }
+                    })();
+                }
+            });
+            $(document).on("change", "input[name='paymentMethodID']", async function () {
+                let prevPayment = await _util.getValue(PAYMENT);
+                if (prevPayment &amp;&amp; prevPayment.name) {
+                    let _name = prevPayment.name;
+                    if(_gC[PAYMENTS][_name]) {
+                        await _gC[PAYMENTS][_name].changePaymentMethod();
+                    }
+                }
+                const payment = $(this).attr('data-type');
+                if (_config[PAYMENTS].hasOwnProperty(payment) &amp;&amp; !_config[PAYMENTS][payment].disable &amp;&amp; _gC[PAYMENTS][payment] &amp;&amp; _gC[PAYMENTS][payment].changePaymentMethod) {
+                    let $paymentSection = await _util.getCache(payment + 'Section');
+                    if($paymentSection &amp;&amp; !$paymentSection.find('.dr_ExpandPaymentDetailsSection:visible').length){
+                        $($paymentSection).find('.dr_expandDetails a').trigger('click');
+                    }
+                    _gC[PAYMENTS][payment].select();
+                    await _gC[PAYMENTS][payment].changePaymentMethod();
+                    if(_config[PAYMENTS][payment].supportedRecurringPayments &amp;&amp; _config[PAYMENTS][payment].saveAsPaymentOption!==false) {
+                        $('#dr_billingOption').show();
+                    } else {
+                        $('#dr_billingOption').hide();
+                    }
+                }
+            });
+            $(document).on("click", ".dr_paymentMethodBlock .dr_expandDetails a", function (e) {
+                e.preventDefault();
+                $(this).closest('.dr_paymentMethodBlock').find('.dr_ExpandPaymentDetailsSection').toggle();
+                return false;
+            });
+            $(document).on("change",_config.selector.address.billingToGc.country, async function () {
+                const country = $(this).val();
+                if(_config.gC.disableNotSupportedPayment!==false) {
+                    $("input[name='paymentMethodID'][data-type]").each(async function () {
+                        let payment = $(this).attr('data-type');
+                        let supported = await _gC[PAYMENTS][payment].supportedGeography(country);
+                        $(this).prop('disabled', !supported);
+                        if (!supported) {
+                            $(this).prop('checked', false);
+                        }
+                    });
+                }
+                let cartData = await _util.getValue(CARTDATA);
+                if(cartData) {
+                    cartData.cart.billingAddress.country = country;
+                    await _util.setValue(CARTDATA, cartData);
+                }
+                /**
+                 * This event will be triggered after the billing country has been updated.
+                 * @memberof CheckoutJS
+                 * @event countryUpdated
+                 * @category Events
+                 * @example checkoutJS.on('countryUpdated',function(){
+                 *     console.log('countryUpdated');
+                 * });
+                 */
+                await _cjs.emit('countryUpdated');
+            });
+            $(document).on("change", "input[name='paymentMethodID']", function () {
+                const $this = $(this);
+                const payment = $this.attr('data-type');
+                if (Global.applySelectedStyle &amp;&amp; payment &amp;&amp; _config[PAYMENTS][payment]) {
+                    if($this.is(':checked')){
+                        Global.applySelectedStyle($this);
+                    }
+                }
+            });
+            _cjs.on('initializeElements',async function(){
+                $(_config.selector.address.billingToGc.country).trigger('change');
+                await _this.createShopperPaymentOptionSelector();
+            });
+        }
+    }
+
+    /**
+     * After loading GlobalCommerce, this function will be triggered when the current page is the confirm order page.
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.initConfirmOrder();
+     */
+    async initConfirmOrder() {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _selector = _config.selector;
+        const _cloudPayPayload = _config.cloudPayPayload;
+        const _gC = _cjs.gC;
+        const $confirmForm = $(_selector.confirmOrder.confirmOrderForm);
+        if ($confirmForm &amp;&amp; $confirmForm.length) {
+            let _paymentType = await _gC._getBasePaymentType(_cloudPayPayload);
+            let _name = await _util.getSourcePaymentType(_paymentType);
+            let _configPayment = _config[PAYMENTS][_name];
+            let originalButtonLockDown = UNDEFINED;
+            let ready = false;
+            const _buttonLockDown = function() {
+                return ready;
+            };
+            if (typeof Global.buttonLockDown === UNDEFINED) {
+                Global.buttonLockDown = _buttonLockDown;
+            }
+            _cjs.once('initializeElements',async function() {
+                if (_cloudPayPayload.type &amp;&amp; _cloudPayPayload.id) {
+                    const _payment = _gC[PAYMENTS][_name];
+                    const paymentElement = `&lt;p id='drjs_${_name}Element'>&lt;/p>`;
+                    const $replacement = $(_selector.confirmOrder.replacement);
+                    if ($replacement &amp;&amp; $replacement.length) {
+                        $replacement.replaceWith(paymentElement);
+                    } else {
+                        $confirmForm.find(_selector.confirmOrder.paymentContainer).append(paymentElement);
+                    }
+
+                    originalButtonLockDown = Global.buttonLockDown;
+                    if (Global.buttonLockDown) {
+                        Global.buttonLockDown = _buttonLockDown;
+                    }
+
+                    const $termsOfSaleAcceptance = $(_selector.confirmOrder.termsOfSaleAcceptance);
+                    const activeAcceptance = await _payment.getActiveAcceptance({
+                        CHECKOUT: _config.labels.CHECKOUT
+                    });
+                    if(activeAcceptance &amp;&amp; activeAcceptance.length &amp;&amp; $termsOfSaleAcceptance &amp;&amp; $termsOfSaleAcceptance.length) {
+                        $termsOfSaleAcceptance.append($('&lt;div class="checkbox-inline checkbox-wide">&lt;/div>').html(activeAcceptance));
+                    }
+
+                    ready = true;
+                }
+            });
+
+            $confirmForm.submit(function (e) {
+                if (_cloudPayPayload &amp;&amp; _cloudPayPayload.id) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return (async () => {
+                        const validateElements = await _gC[PAYMENTS][_name].validateElements();
+                        if(validateElements){
+                            Global.buttonLockDown = originalButtonLockDown;
+                        }
+                        if (validateElements &amp;&amp; (!$confirmForm.valid || $confirmForm.valid()) &amp;&amp; (typeof (Global.buttonLockDown) === UNDEFINED || Global.buttonLockDown())) {
+                            _util.loadingOverlay();
+                            const payment = await _util.getValue(PAYMENT) || {};
+                            try {
+                                let redirectInfoPage = false;
+                                if (payment.name === _name) {
+                                    const currentSource = payment.result ? payment.result.source : {};
+                                    let source = await _gC.validateSource(currentSource);
+                                    if (source) {
+                                        await _gC.createPaymentOptionToShopper();
+                                        $confirmForm[0].submit();
+                                        return;
+                                    }
+                                    if(_cloudPayPayload.type === GCSTOREFRONT) {
+                                        try {
+                                            _cjs.emit(LOGGING, {
+                                                id: _util.getTime(),
+                                                api: CJS,
+                                                method: 'applySourceId',
+                                                responseBody: source
+                                            });
+                                            source = await _gC[PAYMENTS][_name].applySourceId();
+                                            _util.loadingOverlay();
+                                            source = await _gC.validateSource(source);
+                                            if (source) {
+                                                _cjs.emit(LOGGING, {
+                                                    id: _util.getTime(),
+                                                    api: CJS,
+                                                    method: 'submitConfirmForm'
+                                                });
+                                                await _gC.createPaymentOptionToShopper();
+                                                $confirmForm[0].submit();
+                                            } else {
+                                                redirectInfoPage = true;
+                                            }
+                                        } catch (ex) {
+                                            _util.loadingOverlay(true);
+                                            if (ex) {
+                                                $confirmForm.find(_selector.confirmOrder.submitBtnProcessing).html(_config.labels.error.PAYMENT_AUTHORIZATION_FAILED)
+                                                _util.errorMessage(ex);
+                                            }
+                                        }
+                                    }else{
+                                        redirectInfoPage = true;
+                                    }
+                                }else{
+                                    redirectInfoPage = true;
+                                }
+
+                                if(redirectInfoPage) {
+                                    await _util.setValue(PAYMENT, {name: _name});
+                                    const infoLink = await _shopperApi.getInfoPageLink();
+                                    Global.location.href = infoLink;
+                                }
+                            } catch (ex) {
+                                _util.loadingOverlay(true);
+                                if (ex) {
+                                    _util.errorMessage(ex);
+                                }
+                            }
+                        }
+                    })();
+                }
+            });
+        }
+    }
+
+    /**
+     * After loading GlobalCommerce, this function will be triggered when the current page is the thank you page.
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.initThankYou();
+     */
+    async initThankYou() {
+        const _cjs = this[_CHECKOUTJS];
+        const _gC = _cjs.gC;
+        _cjs.on('initialized',async function(){
+            const source = await _gC.getSelectedSource();
+            await _gC.pendingFundsRedirectFlow(source);
+            await _gC.pendingFundsReceiver(source);
+        });
+    }
+
+    /**
+     * Initializes the offline refund element.
+     * @param {string} refundToken
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.initOffineRefund('XXXXXXXXXXXX');
+     */
+    async initOfflineRefund(refundToken) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+
+        const $delayedPaymentRefund = $(_config.selector.delayedPaymentRefund.container);
+        if($delayedPaymentRefund &amp;&amp; $delayedPaymentRefund.length) {
+            $delayedPaymentRefund.find(_config.selector.delayedPaymentRefund.replacement).replaceWith($('&lt;div/>').attr('id',_config.offlineRefund.elementId));
+            const _offlinerefund = new OfflineRefund(_cjs);
+            await _offlinerefund.init(refundToken);
+            Object.defineProperties(_cjs['gC']['elements'], {
+                'offlinerefund': {
+                    value: _offlinerefund,
+                    writable: true,
+                    enumerable: true,
+                    configurable: false
+                }
+            });
+        }
+    }
+
+    async initTC() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _selector = _config.selector;
+        const _this = this;
+        $(document).on("change", _selector.cloudPayTermsAcceptance, function () {
+            const $cloudPayBtn = $(_selector.cloudPayBtn).filter('[data-tc]');
+            if ($(this).is(':checked')) {
+                $(_selector.cloudPayTCError).hide();
+                $cloudPayBtn.css({
+                    "pointer-events": ""
+                });
+                if ($cloudPayBtn.parent().is(".dr_cloudPayOverlay")) {
+                    $cloudPayBtn.unwrap();
+                }
+                $cloudPayBtn.each(function () {
+                    $(this).data('parent', $(this));
+                });
+            } else {
+                $cloudPayBtn.each(function () {
+                    if (!$(this).parent().is(".dr_cloudPayOverlay")) {
+                        const $overlay = $("&lt;div class='dr_cloudPayOverlay'>&lt;/div>").click(function () {
+                            $(_selector.cloudPayTCError).show();
+                        });
+                        $(this).css({
+                            "pointer-events": "none"
+                        }).wrap(
+                            $overlay
+                        );
+                        $(this).data('parent', $(this).parent());
+                    }
+                });
+
+            }
+        });
+
+        if (_config.page === 'ThreePgCheckoutAddressPaymentInfoPage') {
+            $(document).on("change", "input[name='paymentMethodID']", function () {
+                const payment = $(this).attr('data-type');
+                if (payment &amp;&amp; _config[PAYMENTS][payment]) {
+                    if (_config[PAYMENTS][payment].showTC) {
+                        $(_selector.cloudPayTC).show();
+                    } else {
+                        $(_selector.cloudPayTC).hide();
+                        $(_selector.cloudPayTCError).hide();
+                    }
+                }
+            });
+            $("input[name='paymentMethodID']:checked").trigger("change");
+        }
+
+        _cjs.on('entityUpdate', function (entityData) {
+            if (!entityData) {
+                entityData = _config.entity;
+            }
+            const cloudPayTermsAcceptance = $(_selector.cloudPayTermsAcceptance).is(":checked");
+            const cloudPayTC = $.parseHTML(entityData.cloudPayTC);
+            if (cloudPayTC &amp;&amp; cloudPayTC.length) {
+                const html = $(cloudPayTC[0]).html();
+                $(_selector.cloudPayTC).html(html);
+                $(_selector.cloudPayTermsAcceptance).prop('checked', cloudPayTermsAcceptance);
+            }
+        });
+        const $cloudPayBtn = $(_selector.cloudPayBtn);
+        if ($cloudPayBtn &amp;&amp; $cloudPayBtn.length) {
+            let showTC = false;
+            $cloudPayBtn.each(function () {
+                const payment = $(this).attr('data-payment');
+                if (payment &amp;&amp; _config[PAYMENTS][payment].show &amp;&amp; _config[PAYMENTS][payment].showTC) {
+                    showTC = true;
+                    $(this).attr('data-tc', true);
+                }
+            });
+            if (showTC) {
+                _this.showTC = true;
+                await _this.checkTC();
+                $(_selector.cloudPayTermsAcceptance).trigger("change");
+            }
+        }
+    }
+
+    /**
+     * Checks whether the Terms and Conditions container is present on the page and insert the Terms and Conditions text in the container.
+     * @param {jQueryObject} [cloudPayTCContainer]
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.checkTC();
+     */
+    async checkTC(cloudPayTCContainer) {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _selector = _config.selector;
+        const _this = this;
+        if (_this.showTC) {
+            let $cloudPayTCContainer = cloudPayTCContainer;
+            let $cloudPayTCContainerAll = $(_selector.cloudPayTCContainer);
+            $cloudPayTCContainerAll.empty();
+            if (!$cloudPayTCContainer) {
+                if ($cloudPayTCContainerAll.length) {
+                    $cloudPayTCContainer = $cloudPayTCContainerAll.filter(function () {
+                        return $(this).closest(_selector.checkoutForm).length === 0;
+                    });
+                }
+            }
+            if ($cloudPayTCContainer &amp;&amp; $cloudPayTCContainer.length) {
+                //$(_cjs[CONFIG].selector.cloudPayTC).replaceWith(_cjs[CONFIG].entity.cloudPayTC);
+                $cloudPayTCContainer.html(_config.entity.cloudPayTC);
+            } else {
+                if (!$(_selector.checkoutForm).length) {
+                    //$(_cjs[CONFIG].entity.cloudPayTC).insertAfter($(_cjs[CONFIG].selector.cloudPayBtn).last());
+                    $(_config.entity.cloudPayTC).insertBefore($(_selector.cloudPayBtn).first());
+                }
+            }
+            $(_selector.cloudPayTC).show();
+        }
+    }
+
+    /**
+     * Copies the checkout form data to the CheckoutJS instance.
+     * @returns {Promise&lt;void>}
+     * @example checkoutJS.gC.syncShopperInfo();
+     */
+    async syncShopperInfo() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const billingAddress = await _cjs.gC.getBillingAddress();
+        const shippingAddress = await _cjs.gC.getShippingAddress();
+
+        let cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();//{cart:{}};
+        cartData.cart.billingAddress = await _shopperApi.convertPaymentRequestAddressToShopperApiAddress(
+            billingAddress, 'billingAddress'
+        );
+        cartData.cart.shippingAddress = await _shopperApi.convertPaymentRequestAddressToShopperApiAddress(
+            shippingAddress, 'shippingAddress'
+        );
+        await _util.setValue(CARTDATA, cartData);
+
+        let country = _config.country;
+        if (cartData.cart.billingAddress.country) {
+            country = cartData.cart.billingAddress.country;
+        } else if (cartData.cart.shippingAddress.country) {
+            country = cartData.cart.shippingAddress.country;
+        }
+        _config.country = country;
+    }
+
+    async createShopperPaymentOptionSelector() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _shopper = _cjs[SHOPPER];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _selector = _config.selector;
+        const _util = _cjs[UTIL];
+        const _gC = _cjs.gC;
+        const _gcPayments = _gC[PAYMENTS];
+        const CREDITCARD = 'creditCard';
+        if(_shopper.isAuthenticated) {
+
+            let $billingOption = $('&lt;span id="dr_billingOption">&lt;/span>');
+
+            const $paymentContainer = $('#dr_paymentContainer');
+            if ($paymentContainer.find('#dr_payment').length) {
+                $billingOption.insertBefore($paymentContainer.find('#dr_payment>div')[0]);
+            } else {
+                $billingOption.insertBefore($paymentContainer.find('.dr_checkoutContainer>div')[0]);
+            }
+
+            $billingOption.append($(_config.selector.payment.billingNickNameContainer).add(_config.selector.payment.billingOptionContainer));
+
+            const paymentOptions = await _shopperApi.getPaymentOptions();
+            const paymentOption = paymentOptions.paymentOptions.paymentOption;
+            Global.onPaymentChange = async (element)=>{
+                const value = $(element).val();
+                const item = $(element).find('option[value="'+value+'"]').data('item');
+                $("input[name='paymentMethodID'][data-type]:checked").removeAttr('data-disabled');
+                let $input = $(_config.selector.payment.billingNickName);
+
+                if(item){
+                    let paymentType = await _util.getSourcePaymentType(item.type);
+                    if(paymentType === 'CreditCardMethod'){
+                        paymentType = CREDITCARD;
+                    }
+                    let $paymentMethodID = $("input[name='paymentMethodID'][data-type='" + paymentType + "']");
+                    $paymentMethodID.attr('data-source-id',item.sourceId).trigger('click',{selector:true});
+                    switch(paymentType){
+                        case CREDITCARD: {
+                            //$("#CreditCardMethod,#CurrencySpecificCreditCardMethod").attr('data-source-id',item.sourceId).trigger('click',{selector:true});
+                            const paymentOption = Global.paymentList.find(elm => elm.paymentOptionID === item.id.toString());
+                            const creditCard = item.creditCard;
+                            let cardNumber = creditCard.displayName?creditCard.displayName:creditCard.brand+' ';
+                            if(creditCard.displayableNumber){
+                                cardNumber+= creditCard.displayableNumber;
+                            }else{
+                                cardNumber+= paymentOption.cardNumber;
+                            }
+
+                            let element = _config[PAYMENTS][CREDITCARD].element;
+                            if(element) {
+                                element.cardnumber.parentNode.textContent = cardNumber;
+                                element.cardexpiration.parentNode.textContent = '';
+                                element.cardcvv.parentNode.textContent = item.creditCard.expirationMonth + '/' + item.creditCard.expirationYear;
+                            }
+                        }
+                        break;
+                    }
+                    if (item.sourceId &amp;&amp; item.sourceClientSecret) {
+                        $(_selector.cloudPaySourceId).val(item.sourceId);
+                        const result = await _cjs[DRJS].retrieveSource(item.sourceId, item.sourceClientSecret);
+                        await _util.setValue(PAYMENT, {name: item.type, result: result});
+                    } else {
+                        $("input[name='paymentMethodID'][data-type='" + item.type + "']").attr('data-disabled','true');
+                    }
+                }
+
+                if(value === 'NEW'){
+                    if(!$(_config.selector.payment.billingNickNameContainer).is(':visible')) {
+                        $(_config.selector.payment.billingNickNameContainer).show();
+                        $input.on('change', async () => {
+                            const billingOptionNickName = $input.val();
+                            await _util.setValue(NICKNAME, billingOptionNickName);
+                            if(billingOptionNickName &amp;&amp; billingOptionNickName.length){
+                                $input.removeClass(_config.gC.errorClass);
+                            }
+                        });
+                        let element = _config[PAYMENTS][CREDITCARD].element;
+                        if(element) {
+                            element.cardnumber.parentNode.textContent = '';
+                            element.cardexpiration.parentNode.textContent = '';
+                            element.cardcvv.parentNode.textContent = '';
+                        }
+                        _cjs.emit('initializePayments');
+                    }
+                } else {
+                    $(_config.selector.payment.billingNickNameContainer).hide();
+                    await _util.removeValue(NICKNAME);
+                    $input.val('');
+                }
+            };
+
+            if(paymentOption){
+                for(let i=0;i&lt;paymentOption.length;i++) {
+                    const item = paymentOption[i];
+                    const paymentType = await _util.getSourcePaymentType(item.type);
+                    let supportedCurrency = true;
+                    if(item.sourceId &amp;&amp; _gcPayments.hasOwnProperty(paymentType)) {
+                        supportedCurrency = await _gcPayments[paymentType].supportedCurrency();
+                    }
+                    $(_config.selector.payment.billingOptionSelector).find('option[value="'+item.id+'"]').data('item', item).attr('disabled',!supportedCurrency);
+                }
+            }
+            _cjs.once('initialized',async()=>{
+                const _payment = (await _util.getValue(PAYMENT) || {});
+                let source = {};
+                if (_payment &amp;&amp; _payment.result &amp;&amp; _payment.result.source) {
+                    source = _payment.result.source;
+                    if(paymentOption){
+                        for(let i=0;i&lt;paymentOption.length;i++) {
+                            const item = paymentOption[i];
+                            if(item.sourceId === source.id){
+                                $(_config.selector.payment.billingOptionSelector).find('option[value="'+item.id+'"]').prop('selected',true);
+                                break;
+                            }
+                        }
+                    }
+                }
+                $(_config.selector.payment.billingOptionSelector).trigger('change');
+                $(document).on("click", "input[name='paymentMethodID']", (e,data)=> {
+                    if(!data || !data.selector ) {
+                        $(_config.selector.payment.billingOptionSelector).val('NEW').trigger('change');
+                    }
+                });
+                const nickname = await _util.getValue(NICKNAME);
+                $(_config.selector.payment.billingNickName).val(nickname);
+            });
+        }
+    }
+
+    /**
+     * Routes to a gC checkout flow page e.g. cart, info, confirm, thankyou.
+     * @returns {Promise&lt;{PaymentSourceObject}>}
+     * @example checkoutJS.gC.routing('confirm');
+     */
+    async routing(payment) {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _name = payment;
+        const route = _config[PAYMENTS][_name].route;
+        const _selector = _config.selector;
+        const _payment = (await _util.getValue(PAYMENT) || {});
+        let source = {};
+        if (_payment &amp;&amp; _payment.result &amp;&amp; _payment.result.source) {
+            source = _payment.result.source;
+        }
+        if (route === "thankyou") {
+            const response = await _shopperApi.applySourceToCart(source.id);
+            if (response &amp;&amp; response.cart &amp;&amp; typeof response.cart.paymentMethod !== UNDEFINED) {
+                const cart = await _shopperApi.submitCart();
+
+                if (cart.submitCart) {
+                    let orderId = cart.submitCart.order.id;
+                    return Promise.resolve(source).then(async () => {
+                        const link = await _shopperApi.getThankYouPageLink(orderId);
+                        Global.location.href = link;
+                    });
+                } else {
+                    return Promise.reject('fail to submit cart');
+                }
+            } else {
+                return Promise.reject(FAIL_TO_APPLY_SOURCE);
+            }
+        } else if (route === "confirm") {
+            const response = await _shopperApi.applySourceToCart(source.id);
+            if (response &amp;&amp; response.cart &amp;&amp; typeof response.cart.paymentMethod !== UNDEFINED) {
+                return Promise.resolve(source).then(async () => {
+                    const link = await _shopperApi.getConfirmOrderPageLink();
+                    Global.location.href = link;
+                });
+            } else {
+                return Promise.reject(FAIL_TO_APPLY_SOURCE);
+            }
+        } else {
+            const $paymentMethodID = $("input[name='paymentMethodID'][data-type='" + _name + "']");
+            const _gCPayment = _cjs.gC[PAYMENTS][_name];
+            if (_config.page === 'QuickBuyCartPage') {
+                $(_selector.cloudPaySourceId).val(source.id);
+                $paymentMethodID.attr('data-source-id', source.id);
+                if (_gCPayment.changePaymentMethod) {
+                    _gCPayment.changePaymentMethod();
+                }
+                return Promise.resolve(source).then(() => {
+                    if ($paymentMethodID.is(':visible')) {
+                        $paymentMethodID.trigger('click');
+                        $(_selector.checkoutForm).submit();
+                    }
+                });
+            } else if (_config.page === 'ThreePgCheckoutAddressPaymentInfoPage') {
+                $(_selector.cloudPaySourceId).val(source.id);
+                $paymentMethodID.attr('data-source-id', source.id);
+                if (_gCPayment.changePaymentMethod) {
+                    _gCPayment.changePaymentMethod();
+                }
+                $(_selector.checkoutForm).submit();
+                return Promise.resolve(source);
+            } else if (_config.page === 'ThreePgCheckoutShoppingCartPage') {
+                const response = await _shopperApi.applySourceToCart(source.id);
+                if (response &amp;&amp; response.cart &amp;&amp; typeof response.cart.paymentMethod !== UNDEFINED) {
+                    return Promise.resolve(source).then(() => {
+                        $(_selector.threePgCheckoutBtn)[0].click();
+                    });
+                } else {
+                    return Promise.reject(FAIL_TO_APPLY_SOURCE);
+                }
+            } else {
+
+                const response = await _shopperApi.applySourceToCart(source.id);
+                if (response &amp;&amp; response.cart &amp;&amp; typeof response.cart.paymentMethod !== UNDEFINED) {
+                    return Promise.resolve(source).then(async () => {
+                        const link = await _shopperApi.getInfoPageLink();
+                        Global.location.href = link;
+                    });
+                } else {
+                    return Promise.reject(FAIL_TO_APPLY_SOURCE);
+                }
+            }
+        }
+    }
+
+    async validateElements() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _configGc = _config.gC;
+        const _shopper = _cjs[SHOPPER];
+        let validated = true;
+        if (_shopper.isAuthenticated) {
+            const $nickinput = $(_config.selector.payment.billingNickName);
+            const value = $nickinput.val();
+            if(value &amp;&amp; value.length === 0) {
+                $nickinput.addClass(_configGc.errorClass);
+                validated = false;
+            }
+        }
+        return validated;
+    }
+}
+
+/**
+ * @class ShopperGC
+ * @classdesc The ShopperGC class is the shopper module for Global Commerce hosted sites.
+ * @extends Shopper
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @returns {Promise&lt;ShopperGC>}
+ * @category CommerceAPI
+ */
+class ShopperGC extends Shopper {
+    constructor(parent, collection) {
+        super(parent, Object.assign({
+            excludeMethods: {constructor: true},
+            writableMethods: {
+                getPrefix: true
+            }
+        }, collection));
+        return (async () => {
+            return parent.shopper;
+        })();
+    }
+
+    async getPrefix() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        let _id = await _cjs[UTIL].getCookie('gc_ss_' + _config.siteId);
+        if (!_id) _id = _config.siteId;
+        return _config.prefixName + _id + '_';
+    }
+}
+
+/**
+ * @class GlobalCommercePayment
+ * @classdesc The GlobalCommercePayment class is the payment module for DigitalRiver.js payments on Global Commerce hosted sites. Override the functions in this class if customizations for the payment is needed.
+ * @hideconstructor
+ * @extends StorefrontPayment
+ * @category PaymentBase
+ */
+const PaymentGC = {
+
+    /**
+     * Creates the payment sections for each enabled DigitalRiver.js payments on the Global Commerce billing/payment information pages when the #dr_paymentContainer exists on the page.
+     * @memberOf GlobalCommercePayment
+     * @returns {Promise&lt;$paymentSection>}
+     * @instance
+     * @abstract
+     * @async
+     */
+    createPaymentInfo: async function () {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+        let _payment = _config[PAYMENTS][_name];
+        let $paymentSection = await _util.getCache(_name + 'Section');
+        if (!$paymentSection &amp;&amp; _payment.hidePaymentSection !== true) {
+            const cloudPayPaymentMethodID = $('#CloudPay').val();
+            if (cloudPayPaymentMethodID) {
+                if (typeof Global.resizeToMobilePayments !== UNDEFINED) {
+                    Global.resizeToMobilePayments();
+                }
+                _payment = _config[PAYMENTS][_name];
+                $paymentSection = $(_util.format($(_config.template.payment).html(), {
+                    paymentId: _name,
+                    name: _payment.name,
+                    description: _payment.description,
+                    details: _config.labels.DETAILS
+                }));
+                const $paymentContainer = $('#dr_paymentContainer');
+                if ($paymentContainer.find('.dr_checkoutContainer').length) {
+                    $paymentContainer.find('.dr_checkoutContainer').append($paymentSection);
+                } else {
+                    $paymentContainer.find('#dr_payment').append($paymentSection);
+                }
+                let $paymentMethodID = $paymentSection.find("input[name='paymentMethodID']");
+                $paymentMethodID.attr("data-type", _name);
+
+                $(Global).trigger('resize');
+                if (typeof Global.payDetailsSize !== UNDEFINED) {
+                    Global.payDetailsSize();
+                }
+
+                let _payment = (await _util.getValue(PAYMENT) || {});
+                if (Object.keys(_payment).length === 0) {
+                    _payment = _config.cloudPayPayload || {};
+                }
+                if (_payment &amp;&amp; (_payment.type === _name || _payment.name === _name) &amp;&amp; $("#CloudPay").is(':checked')) {
+                    let source = (_payment &amp;&amp; _payment.result &amp;&amp; _payment.result.source) ? _payment.result.source : _payment;
+                    if (source &amp;&amp; source.id) {
+                        if (source.clientSecret) {
+                            const result = await _cjs[DRJS].retrieveSource(source.id, source.clientSecret);
+                            await _util.setValue(PAYMENT, {name: _name, result: result});
+                            source = result.source;
+                            _cjs.emit(LOGGING, {
+                                id: _util.getTime(),
+                                api: DRJS,
+                                method: 'retrieveSource',
+                                options: result
+                            });
+                        }
+                        if (source &amp;&amp; _util.isReadySubmitState(source.state)) {
+                            $paymentMethodID.attr('data-source-id', source.id);
+                        }
+                    }
+                    $paymentMethodID.trigger('click');
+                }
+                await _util.setCache(_name + 'Section', $paymentSection);
+            }
+        }
+        return $paymentSection;
+    },
+
+    /**
+     * Hides the payment information sections of the non-selected payment methods after creating the payment sections and initializing the payments.
+     * @memberOf GlobalCommercePayment
+     * @returns {Promise}
+     * @instance
+     * @abstract
+     * @async
+     */
+    completePaymentInfo: async function () {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        if (!_cjs[CONFIG][PAYMENTS][_name].show) {
+            const section$ = await _cjs[UTIL].getCache(_name + 'Section');
+            if (section$) {
+                section$.hide();
+            }
+        }
+        return await _cjs.gC[PAYMENTS][_name].changePaymentMethod();
+    },
+
+    /**
+     * This event will be triggered after the payment method has changed.
+     * @memberOf GlobalCommercePayment
+     * @returns {Promise}
+     * @instance
+     * @abstract
+     * @async
+     */
+    changePaymentMethod: async function () {
+
+    }
+};
+
+/** The CheckoutJS configuration structure for Global Commerce hosted sites.
+ *  @module ConfigGC
+ *  @extends module:Config
+ *  @category Utility
+ */
+const ConfigGC = {
+    /**
+     * All payment configurations for for Global Commerce hosted sites.
+     * @name payments
+     * @type { Object.&lt;string, module:Config.PaymentConfigDefinition> }
+     * @memberOf module:ConfigGC
+     * @instance
+     * @property {module:Config.PaymentConfigDefinition} codJapan - Cash On Delivery
+     */
+    payments: {
+        creditCard:{
+            gcStorefront:false
+        },
+        payPal:{
+            gcStorefront:false
+        },
+        applePay: {
+            route: "thankyou",
+            showTC: true,
+            hidePaymentSection: true
+        },
+        googlePay: {
+            route: "thankyou",
+            showTC: true,
+            hidePaymentSection: true
+        },
+        codJapan: {
+            name: "Cash On Delivery",
+            elementId: "dr_codJapan",
+            disable: true,
+            show: false,
+            enumerable: false,
+            supportedGeographies: ["JP"],
+            supportedCurrencies: ["JPY"]
+        },
+        payco: {
+            preventPopupClose: true
+        },
+        bankTransfer: {
+            preventPopupClose: true
+        }
+    },
+    selector: {
+        payment: {
+            billingNickNameContainer: '#billingNickDiv',
+            billingNickName: '#ccNickName',
+            billingOptionContainer: '#dr_ccMethodSelect',
+            billingOptionSelector: '#ccMethod',
+        }
+    },
+    gC: {
+        errorClass: "dr_error",
+        disableNotSupportedPayment: true
+    }
+};
+
+export {
+    GlobalCommerce,
+    ShopperGC,
+    PaymentGC,
+    ConfigGC,
+    $
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

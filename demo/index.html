@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CheckoutJS Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="https://drh.img.digitalriver.com/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <!--[if IE]-->
+    <script src="../dist/polyfills.js"></script>
+    <!--[endif]-->
+    <script>
+        function expressClick(){
+            var _this = checkoutJS;
+            eventBus.$emit('loading',true);
+            return _this.shopperApi.updateCart({cart:app.cart});
+        }
+        function expressCancel(){
+            var _this = checkoutJS;
+            eventBus.$emit('loading',false);
+            return Promise.resolve();
+        }
+        function expressCompleteSourceId(source,response){
+            var _this = checkoutJS;
+            eventBus.$emit('loading',true);
+            return new Promise(function (resolve, reject) {
+                _this.shopperApi.submitCart().then(function (cart) {
+                    resolve();
+                    if (cart.submitCart) {
+                        var orderId = cart.submitCart.order.id;
+                        app.order = cart.submitCart;
+                        history.pushState(cart.submitCart, 'order', '#order-' + orderId);
+                        eventBus.$emit('forceUpdate');
+                        eventBus.$emit('loading',false);
+                    }
+                }).catch(function(ex){
+                    reject(ex);
+                    eventBus.$emit('loading',false);
+                });
+            });
+        }
+        function expressCreatePaymentRequest(payload) {
+            var _this = checkoutJS;
+            eventBus.$emit('loading',false);
+            return Promise.resolve(payload);
+        }
+        window.checkoutJS = {
+            config:{
+                payments: {
+                    creditCard: {
+                        style:{
+                            base: {
+                                color: "#666"
+                            },
+                            complete: {
+                                color: "#32d296"
+                            }
+                        },
+                        classes: {
+                            complete: "uk-form-success",
+                            invalid: "uk-form-danger",
+                        }
+                    }
+                },
+                redirectOverlay: {
+                    buttonClass:"uk-button uk-button-primary uk-margin-small"
+                }
+            },
+            payments: {
+                googlePay: {
+                    click: expressClick,
+                    completeSourceId : expressCompleteSourceId,
+                    createPaymentRequest: expressCreatePaymentRequest,
+                    cancel: expressCancel
+                },
+                applePay: {
+                    click: expressClick,
+                    completeSourceId : expressCompleteSourceId,
+                    createPaymentRequest: expressCreatePaymentRequest,
+                    cancel: expressCancel
+                },
+                payPal: {
+                    click: expressClick,
+                    completeSourceId : expressCompleteSourceId,
+                    cancel: expressCancel
+                }
+            },
+            util:{
+                errorMessage: function(ex){
+                    console.error(ex);
+                    checkoutJS.util.extractErrorMessage(ex).then(function(message){
+                        UIkit.notification(message, {
+                            status: 'danger',
+                            timeout: 10000
+                        });
+                        eventBus.$emit('loading',false);
+                    });
+                }
+            }
+        };
+    </script>
+    <!--<script src="../dist/CheckoutJS.js?callback=initCheckoutJS" data-siteid="adskkr" data-config="adskkrpayload.json" data-instance="true" async defer ></script>-->
+    <!--<script src="../dist/CheckoutJS.js?callback=initCheckoutJS" data-siteid="drdod15" data-config="demopayload.json" data-instance="true" async defer ></script>-->
+    <!--<script src="../dist/CheckoutJS.js?callback=initCheckoutJS" data-siteid="stdtest2" data-config="stdtest2payload.json" data-instance="true" async defer ></script>-->
+    <!--<script src="../dist/CheckoutJS.js?callback=initCheckoutJS" data-config="https://drhadmin-cte.digitalriver.com/store/stdtest2/CheckoutJsConfig/" data-instance="true" async defer ></script>-->
+
+    <script src="../dist/CheckoutJS.js?callback=initCheckoutJS" data-config="https://drhadmin-cte.digitalriver.com/store/stdtest2/CheckoutJsConfig/" data-instance="true" async defer ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-i18n/8.17.7/vue-i18n.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paymentfont/1.2.5/css/paymentfont.min.css" />
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.4/css/uikit.min.css" />
+    <style>
+        /* Begin API Console */
+        #api-console {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000000;
+            color: #222;
+            font-size: .9em;
+        }
+
+        #api-console .resize {
+            resize: vertical;
+            cursor: n-resize;
+            text-align: center;
+            background-color: #d1d1d1;
+            user-select: none;
+            line-height: 13px;
+        }
+        #api-console .api-list-container {
+            min-height:200px;
+        }
+        #api-console .btn-api-console {
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, .7);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            left: 15px;
+            bottom: 15px;
+            cursor: pointer;
+            -webkit-box-shadow: 0 0 10px 3px rgba(0, 0, 0, .2);
+            -moz-box-shadow: 0 0 10px 3px rgba(0, 0, 0, .2);
+            box-shadow: 0 0 10px 3px rgba(0, 0, 0, .2);
+        }
+
+        #api-console .btn-api-console:hover {
+            background-color: #eee;
+        }
+
+        #api-console .api-logs-wrapper {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        #api-console .api-list-header {
+            position: absolute;
+            padding: 5px 5px 0px 5px;
+            background: #e1e1e1;
+            font-weight: bold;
+            color: #222;
+            border-bottom: 1px solid #707070;
+            width:100%;
+            line-height: 25px;
+        }
+
+        #api-console .btn-close-logs,
+        #api-console .btn-trash-logs {
+            margin-right: 7px;
+            float:right;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }{
+            position: absolute;
+            right: 25px;
+            top: 5px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        #api-console .btn-close-logs:hover {
+            border: 1px solid #00a7e1;
+            color: #00a7e1;
+        }
+
+        #api-console .api-list {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 35px;
+            padding-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #api-console .api-list li {
+            padding: 0 10px;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        #api-console .api-list li:nth-of-type(even) {
+            background-color: rgba(0, 0, 0, .05);
+        }
+
+        #api-console .api-list li:hover {
+            background: #ccc;
+        }
+
+        #api-console .api-list li.active {
+            background: #f1cfb5;
+        }
+        #api-console .api-list li.error {
+            color: red;
+        }
+
+        #api-console .api-title {
+            color: #00a7e1;
+            flex: 1;
+            overflow: hidden;
+            min-width: 140px;
+        }
+
+        #api-console .api-name {
+            text-transform: capitalize;
+        }
+
+        #api-console .api-method {
+            color: #00a651;
+            margin-left: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #api-console .api-type {
+            text-transform: uppercase;
+            color: #898989;
+            margin: 0 7px;
+            width: 48px;
+            min-width: 35px;
+        }
+
+        #api-console .api-list li .api-url {
+            flex: 3;
+            margin-left: 8px;
+        }
+
+        #api-console .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #api-console .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        #api-console .custom-scroll::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background: #aaa;
+        }
+
+        #api-console .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #888;
+        }
+
+        #api-console .api-details-container {
+            height: 0;
+            overflow: hidden;
+            transition: all .2s ease-in-out;
+        }
+
+        #api-console .api-details-container.expanded {
+            /*overflow-y: hidden;*/
+            min-height: 280px;
+            overflow: auto;
+        }
+
+        #api-console .details-header {
+            position: relative;
+            text-align: center;
+            padding: 5px;
+            cursor: pointer;
+            height: 20px;
+        }
+
+        #api-console .details-header:hover {
+            background: #eee;
+        }
+
+        #api-console .details-header .arrow {
+            height: 15px;
+            width: 15px;
+            border: 1px solid tomato;
+            border-width: 2px 2px 0 0;
+            transform: rotate(135deg);
+            position: absolute;
+            top: -10px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        #api-console .details-header:hover .arrow {
+            border-color: #00a7e1;
+        }
+
+        #api-console .details-section {
+            box-sizing: border-box;
+            /*
+            flex: 0 0 33%;
+            max-width: 33%;
+            */
+            padding: 10px 15px;
+        }
+
+        #api-console .details-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        #api-console .details-section .detail-content {
+            box-sizing: border-box;
+            min-height: 100px;
+            overflow: auto;
+            padding: 15px;
+            background: #f7f8f9;
+            border: 1px solid #898989;
+        }
+
+        #api-console .json-tree-root {
+            min-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        /* End API Console */
+
+        .uk-link, a {
+            color: #666;
+            text-decoration: underline;
+        }
+        .dr_legalPolicyLinks a {
+            margin-left: 14px;
+        }
+        .dr_legalPolicyLinks a:first-child {
+            margin-left: 0;
+        }
+        .locale-selector {
+            margin-right: 20px;
+        }
+        .loading {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .loading>div {
+            z-index: 999;
+        }
+        .uk-card.active:not(.uk-card-hover) {
+            border: 1px solid #1E87F0;
+            box-shadow: 0 5px 15px rgba(30, 135, 240, .3);
+        }
+        body>iframe {
+            display:none;
+        }
+        @media (max-width: 639px) {
+            header .uk-navbar-nav > li > a {
+                min-height: 45px;
+            }
+            header .uk-navbar-nav > li > a > img {
+                height: 45px;
+            }
+            footer .uk-section-secondary {
+                padding-top: 5px;
+            }
+        }
+
+    </style>
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.4/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.4/js/uikit-icons.min.js"></script>
+    <script src="https://unpkg.com/vue-json-tree@0.4.1/dist/json-tree.js"></script>
+
+</head>
+<body>
+<div id="app"  :class="{ loading: isLoading }" class="uk-offcanvas-content">
+    <div class="uk-position-center" v-show="isLoading">
+        <div uk-spinner="ratio: 3"></div>
+    </div>
+    <header>
+        <div class="uk-navbar-container uk-background-secondary uk-navbar-transparent">
+            <div class="uk-container" uk-navbar>
+                <div class="uk-navbar-left">
+                    <nav>
+                        <ul class="uk-navbar-nav">
+                            <li>
+                                <a href="#home" class="uk-margin-small uk-margin-small-top">
+                                    <img alt="Home Page" uk-img src="data:image/png;base64,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"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="uk-navbar-right">
+                    <div class="locale-selector" v-if="supportedLocales.length > 1">
+                        <select class="uk-select uk-form-small uk-width-medium" v-model="selectedLocale" @change="localeChange($event.target.value)">
+                            <option v-for="locale in supportedLocales" :value="locale.value">{{locale.text}}</option>
+                        </select>
+                    </div>
+                    <div v-if="cart && cart.totalItemsInCart>0">
+                        <a href="#checkout"><span uk-icon="icon: cart; ratio: 2"></span><span class="uk-badge">{{cart.totalItemsInCart}}</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main uk-height-viewport="expand: true;offset-top: true; offset-bottom: true;">
+        <section class="uk-section uk-section-small">
+            <div class="uk-container">
+                <div>
+
+                    <template v-if="page == 'home'">
+                        <home-component v-if="ready" :site="site" :page="page"></home-component>
+                    </template>
+
+                    <template v-if="page == 'checkout' && ready">
+                        <checkout-component ref="checkout" :page="page" :candy-rack-offers="candyRackOffers" :site="site" :locale="selectedLocale"></checkout-component>
+
+                        <checkout-footer ref="footer" class="uk-width-1-1 uk-clearfix"></checkout-footer>
+
+                        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-background-muted"  v-if="!!cart && !!cart.lineItems && !!cart.lineItems.lineItem">
+                            <h3>Developer Tool</h3>
+                            <div>
+                                <label>Test Order: <input type="checkbox" class="uk-checkbox" v-model="cart.testOrder" :true-value="TrueValue" :false-value="FalseValue" /></label>
+                            </div>
+                            <div>
+                                <label>Send Email: <input type="checkbox" class="uk-checkbox" v-model="cart.sendEmail" :true-value="TrueValue" :false-value="FalseValue" /></label>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template v-if="page && page.startsWith('order') && ready">
+                        <order-component :page="page" :order="order"></order-component>
+                    </template>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <section class="uk-section uk-section-secondary uk-section-small uk-light">
+            <div class="uk-container">
+                <div class="uk-grid-medium uk-child-width-1-1 uk-child-width-1-3@m uk-grid" uk-grid>
+                    <div><a class="uk-logo" href="https://www.digitalriver.com/"></a>
+                        <p class="uk-text-small">© 2020 JOVS, Inc</p>
+                        <ul class="uk-iconnav">
+                            <li><a href="#" title="Facebook" uk-icon="facebook"></a></li>
+                            <li><a href="#" title="Twitter" uk-icon="twitter"></a></li>
+                            <li><a href="#" title="YouTube" uk-icon="youtube"></a></li>
+                            <li><a href="#" title="Instagram" uk-icon="instagram"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <div id="log-console">
+        <log-component></log-component>
+    </div>
+</div>
+<script type="text/x-template" id="home-component">
+    <div class="uk-container" v-if="offer">
+        <!--<h2 class="uk-text-center" v-if="offer.name">{{offer.name}}</h2>-->
+        <div class="uk-grid-small uk-grid-match uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-4@l" uk-grid>
+            <article v-for="productOffer in offer.productOffers.productOffer">
+                <div class="uk-card uk-card-default uk-padding-small">
+                    <!--<span>
+                        <span class="uk-label uk-label-warning">top selling</span>
+                        <span class="uk-label uk-label-danger">trade-in</span>
+                    </span>-->
+                    <figure class="uk-height-small" uk-lightbox="animation: fade" >
+                        <a class="uk-inline" :href="productOffer.product.productImage" :data-caption="productOffer.product.displayName">
+                            <img class="uk-height-small" :src="productOffer.product.thumbnailImage" :alt="productOffer.product.displayName">
+                        </a>
+                    </figure>
+                    <div class="uk-height-small">
+                        <h4>{{productOffer.product.displayName}}</h4>
+                        <!--<div class="uk-text-meta uk-margin-xsmall-bottom">SKU: {{productOffer.product.sku}}</div>
+                        <ul class="uk-list uk-text-small">
+                            <li><span class="uk-text-muted">{{ productOffer.salesPitch }}</span></li>
+                            <li><span class="uk-text-muted">{{ productOffer.product.shortDescription }}</span></li>
+                        </ul>-->
+                        <div class="uk-position-small uk-position-bottom-right">
+                            <div class="uk-text-right uk-margin-small">
+                                <del v-if="productOffer.pricing.discountDescription" class="uk-text-meta">{{productOffer.pricing.formattedListPriceWithQuantity}}</del>
+                                <strong class="uk-h4">{{productOffer.pricing.formattedSalePriceWithQuantity}}</strong>
+                            </div>
+                            <div class="uk-text-right">
+                                <button class="uk-button uk-button-primary" @click="addProduct(productOffer.addProductToCart.cartUri);">
+                                    <span class="uk-icon" uk-icon="cart"></span>
+                                    <span class="">{{$t('BTN_ADD_TO_CART')}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</script>
+<script type="text/x-template" id="cart-component">
+    <div v-if="!!cart">
+        <div class="uk-grid-medium" uk-grid>
+            <div class="uk-width-1-1 uk-width-expand@m">
+                <div class="uk-card uk-card-default tm-ignore-container">
+                    <div class="uk-card-header" v-if="page.startsWith('order')">
+                        <h4 class="uk-card-title uk-margin-remove-bottom">{{$t('PURCHASE_ORDER_INFORMATION_HEADER')}}</h4>
+                    </div>
+                    <div class="uk-card-header uk-text-right" v-if="!page.startsWith('order')" >
+                        <label>{{$t('CURRENCY_TEMPLATE')}}
+                            <select v-model="selectedCurrency" class="uk-select uk-form-small uk-width-small" @change="currencyChange(selectedCurrency);">
+                                <option v-for="currency in currency">{{currency}}</option>
+                            </select>
+                        </label>
+                    </div>
+                    <header class="uk-card-header uk-padding-remove-bottom uk-text-uppercase uk-text-muted uk-text-center uk-text-small uk-visible@m">
+                        <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                            <div>{{$t('PRODUCT')}}</div>
+                            <div>
+                                <div class="uk-grid-small uk-child-width-expand" uk-grid>
+                                    <div v-if="!page.startsWith('order')" class="tm-price-column">{{$t('UNIT_PRICE')}}</div>
+                                    <div class="tm-quantity-column">{{$t('QUANTITY')}}</div>
+                                    <div class="tm-sum-column uk-align-left@s uk-text-right@m">{{$t('PRICE')}}</div>
+                                    <div class="tm-delete-column uk-width-auto" v-if="readonly != 'true'">
+                                        <div style="width: 20px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <template v-show="!!cart.lineItems && !!cart.lineItems.lineItem">
+                        <div class="uk-card-body"  v-for="lineItem in cart.lineItems.lineItem" >
+                            <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@m uk-flex-middle" uk-grid>
+                                <div>
+                                    <div class="uk-grid-small" uk-grid>
+                                        <div class="uk-width-1-3">
+                                            <div class="tm-ratio tm-ratio-4-3">
+                                                <a class="tm-media-box" href="#">
+                                                    <figure class="tm-media-box-wrap">
+                                                        <img :src="lineItem.product.thumbnailImage" :alt="lineItem.product.displayName"  uk-img />
+                                                    </figure>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <a class="uk-link-heading" href="#" v-if="readonly != 'true'">{{ lineItem.product.displayName}}</a>
+                                            <div v-else>{{ lineItem.product.displayName}}</div>
+                                            <div class="uk-text-meta">{{ lineItem.product.sku}}</div>
+                                            <div class="uk-text-meta" v-if="lineItem.digitalRights && lineItem.digitalRights.serialNumber">
+                                                Serial Number: <span class="uk-alert-success">{{lineItem.digitalRights.serialNumber}}</span>
+                                            </div>
+                                            <div class="uk-text-meta" v-if="lineItem.downloads && lineItem.downloads.downloadUri">
+                                                <a :href="lineItem.downloads.downloadUri[0]" target="_blank">Download</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-grid-small uk-child-width-1-1 uk-child-width-expand@s uk-text-center" uk-grid>
+                                        <div class="tm-price-column" v-if="!page.startsWith('order')">
+                                            <div class="uk-text-muted uk-hidden@m">{{$t('PRICE')}}</div>
+                                            <div v-if="lineItem.pricing">{{ lineItem.pricing.formattedListPrice }}</div>
+                                        </div>
+                                        <div class="tm-cart-quantity-column" v-if="readonly != 'true'">
+                                            <a @click="updateQty(lineItem,-1)" uk-icon="icon: minus; ratio: .75"></a>
+                                            <input class="uk-input tm-quantity-input" style="width: 50%" type="text" maxlength="3" v-model="lineItem.quantity" @change="updateQty(lineItem);"/>
+                                            <a @click="updateQty(lineItem,1)" uk-icon="icon: plus; ratio: .75"></a>
+                                        </div>
+                                        <div class="tm-cart-quantity-column" v-else>
+                                            <div class="uk-text-muted uk-hidden@m">{{$t('QUANTITY')}}}</div>
+                                            <div v-if="lineItem.pricing">{{ lineItem.quantity }}</div>
+                                        </div>
+                                        <div class="tm-sum-column uk-align-left@s uk-text-right@m">
+                                            <div class="uk-text-muted uk-hidden@m">{{$t('PRICE')}}</div>
+                                            <del v-if="lineItem.pricing.salePriceWithQuantity.value!=lineItem.pricing.listPriceWithQuantity.value" class="uk-text-meta">{{lineItem.pricing.formattedListPriceWithQuantity}}</del>
+                                            <div v-if="lineItem.pricing">{{ lineItem.pricing.formattedSalePriceWithQuantity }}</div>
+                                        </div>
+                                        <div class="tm-delete-column uk-width-auto@s" v-if="readonly != 'true'">
+                                            <a class="uk-text-danger" :uk-tooltip="$t('REMOVE')" @click="lineItem.quantity=0;updateQty(lineItem);"><span uk-icon="close"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="uk-card-footer" v-if="readonly != 'true'">
+                        <label>
+                            <span class="uk-form-label uk-margin-small-right">{{$t('PROMO_CODE')}}</span>
+                            <div class="uk-inline">
+                                <a class="uk-form-icon uk-form-icon-flip" @click="applyCoupon()" href="#" uk-icon="arrow-right"></a><input class="uk-input uk-form-width-small" type="text" v-model="couponCode" v-on:keyup.enter="applyCoupon()">
+                            </div>
+                            <span class="uk-alert-danger" v-if="cart.couponError">{{$t('INVALID_COUPON_CODE')}}</span>
+                        </label>
+                    </div>
+                    <div class="uk-card-footer">
+                        <div class="uk-grid-small uk-text-right" uk-grid>
+                            <div class="uk-width-expand">
+                                <div class="uk-text-muted">{{$t('SUB_TOTAL')}}</div>
+                            </div>
+                            <div class="uk-width-1-4@m">
+                                <div>{{ cart.pricing.formattedSubtotal }}</div>
+                            </div>
+                        </div>
+                        <div v-if="(!!cart.pricing.discount && cart.pricing.discount.value>0) || (!!cart.pricing.incentive && cart.pricing.incentive.value>0)" class="uk-grid-small uk-text-right" uk-grid>
+                            <div class="uk-width-expand">
+                                <div class="uk-text-muted">{{$t('DISCOUNT')}}</div>
+                            </div>
+                            <div class="uk-width-1-4@m" v-if="!!cart.pricing.discount">
+                                <div class="uk-text-danger">- {{ cart.pricing.formattedDiscount }}</div>
+                            </div>
+                            <div class="uk-width-1-4@m" v-else-if="!!cart.pricing.incentive">
+                                <div class="uk-text-danger">- {{ cart.pricing.formattedIncentive }}</div>
+                            </div>
+                        </div>
+                        <div v-if="(!!cart.pricing.shippingAndHandling && cart.pricing.shippingAndHandling.value>0) || (!!cart.pricing.shipping && cart.pricing.shipping.value>0)" class="uk-grid-small uk-text-right" uk-grid>
+                            <div class="uk-width-expand">
+                                <div class="uk-text-muted">{{$t('SHIPPING')}}</div>
+                            </div>
+                            <div class="uk-width-1-4@m" v-if="!!cart.pricing.shippingAndHandling && !!cart.shippingOptions">
+                                <div class="uk-form-select" uk-form-custom="target: > * > span:last-child" data-uk-form-select>
+                                    <select v-model="cart.shippingMethod.code" class="uk-select uk-form-small" @change="shippingChange(cart.shippingMethod.code);">
+                                        <option v-for="option in cart.shippingOptions.shippingOption" v-bind:value="option.id">
+                                            {{option.description}} - {{option.formattedCost}}
+                                        </option>
+                                    </select>
+                                    <span class="uk-link">
+                                        <span uk-icon="icon: pencil"></span>
+                                        <span></span>
+                                    </span>
+                                </div>
+                                <!--{{ cart.pricing.formattedShippingAndHandling }}-->
+                            </div>
+                            <div class="uk-width-1-4@m" v-else-if="!!cart.pricing.shippingAndHandling">
+                                <div>{{ cart.pricing.formattedShippingAndHandling }}</div>
+                            </div>
+                            <div class="uk-width-1-4@m" v-else-if="!!cart.pricing.shipping">
+                                <div>{{ cart.pricing.formattedShipping }}</div>
+                            </div>
+                        </div>
+                        <div v-if="cart.pricing.tax.value>0" class="uk-grid-small uk-text-right" uk-grid>
+                            <div class="uk-width-expand">
+                                <div class="uk-text-muted">{{$t('TAX')}}</div>
+                            </div>
+                            <div class="uk-width-1-4@m">
+                                <div>{{ cart.pricing.formattedTax }}</div>
+                            </div>
+                        </div>
+                        <div class="uk-grid-small uk-text-right" uk-grid>
+                            <div class="uk-width-expand">
+                                <div class="uk-text-lead uk-text-bolder">{{$t('TOTAL')}}</div>
+                            </div>
+                            <div class="uk-width-1-4@m" v-if="!!cart.pricing.formattedOrderTotal">
+                                <div class="uk-text-lead uk-text-bolder">{{ cart.pricing.formattedOrderTotal }}</div>
+                            </div>
+                            <div class="uk-width-1-4@m" v-else-if="!!cart.pricing.formattedTotal">
+                                <div class="uk-text-lead uk-text-bolder">{{ cart.pricing.formattedTotal }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+
+
+        </div>
+    </div>
+</script>
+<script type="text/x-template" id="account-component">
+    <div class="uk-clearfix" v-if="!isAuthenticated">
+        <a @click="expand=!expand" class="uk-align-right ui-link uk-h4">{{$t('LOGIN_CREATE_USER_PAGE_TITLE')}}</a>
+        <section v-show="expand">
+            <h2>{{$t('ACCOUNT_INFORMATION')}}</h2>
+            <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+                    <div class="uk-card uk-card-hover uk-padding-medium">
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">{{$t('ENTER_EMAIL_AND_PASSWORD')}}</h3>
+                            <div>
+                                <label>
+                                    <div class="uk-form-label uk-form-label-required" >{{$t('EMAIL_ADDRESS_REQUIRED')}}</div>
+                                    <input v-model="email" class="uk-input" :class="{ 'uk-form-success': email }" type="text" required>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <div class="uk-form-label uk-form-label-required" >{{$t('PASSWORD_REQUIRED_FIELD')}}</div>
+                                    <input v-model="password" class="uk-input" :class="{ 'uk-form-success': password }" v-on:keyup.enter="login()" type="password" required>
+                                </label>
+                            </div>
+                            <div class="uk-grid-margin">
+                                <button class="uk-button uk-button-primary" @click="login();">
+                                    <span class="uk-icon" uk-icon="sign-in"></span>
+                                    <span class="">{{$t('LOGIN')}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-card uk-card-hover uk-padding-medium">
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">{{$t('NEW_CUSTOMER_DESC')}}</h3>
+                            <div>
+                                <label>
+                                    <div class="uk-form-label uk-form-label-required" >{{$t('FIRST_NAME_REQUIRED')}}</div>
+                                    <input v-model="firstName" class="uk-input" :class="{ 'uk-form-success': firstName }" type="text" required>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <div class="uk-form-label uk-form-label-required" >{{$t('LAST_NAME_REQUIRED')}}</div>
+                                    <input v-model="lastName" class="uk-input" :class="{ 'uk-form-success': lastName }" type="text" required>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <div class="uk-form-label uk-form-label-required" >{{$t('EMAIL_ADDRESS_REQUIRED')}}</div>
+                                    <input v-model="email" class="uk-input" :class="{ 'uk-form-success': email }" type="text" required>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <div class="uk-form-label uk-form-label-required" >{{$t('PASSWORD_REQUIRED_FIELD')}}</div>
+                                    <input v-model="password" class="uk-input" :class="{ 'uk-form-success': password }"  v-on:keyup.enter="createAccount()" type="password" required>
+                                </label>
+                            </div>
+                            <div class="uk-grid-margin">
+                                <button class="uk-button uk-button-primary" @click="createAccount();">
+                                    <span class="uk-icon" uk-icon="user"></span>
+                                    <span class="">{{$t('CREATE_ACCOUNT')}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</script>
+<script type="text/x-template" id="address-component">
+    <div class="uk-card uk-card-default uk-card-small uk-card-body tm-ignore-container">
+        <div class="uk-grid-small uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required" >{{$t('FIRST_NAME_REQUIRED')}}</div>
+                    <input v-model="address.firstName" class="uk-input" :class="{ 'uk-form-success': address.firstName }" :name="type+'first'" type="text" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('LAST_NAME_REQUIRED')}}</div>
+                    <input v-model="address.lastName" class="uk-input"  :class="{ 'uk-form-success': address.lastName }" :name="type+'last'" type="text" required>
+                </label>
+            </div>
+            <div v-if="locale==='ja_JP'">
+                <label>
+                    <div class="uk-form-label uk-form-label-required" >{{$t('PHONETIC_FIRST_NAME_COLON')}}</div>
+                    <input v-model="address.phoneticFirstName" class="uk-input" :class="{ 'uk-form-success': address.firstName }" :name="type+'first'" type="text" required>
+                </label>
+            </div>
+            <div v-if="locale==='ja_JP'">
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('PHONETIC_LAST_NAME_COLON')}}</div>
+                    <input v-model="address.phoneticLastName" class="uk-input"  :class="{ 'uk-form-success': address.lastName }" :name="type+'last'" type="text" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('PHONE_NUMBER_REQUIRED')}}</div>
+                    <input v-model="address.phoneNumber" class="uk-input" :class="{ 'uk-form-success': address.phoneNumber }" :name="type+'phone'" type="tel" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('EMAIL_ADDRESS_REQUIRED')}}</div>
+                    <input v-model="address.emailAddress"  class="uk-input" :class="{ 'uk-form-success': address.emailAddress }" :name="type+'email'" type="email" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('COUNTRY_REQUIRED')}}</div>
+                    <select v-model="address.country" class="uk-select" :class="{ 'uk-form-success': address.country }" :name="type+'country'" @change="updatingCountry(address.country)">
+                        <option>Choose the country</option>
+                        <option value="US">USA</option>
+                        <option value="DE">German</option>
+                        <option value="KR">Korean</option>
+                        <option value="JP">Japan</option>
+                        <option value="IE">Ireland</option>
+                        <option value="FR">France</option>
+                        <option value="GB">Great Britain</option>
+                        <option value="AU">Australia</option>
+                        <option value="FI">Finland</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('CITY_REQUIRED')}}</div>
+                    <input v-model="address.city" class="uk-input" :class="{ 'uk-form-success': address.city }" :name="type+'city'" type="text" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('ZIP_CODE_REQUIRED')}}</div>
+                    <input v-model="address.postalCode" class="uk-input" :class="{ 'uk-form-success': address.postalCode }" :name="type+'zip'" type="text" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('STATE_PROVINCE_REQUIRED')}}</div>
+                    <input v-model="address.countrySubdivision" class="uk-input" :class="{ 'uk-form-success': address.countrySubdivision }" :name="type+'zip'" type="text" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('ADDRESS1_REQUIRED')}}</div>
+                    <input v-model="address.line1" class="uk-input" :class="{ 'uk-form-success': address.line1 }" :name="type+'line1'" type="text" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <div class="uk-form-label uk-form-label-required">{{$t('ADDRESS2')}}</div>
+                    <input v-model="address.line2" class="uk-input" :class="{ 'uk-form-success': address.line2 }" :name="type+'line2'" type="text" required>
+                </label>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/x-template" id="payment-component">
+    <section>
+        <h2>{{$t('PAYMENT_INFORMATION')}}</h2>
+        <div class="uk-card uk-card-default uk-card-small uk-card-body">
+            <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+                <div v-for="(payment, name) in checkoutJS.config.payments" v-show="!payment.disable && payment.show">
+                    <label class="uk-card uk-card-hover uk-card-body" :class="{ 'active uk-card-default': paymentMethod.type===name }" :for="name">
+                        <h3 class="uk-card-title">
+                            <input type="radio" class="uk-radio" name="payment" :value="name" :id="name" v-model="paymentMethod.type" :disabled="!payment.supported"/>
+                            {{payment.name}}
+                        </h3>
+                        <p>
+                            <template v-if="name === 'creditCard'">
+                                <div id="dr_cardNumber" class="uk-input"></div>
+                                <br/>
+                                <div id="dr_cardExpiration" class="uk-input"></div>
+                                <br/>
+                                <div id="dr_cardCvv" class="uk-input"></div>
+                            </template>
+                            <div :id="payment.elementId"></div>
+                            <div :id="'drjs_'+name+'Element'"></div>
+                        </p>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+</script>
+<script type="text/x-template" id="checkout-component">
+    <section>
+        <div class="uk-container uk-margin-large" v-show="!(!!cart && !!cart.lineItems && !!cart.lineItems.lineItem)">
+            <div class="uk-text-center">
+                <span uk-icon="icon: cart; ratio: 8"></span>
+                <h2>Empty Cart</h2>
+            </div>
+        </div>
+        <div class="uk-margin-medium">
+          <cart-component ref="cart" :site="site" :page="page" v-show="!!cart && !!cart.lineItems && !!cart.lineItems.lineItem"></cart-component>
+          <div id="candyRackOffer" class="uk-margin-medium" v-if="candyRackOffers">
+              <div id="candyRackHeading" class="uk-h4">You may also like...</div>
+              <div id="candyRackSlider" class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider>
+                  <ul class="uk-slider-items uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-4@l" uk-grid-small>
+                      <template v-for="candyRackOffer in candyRackOffers.offer">
+                          <li v-for="candyRackProduct in candyRackOffer.productOffers.productOffer">
+                              <div class="uk-panel uk-text-center">
+                                  <figure class="uk-height-small" uk-lightbox="animation: fade" >
+                                      <a class="uk-inline" :href="candyRackProduct.product.productImage" :data-caption="candyRackProduct.product.displayName">
+                                          <img :src="candyRackProduct.product.thumbnailImage" :alt="candyRackProduct.product.displayName">
+                                      </a>
+                                  </figure>
+                                  <div class="uk-margin-small">
+                                      <div class="uk-h4">{{candyRackProduct.product.displayName}}</div>
+                                  </div>
+                                  <div class="uk-margin-small">
+                                      <del v-if="candyRackProduct.pricing.discountDescription" class="uk-text-meta">{{candyRackProduct.pricing.formattedListPriceWithQuantity}}</del>
+                                      <strong class="uk-h4">{{candyRackProduct.pricing.formattedSalePriceWithQuantity}}</strong>
+                                  </div>
+                                  <div class="uk-margin-small">
+                                      <button class="uk-button uk-button-primary" @click="addCandyRackProduct(candyRackProduct.addProductToCart.cartUri);">
+                                          <span class="uk-icon" uk-icon="cart"></span>
+                                          <span class="">{{$t('BTN_ADD_TO_CART')}}</span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </li>
+                      </template>
+                  </ul>
+                  <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                  <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+              </div>
+          </div>
+        </div>
+        <account-component :page="page" v-show="!!cart && !!cart.lineItems && !!cart.lineItems.lineItem"></account-component>
+        <div class="uk-grid-medium uk-child-width-1-1" uk-grid  v-show="!!cart && !!cart.lineItems && !!cart.lineItems.lineItem">
+            <section>
+                <div class="uk-grid-medium" uk-grid>
+                    <form @submit="checkout" class="uk-form-stacked uk-width-1-1 tm-checkout uk-width-expand@m">
+                        <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
+                            <section class="uk-margin-small"><h2 class="tm-checkout-title">{{$t('BILLING_INFORMATION')}}</h2>
+                                <address-component ref="billingAddress" type="billingAddress" :cart="cart" :locale="locale"></address-component>
+                            </section>
+                            <section class="uk-margin-small" v-if="!!cart.shippingOptions && !!cart.shippingOptions.shippingOption">
+                                <h2 class="tm-checkout-title">{{$t('SHIPPING_INFORMATION')}}</h2>
+                                <address-component ref="shippingAddress" type="shippingAddress" :cart="cart" :locale="locale"></address-component>
+                            </section>
+                            <section class="uk-margin-small">
+                                <payment-component ref="payment" v-if="Object.keys(cart).length>0"></payment-component>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <div class="uk-clearfix uk-grid uk-margin-medium" v-show="!!cart && !!cart.lineItems && !!cart.lineItems.lineItem">
+            <div class="uk-form-controls uk-margin" v-show="hasAutorenewal">
+                <label class="uk-form-label"><input type="checkbox" class="uk-checkbox" v-model="cart.autorenewalPlanTerms" :true-value="TrueValue" :false-value="FalseValue" /> <span v-html="autorenewalPlanTerms"></span></label>
+            </div>
+            <div  class="uk-form-controls uk-margin">
+                <label class="uk-form-label"><input type="checkbox" class="uk-checkbox" v-model="cart.termsOfSalesAcceptance" :true-value="TrueValue" :false-value="FalseValue" /> <span v-html="confirmDisclosure"></span></label>
+            </div>
+        </div>
+
+        <div class="uk-clearfix uk-grid uk-margin-medium" v-show="!!cart && !!cart.lineItems && !!cart.lineItems.lineItem">
+            <button type="submit" @click="checkout" class="uk-button uk-button-primary uk-margin-small uk-width-1-1 uk-width-1-4@m uk-align-right">{{$t('CHECKOUT')}}</button>
+        </div>
+    </section>
+</script>
+<script type="text/x-template" id="order-component">
+    <section v-if="!!errors">
+        <div class="uk-container uk-margin-large">
+            <h3>{{errors.error[0].description}}</h3>
+        </div>
+    </section>
+    <section v-else>
+        <div id="order-init" class="uk-container uk-margin-large" v-if="order == null">
+            <h3>{{$t('LOOKUP_YOUR_ORDER')}}...</h3>
+        </div>
+        <div id="order-header" class="uk-container uk-margin-large" v-if="!!order">
+            <div class="uk-text-center">
+                <span uk-icon="icon: cart; ratio: 8"></span>
+                <h2>{{$t('THANKS')}}</h2>
+                <div class="uk-text-large">
+                    <span class="uk-text-bolder">{{$t('ORDER_TEXT')}} #:</span>
+                    <span class="uk-text-muted" v-if="!!order.id">{{order.id}}</span>
+                    <span class="uk-text-muted" v-else-if="!!order.order.id">{{order.order.id}}</span>
+                </div>
+            </div>
+        </div>
+        <div id="order-info" class="uk-container uk-margin-large" v-if="!!order">
+            <div class="uk-grid-medium uk-grid-match uk-child-width-1-1@s uk-child-width-1-2@m" uk-grid>
+                <div>
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-header">
+                            <h4 class="uk-card-title uk-margin-remove-bottom">{{$t('ORDER_SUMMARY')}}</h4>
+                        </div>
+                        <div class="uk-card-body">
+                            <div>
+                                <span class="uk-text-bolder">{{$t('ORDER_DATE')}}:</span>
+                                <span class="uk-text-xsmall uk-text-muted">{{formattedSubmissionDate}}</span>
+                            </div>
+                            <div class="uk-margin-small-bottom">
+                                <span class="uk-text-bolder">{{$t('TOTAL_ORDERS')}}:</span>
+                                <span class="uk-text-xsmall uk-text-primary uk-text-bold" v-if="!!order.pricing.formattedOrderTotal">{{order.pricing.formattedOrderTotal}}</span>
+                                <span class="uk-text-xsmall uk-text-primary uk-text-bold" v-else-if="!!order.pricing.formattedTotal">{{order.pricing.formattedTotal}}</span>
+                            </div>
+                            <div v-if="!!order.paymentMethod && order.paymentMethod.type == 'creditCard'">
+                                <div>
+                                    <span class="uk-text-xsmall uk-text-muted">Paid with <span uk-icon="credit-card"></span> ending in {{order.paymentMethod.creditCard.lastFourDigits}}, expiry date {{order.paymentMethod.creditCard.expirationMonth}}/{{order.paymentMethod.creditCard.expirationYear}}. The charge(s) will appear on your statement as "DRI*STD Test".</span>
+                                </div>
+                            </div>
+                            <div>
+                                Paid with {{order.paymentMethod.type}}
+                            </div>
+                            <div id="dr_paymentInstruction"></div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="!!order.shippingAddress">
+                    <div class="uk-card uk-card-default">
+                        <div v-if="isPhysical == true">
+                            <div class="uk-card-header">
+                                <h4 class="uk-card-title uk-margin-remove-bottom">{{$t('SHIPPING_INFORMATION')}}</h4>
+                            </div>
+                            <div class="uk-card-body">
+                                <div class="uk-text-xsmall uk-text-muted">{{order.shippingAddress.firstName}} {{order.shippingAddress.lastName}}</div>
+                                <div class="uk-text-xsmall uk-text-muted" v-if="order.shippingAddress.companyName">{{order.shippingAddress.companyName}}</div>
+                                <div class="uk-text-xsmall uk-text-muted">{{order.shippingAddress.line1}}</div>
+                                <div class="uk-text-xsmall uk-text-muted" v-if="order.shippingAddress.line2">{{order.shippingAddress.line2}}</div>
+                                <div class="uk-text-xsmall uk-text-muted">{{order.shippingAddress.city}}, {{order.shippingAddress.countrySubdivision}} {{order.shippingAddress.postalCode}}</div>
+                                <div class="uk-text-xsmall uk-text-muted">{{order.shippingAddress.countryName}}</div>
+                                <div class="uk-text-xsmall uk-text-muted">{{order.shippingAddress.emailAddress}}</div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div class="uk-card-header">
+                                <h4 class="uk-card-title uk-margin-remove-bottom">{{$t('BILLING_INFORMATION')}}</h4>
+                            </div>
+                            <div class="uk-card-body">
+                                <div class="uk-text-xsmall uk-text-muted">{{order.billingAddress.firstName}} {{order.billingAddress.lastName}}</div>
+                                <div class="uk-text-xsmall uk-text-muted" v-if="order.billingAddress.companyName">{{order.billingAddress.companyName}}</div>
+                                <div class="uk-text-xsmall uk-text-muted">{{order.billingAddress.line1}}</div>
+                                <div class="uk-text-xsmall uk-text-muted" v-if="order.billingAddress.line2">{{order.billingAddress.line2}}</div>
+                                <div class="uk-text-xsmall uk-text-muted">{{order.billingAddress.city}}, {{order.billingAddress.countrySubdivision}} {{order.billingAddress.postalCode}}</div>
+                                <div class="uk-text-xsmall uk-text-muted">{{order.billingAddress.countryName}}</div>
+                                <div class="uk-text-xsmall uk-text-muted">{{order.billingAddress.emailAddress}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="order-items" class="uk-container uk-margin-large">
+            <cart-component :page="page" readonly="true"></cart-component>
+        </div>
+        <div id="order-instructions" class="uk-container uk-margin-large" v-show="!!order">
+            <div class="uk-card uk-card-default">
+                <div class="uk-card-header">
+                    <h4 class="uk-card-title uk-margin-remove-bottom">Order Instructions</h4>
+                </div>
+                <div class="uk-card-body">
+                    <p>
+                        <b>If your order contains downloadable software</b> and you have not purchased our Extended Download Service, you have <b>30 days</b> to download your purchase. After you download we suggest you save a copy of the downloaded file on an external drive, CD, DVD, or some other storage medium in the event you have computer problems or the downloaded file becomes damaged or corrupt.
+                    </p>
+                    <p>
+                        <b>If your product requires a serial number or unlock code</b>, please make note of the number displayed in your order details above for future reference. A confirmation email will be sent to you shortly that will also supply this information.
+                    </p>
+                    <p>
+                        <b>If your order contains a shipped product</b>, we will send you an additional email which will include tracking information when the item is shipped. Shipping invoices received with the product shipment may not reflect actual purchase price but rather a list price per product.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="uk-container uk-margin-large" v-show="!!order">
+            <div class="uk-text-large uk-text-bold uk-text-center">
+                Thank you again for your order!
+            </div>
+        </div>
+        <div class="uk-container uk-margin-large" v-show="!!order">
+            <div class="uk-grid-collapse uk-child-width-expand@s uk-text-center" uk-grid>
+                <div>
+                    <a class="uk-link" :href="continueShoppingURL">
+                        <span uk-icon="icon: home; ratio: 3"></span>
+                        <div class="uk-text-medium">Continue shopping</div>
+                    </a>
+                </div>
+                <div>
+                    <a class="uk-link" :href="helpPageURL">
+                        <span uk-icon="icon: question; ratio: 3"></span>
+                        <div class="uk-text-medium">Need help?</div>
+                    </a>
+                </div>
+                <div>
+                    <a class="uk-link" :href="'mailto:' + csEmail">
+                        <span uk-icon="icon: mail; ratio: 3"></span>
+                        <div class="uk-text-medium">Contact us</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <checkout-footer class="uk-width-1-1 uk-clearfix"></checkout-footer>
+    </section>
+</script>
+
+<script type="text/x-template" id="log-component">
+    <div id="api-console" ref="console">
+        <div class="resize" ref="resize" v-show="expandLogs">=</div>
+        <section class="btn-api-console" v-show="!expandLogs" @click="expandLogs=true">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35px" height="25px">
+                <path fill-rule="evenodd"  fill="rgb(0, 167, 225)"
+                d="M3.571,-0.000 L31.429,-0.000 C33.401,-0.000 35.000,1.599 35.000,3.571 C35.000,5.544 33.401,7.143 31.429,7.143 L3.571,7.143 C1.599,7.143 -0.000,5.544 -0.000,3.571 C-0.000,1.599 1.599,-0.000 3.571,-0.000 Z"/>
+                <path fill-rule="evenodd"  fill="rgb(80, 197, 237)"
+                d="M3.571,8.929 L24.429,8.929 C26.401,8.929 28.000,10.528 28.000,12.500 C28.000,14.472 26.401,16.071 24.429,16.071 L3.571,16.071 C1.599,16.071 -0.000,14.472 -0.000,12.500 C-0.000,10.528 1.599,8.929 3.571,8.929 Z"/>
+                <path fill-rule="evenodd"  fill="rgb(140, 222, 251)"
+                d="M3.571,17.857 L14.429,17.857 C16.401,17.857 18.000,19.456 18.000,21.429 C18.000,23.401 16.401,25.000 14.429,25.000 L3.571,25.000 C1.599,25.000 -0.000,23.401 -0.000,21.429 C-0.000,19.456 1.599,17.857 3.571,17.857 Z"/>
+            </svg>
+        </section>
+        <section class="api-logs-wrapper" v-show="expandLogs">
+            <div class="api-details-container" :class="{ expanded: Object.keys(apiDetails).length > 0 }">
+                <div class="details-header" @click="closeLogs()">
+                    <div class="arrow"></div>
+                </div>
+
+                <div class="" v-if="Object.keys(apiDetails).length > 0">
+                    <section class="details-section">
+                        <span class="api-title">
+                            <span class="api-name">{{apiDetails.log.api}}</span>
+                            <span>:</span>
+                            <span class="api-method">{{apiDetails.log.method}}</span>
+                        </span>
+                        <span class="api-type">{{apiDetails.log.type}}</span>
+                        <span class="api-url">{{apiDetails.log.url}}{{apiDetails.log.payment}}</span>
+                    </section>
+                    <section class="details-section" v-if="Object.keys(apiDetails.apiRequestData).length > 0">
+                        <div class="details-title">{{apiDetails.apiRequestTitle}}</div>
+                        <div class="detail-content custom-scroll">
+                            <json-tree :data="apiDetails.apiRequestData" :level="2"></json-tree>
+                        </div>
+                    </section>
+                    <section class="details-section" v-if="Object.keys(apiDetails.apiRequestBodyData).length > 0">
+                        <div class="details-title">{{apiDetails.apiRequestBodyTitle}}</div>
+                        <div class="detail-content custom-scroll">
+                            <json-tree :data="apiDetails.apiRequestBodyData" :level="2"></json-tree>
+                        </div>
+                    </section>
+                    <section class="details-section" v-if="Object.keys(apiDetails.apiResponseData).length > 0">
+                        <div class="details-title">{{apiDetails.apiResponseTitle}}</div>
+                        <div class="detail-content custom-scroll">
+                            <json-tree :data="apiDetails.apiResponseData" :level="2"></json-tree>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="api-list-container" ref="apicontainer">
+                <div class="api-list-header">
+                    <span uk-icon="icon: close; ratio: 1" class="btn-close-logs" @click="closeLogs(true)"></span>
+                    <span uk-icon="icon: trash; ratio: 1" class="btn-trash-logs" @click="clearLogs()"></span>
+                    <div>API/Event Call</div>
+                </div>
+                <ul class="api-list custom-scroll" ref="scroll">
+                    <li class="uk-flex log-item"
+                        v-for="(log, key) in logData"
+                        :class="{ active: activeItem === key, error: !!log.error }"
+                        :title="log.api + ': ' + log.method"
+                        :data-log-id="key"
+                        @click="showLogDetails(key)">
+                        <div class="api-title uk-flex">
+                            <span class="api-name">{{log.api}}</span>
+                            <span>:</span>
+                            <span class="api-method">{{log.method}}</span>
+                        </div>
+                        <div class="api-type">{{log.type}}</div>
+                        <div class="api-url">{{log.url}}{{log.payment}}</div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</script>
+
+<script>
+    const eventBus = new Vue();
+    let app, logConsole;
+    function initCheckoutJS(CheckoutJS){
+        checkoutJS.on('cartUpdated',function(cartData){
+            eventBus.$emit('updatingCart',cartData.cart);
+            eventBus.$emit('updatingEntity');
+        });
+
+        checkoutJS.on('entityUpdate',function(entityData){
+            eventBus.$emit('updatingEntity',entityData);
+        });
+
+        checkoutJS.on('initialized',function(checkoutJS){
+            eventBus.$emit('checkoutJS',checkoutJS);
+        });
+
+        checkoutJS.on('logging', function(logData){
+            eventBus.$emit('logData', logData);
+        });
+
+        checkoutJS.on('shopperUpdated', function(){
+            eventBus.$emit('shopperUpdated', checkoutJS.shopper);
+            return checkoutJS.shopperApi.getCart();
+        });
+
+        checkoutJS.shopperApi.getSiteInfo().then(function(response){
+            app.site = response.site;
+            app.ready = true;
+            eventBus.$emit('initLocales', app.site);
+            return checkLocale(i18n.locale);
+        }).catch(function(){
+            app.ready = true;
+        });
+    }
+
+    Vue.component('HomeComponent', {
+        template: '#home-component',
+        data: function() {
+            return {
+                offer: null
+            };
+        },
+        props: ['page'],
+        created: function() {
+            console.log('Component:', 'HomeComponent');
+            var _this = this;
+            eventBus.$on('localeUpdated',function(){
+                if(_this.page==='home') {
+                    _this.getPointOfPromotionOffer();
+                }
+            });
+        },
+        mounted: function() {
+            this.getPointOfPromotionOffer();
+        },
+        methods: {
+            getPointOfPromotionOffer: function() {
+                var _this = this;
+                eventBus.$emit('loading',true);
+                checkoutJS.shopperApi.getPointOfPromotionOffer('SiteMerchandising_HomePageTopSellers').then(function(offersData){
+                    if(offersData && offersData.offers.offer && offersData.offers.offer.length){
+                        _this.offer = offersData.offers.offer[0];
+                    }
+                    eventBus.$emit('loading',false);
+                });
+            },
+            addProduct: function(uri) {
+                eventBus.$emit('loading',true);
+                checkoutJS.shopperApi.applyUri(uri,{},'post').then(function(response){
+                    eventBus.$emit('updatingCart',response.cart);
+                    history.pushState(null, 'checkout', '#checkout');
+                    eventBus.$emit('forceUpdate');
+                    eventBus.$emit('loading',false);
+                });
+            }
+        }
+    });
+
+    Vue.component('CheckoutComponent', {
+        template: '#checkout-component',
+        data: function() {
+            return {
+                cart: {},
+                TrueValue: 'true',
+                FalseValue: 'false',
+                hasAutorenewal: false,
+                confirmDisclosure: '',
+                autorenewalPlanTerms: ''
+            };
+        },
+        provide: {
+            validated: true
+        },
+        props: ['page', 'candyRackOffers','site','locale'],
+        created: function() {
+            console.log('Component:', 'CheckoutComponent');
+            var _this = this;
+            eventBus.$on('updatingCart',function(){
+                checkoutJS.getConfirmDisclosure().then(function(confirmDisclosure){
+                    _this.confirmDisclosure = confirmDisclosure;
+                });
+                checkoutJS.getAutorenewalPlanTerms().then(function(autorenewalPlanTerms){
+                    _this.autorenewalPlanTerms = autorenewalPlanTerms;
+                });
+                checkoutJS.hasAutorenewal().then(function(hasAutorenewal){
+                    _this.hasAutorenewal = hasAutorenewal;
+                });
+            })
+        },
+        mounted: function() {
+            window.scrollTo(0,0);
+            var _this = this;
+            if (Object.keys(_this.cart).length === 0) {
+                _this.getCart();
+            }
+        },
+        methods: {
+            getCart: function() {
+                var _this = this;
+                eventBus.$on('updatingCart', this.updatingCart);
+                eventBus.$emit('loading', true);
+                checkoutJS.shopperApi.getCart().then(function(response){
+                    eventBus.$emit('getCandyRackOffers');
+                    eventBus.$emit('forceUpdate');
+                    eventBus.$emit('loading', false);
+                });
+            },
+            updatingCart: function(cartData) {
+                this.cart = cartData;
+            },
+            addCandyRackProduct: function(uri) {
+                var _this = this;
+                eventBus.$emit('loading',true);
+                checkoutJS.shopperApi.applyUri(uri,{},'post').then(function(response){
+                    eventBus.$emit('updatingCart',response.cart);
+                    eventBus.$emit('getCandyRackOffers');
+                    eventBus.$emit('forceUpdate');
+                    eventBus.$emit('loading',false);
+                });
+            },
+            checkout: function(e) {
+                var _this = this;
+                var paymentType = _this.$refs.payment.paymentMethod.type;
+                if( !paymentType.length ){
+                    e.preventDefault();
+                    return false;
+                }
+                eventBus.$emit('loading',true);
+                checkoutJS.shopperApi.updateCart({cart:this.cart}).then(function(cartData){
+                    if(paymentType && paymentType.length) {
+                        return checkoutJS.payments[paymentType].applySourceId(paymentType);
+                    }
+                }).then(function(success){
+                    if(success) {
+                        return checkoutJS.shopperApi.submitCart();
+                    }else{
+                        eventBus.$emit('loading',false);
+                    }
+                }).then(function(response){
+                    if(response && response.submitCart && response.submitCart.order)
+                    {
+                        app.order = response.submitCart;
+                        _this.order = response.submitCart.order;
+                        history.pushState(response.submitCart, 'order', '#order-' + response.submitCart.order.id);
+                        eventBus.$emit('forceUpdate');
+                        eventBus.$emit('loading',false);
+                    }
+                }).catch(function(ex){
+                    console.trace(ex);
+                    checkoutJS.util.errorMessage(ex);
+                    eventBus.$emit('loading',false);
+                });
+            }
+        }
+    });
+
+    Vue.component('CheckoutFooter',{
+        template: '<footer id="dr_compliance"></footer>',
+        created: function() {
+            var _this = this;
+            console.log('Component:', 'CheckoutFooter');
+        },
+        mounted: function() {
+            checkoutJS.emit("initializeElements");
+
+        },
+    });
+
+    Vue.component('CartComponent',{
+        template: '#cart-component',
+        props: ['page', 'readonly', 'site'],
+        data: function() {
+            return {
+                cart: null,
+                couponCode: "",
+                currency:[],
+                selectedCurrency:"",
+            };
+        },
+        created: function() {
+            console.log('Component:', 'CartComponent');
+            eventBus.$on('updatingCart', this.updatingCart);
+            eventBus.$on('shopperUpdated', this.shopperUpdated);
+            this.shopperUpdated(checkoutJS.shopper);
+        },
+        methods: {
+            updatingCart: function(cartData) {
+                this.cart = cartData;
+            },
+            shopperUpdated: function(shopper) {
+                var _this = this;
+                this.selectedCurrency = shopper.currency;
+                if(_this.site){
+                    var localeOptions = this.site.localeOptions.localeOption.filter(function(localeOption){
+                        return localeOption.locale === shopper.locale;
+                    });
+                    if(localeOptions && localeOptions.length){
+                        _this.currency = localeOptions[0].supportedCurrencies.currency;
+                    }
+                }
+            },
+            currencyChange: function(selectedCurrency) {
+                eventBus.$emit('loading',true);
+                this.selectedCurrency = selectedCurrency;
+                checkoutJS.updateLocaleAndCurrency(checkoutJS.shopper.locale, selectedCurrency).then(function(){
+                    return eventBus.$emit('getCandyRackOffers');
+                }).catch(function(ex){
+                    checkoutJS.util.errorMessage(ex);
+                }).then(function(){
+                    eventBus.$emit('forceUpdate');
+                    eventBus.$emit('loading',false);
+                });
+            },
+            updateQty: function(lineItem,number){
+                eventBus.$emit('loading',true);
+                if(number) {
+                    lineItem.quantity = lineItem.quantity + number;
+                }
+                checkoutJS.shopperApi.updateCart({cart:this.cart}).then(function(){
+                    if (lineItem.quantity === 0) { eventBus.$emit('getCandyRackOffers'); }
+                    eventBus.$emit('loading',false);
+                }).catch(function(ex){
+                    checkoutJS.util.errorMessage(ex);
+                });
+            },
+            applyCoupon: function() {
+                var _this = this;
+                eventBus.$emit('loading',true);
+                checkoutJS.shopperApi.applyCouponToCart(_this.couponCode).catch(function(err){
+                    _this.cart.couponError = true;
+                }).then(function(){
+                    _this.couponCode = '';
+                    eventBus.$emit('loading', false);
+                });
+            },
+            deleteLineItem: function(lineItem) {
+                eventBus.$emit('loading',true);
+                checkoutJS.shopperApi.deleteLineItem(lineItem.id).then(function(){
+                    eventBus.$emit('loading',false);
+                }).catch(function(ex){
+                    checkoutJS.util.errorMessage(ex);
+                });
+            },
+            shippingChange: function(shippingMethod) {
+                eventBus.$emit('loading',true);
+                checkoutJS.shopperApi.updateSelectedShippingMethodOnCart(shippingMethod).then(function(){
+                    eventBus.$emit('loading',false);
+                });
+            }
+        }
+    });
+
+    Vue.component('AccountComponent',{
+        template: '#account-component',
+        props: ['page'],
+        data: function() {
+            return {
+                expand: false,
+                isAuthenticated: false,
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+            };
+        },
+        created: function() {
+            console.log('Component:', 'AccountComponent');
+            eventBus.$on('shopperUpdated', this.shopperUpdated);
+            this.isAuthenticated = checkoutJS.shopper.isAuthenticated;
+        },
+        methods: {
+            login: function() {
+                var _this = this;
+                eventBus.$emit('loading', true);
+                checkoutJS.shopperApi.login(this.email,this.password).then(function() {
+                    return _this.getShopperInfo();
+                }).catch(function(ex){
+                    checkoutJS.util.errorMessage(ex);
+                }).then(function(){
+                    eventBus.$emit('loading', false);
+                });
+            },
+            createAccount: function() {
+                var _this = this;
+                eventBus.$emit('loading', true);
+                checkoutJS.shopperApi.createShopper({
+                    shopper: {
+                        username: this.email,
+                        emailAddress: this.email,
+                        //"externalReferenceId": this.email,
+                        firstName: this.firstName,
+                        lastName: this.lastName,
+                        password: this.password,
+                    }
+                }).then(function() {
+                    return _this.getShopperInfo();
+                }).catch(function(ex){
+                    checkoutJS.util.errorMessage(ex);
+                }).then(function(){
+                    eventBus.$emit('loading', false);
+                });
+            },
+            getShopperInfo: function() {
+                return checkoutJS.shopperApi.getShopper().then(function(response){
+                    if(response.shopper.addresses && response.shopper.addresses.address){
+                        var address = response.shopper.addresses.address[0];
+                        return checkoutJS.shopperApi.updateCart({cart:{
+                                billingAddress:address,
+                                shippingAddress:address,
+                            }});
+                    }else{
+                        var address = response.shopper;
+                        return checkoutJS.shopperApi.updateCart({cart:{
+                                billingAddress:{
+                                    firstName: address.firstName,
+                                    lastName: address.lastName,
+                                },
+                                shippingAddress:{
+                                    firstName: address.firstName,
+                                    lastName: address.lastName,
+                                },
+                            }});
+                    }
+                })
+            },
+            shopperUpdated: function(shopper) {
+                this.isAuthenticated = !!shopper.isAuthenticated;
+            }
+        }
+    });
+
+    Vue.component('PaymentComponent',{
+        inject: ['validated'],
+        template: '#payment-component',
+        data: function() {
+            return {
+                cart: null,
+                checkoutJS:checkoutJS,
+                paymentMethod: {
+                    type:''
+                },
+                paymentMethods: null
+            };
+        },
+        created: function() {
+            console.log('Component:', 'PaymentComponent');
+            var _this = this;
+            eventBus.$on('updatingCart', this.updatingCart);
+            eventBus.$on('updatingCountry', this.updatingCountry);
+            eventBus.$on('checkoutJS',function(checkoutJS){
+                _this.checkoutJS = checkoutJS;
+                _this.$forceUpdate();
+            });
+            eventBus.$on('forceUpdate',function(){
+                _this.$forceUpdate();
+            });
+        },
+        mounted: function() {
+            var _this = this;
+            var promise = checkoutJS.emit("initializePayments");
+            if(promise){
+                _this.updatingCart.call(_this);
+                promise.then(function(){
+                    _this.$forceUpdate();
+                });
+            }
+        },
+        beforeDestroy: function(){
+            return checkoutJS.emit("destroyPayments");
+        },
+        methods: {
+            updatingCountry: function(country, type) {
+                checkoutJS.emit("initializePayments").then(function(){
+                    eventBus.$emit('forceUpdate');
+                });
+            },
+            updatingCart: function(cartData) {
+                var _this = this;
+                if(cartData) {
+                    this.cart = cartData;
+                    if (!cartData.paymentMethod || !cartData.paymentMethod.type) {
+                        cartData.paymentMethod = {
+                            type: ''
+                        };
+                    }
+                    _this.paymentMethod = cartData.paymentMethod;
+                }
+                if(!_this.paymentMethod.type.length) {
+                    checkoutJS.util.getValue('payment').then(function (payment) {
+                        if (payment && payment.name) {
+                            _this.paymentMethod.type = payment.name;
+                        }
+                    });
+                }
+            }
+        }
+    });
+
+    Vue.component('AddressComponent',{
+        template: '#address-component',
+        props:['type','cart','locale'],
+        data: function() {
+            return {
+                address: {}
+            };
+        },
+        created: function() {
+            console.log('Component:', 'AddressComponent');
+            var _this = this;
+            eventBus.$on('updatingCart', this.updatingCart);
+            if(this.cart[this.type]) {
+                this.address = this.cart[this.type];
+            }
+        },
+        methods: {
+            updatingCart: function(cartData) {
+                this.address = cartData[this.type];
+            },
+            updatingCountry: function(country){
+                eventBus.$emit('loading', true);
+                var type = this.type;
+                checkoutJS.shopperApi.updateCart({cart:this.cart}).then(function(){
+                    eventBus.$emit('updatingCountry', country, type);
+                });
+            }
+        }
+    });
+
+    Vue.component('OrderComponent', {
+        template: '#order-component',
+        data: function() {
+            return {
+                errors: null,
+                dateOpt: { year: 'numeric', month: 'numeric', day: 'numeric' },
+                continueShoppingURL: 'index.html',
+                helpPageURL: '#help',
+                csEmail: 'service@digitalriver.com'
+            };
+        },
+        computed: {
+            formattedSubmissionDate: function () {
+                var submissionDate = (typeof this.order.submissionDate != 'undefined')? this.order.submissionDate :  this.order.order.submissionDate;
+                var locale = (typeof this.order.locale != 'undefined')? this.order.locale :  this.order.order.locale;
+                return (new Date(submissionDate)).toLocaleDateString(locale.replace('_', '-'), this.dateOpt);
+            },
+            isPhysical: function () {
+                var shippingMethod = this.order.shippingMethod;
+                return !(Object.entries(shippingMethod).length === 0 && shippingMethod.constructor === Object);
+            }
+        },
+        props: ['page', 'order'],
+        created: function() {
+            console.log('Component:', 'OrderComponent');
+            if(this.page) {
+                var orderId = this.page.split('-')[1];
+                if(this.order == null && orderId) {
+                    this.getOrder(orderId);
+                }
+                checkoutJS.storefront.getSelectedSource().then(function(source){
+                    console.log('checkoutJS.storefront.pendingFundsRedirectFlow');
+                    checkoutJS.storefront.pendingFundsRedirectFlow(source);
+                    checkoutJS.storefront.pendingFundsReceiver(source);
+                });
+            }
+        },
+        mounted: function () {
+            window.scrollTo(0,0);
+            if(this.order != null) {
+                this.updateCartAndEntity(this.order);
+            }
+        },
+        methods: {
+            getOrder: function(orderId) {
+                var _this = this;
+                eventBus.$emit('loading', true);
+                checkoutJS.shopperApi.getOrder(orderId).then(function(response){
+                    if (response.order) {
+                        eventBus.$emit('updatingOrder', response.order);
+                        _this.updateCartAndEntity(response.order);
+                    }
+                }).catch(function (err) {
+                    if(err.response.data.errors) {
+                        _this.errors = err.response.data.errors;
+                    }
+                }).then(function() {
+                    eventBus.$emit('loading', false);
+                });
+            },
+            updateCartAndEntity: function(cartData) {
+                eventBus.$emit('updatingCart', cartData);
+                eventBus.$emit('updatingEntity', checkoutJS.config.entity);
+            }
+        }
+    });
+
+    Vue.component('LogComponent',{
+        template: '#log-component',
+        data: function() {
+            return {
+                logData: {},
+                apiDetails: {},
+                expandLogs: false,
+                activeItem: ''
+            };
+        },
+        created: function() {
+            console.log('Component:', 'LogComponent');
+            var _this = this;
+            eventBus.$on('logData', _this.logging);
+        },
+        mounted: function() {
+            var _this = this;
+            var _resize = _this.$refs.resize;
+            var _console = _this.$refs.console;
+            var _apicontainer = _this.$refs.apicontainer;
+            var isElement = false;
+            var moveEvent = function (e) {
+                if(isElement) {
+                    var _clientY = e.clientY;
+                    if(e.touches && e.touches.length) {
+                        var touch = e.touches[0];
+                        _clientY = touch.clientY;
+                    }
+                    var _height = (_apicontainer.offsetHeight + (_console.offsetTop - _clientY));
+                    if( (window.screen.height-30)>_height) {
+                        _apicontainer.style.height = _height + 'px';
+                    }
+                }
+            };
+            ['mousemove','touchmove'].forEach( function(evt) {
+                document.body.addEventListener(evt, moveEvent);
+            });
+            ['mousedown','touchstart'].forEach( function(evt) {
+                _resize.addEventListener(evt, function (e) {
+                    isElement = true;
+                });
+            });
+            ['mouseup','touchend'].forEach( function(evt) {
+                document.body.addEventListener(evt, function (e) {
+                    isElement = false;
+                });
+                _resize.addEventListener(evt, function (e) {
+                    isElement = false;
+                });
+            });
+        },
+        methods: {
+            logging: function(log) {
+                let _this = this;
+                let logObj = log;
+                let logId = 'log-' + logObj.id;
+                if (logId && !!logObj.responseBody) {
+                    logObj.responseTime = new Date().getTime();
+                } else {
+                    logObj.requestTime = new Date().getTime();
+                }
+                this.$set(this.logData, logId, logObj);
+                this.$forceUpdate();
+                setTimeout(function(){
+                    let scroll = _this.$refs.scroll;
+                    scroll.scrollTop = scroll.scrollHeight;
+                },100);
+            },
+            clearLogs: function(){
+                this.logData = {};
+                this.apiDetails = {};
+                this.expandLogs = true;
+                //this.activeItem = '';
+                this.$forceUpdate();
+            },
+            closeLogs: function(all) {
+                if (all) {
+                    this.expandLogs = false;
+                }
+                this.apiDetails = {};
+                this.activeItem = '';
+            },
+            showLogDetails: function(logId) {
+                this.apiDetails = {};
+
+                let log = this.logData[logId];
+                let apiRequestData = {};
+                let apiRequestBodyData = {};
+                let apiResponseData = {};
+                let apiRequestTitle = 'Request Params';
+                let apiRequestBodyTitle = 'Request Body';
+                let apiResponseTitle = 'Response';
+
+                if (log && log.type) {
+                    if(log.type === 'event') {
+                        apiRequestTitle = 'Request Event';
+                        apiResponseTitle = 'Update Event';
+                        //apiResponseData = null;
+                        apiRequestData = log.event;
+                        if (log.update) {
+                            apiResponseData = log.update;
+                        }
+                    }else if(log.type === 'options') {
+                        apiRequestTitle = 'Options';
+                        apiRequestData = log.options;
+                    }else {
+                        apiRequestData = log.requestParams;
+                        apiRequestBodyData = log.requestBody;
+                        apiResponseData = log.responseBody;
+                    }
+                    if(log.error) {
+                        apiResponseTitle = 'Error';
+                        apiResponseData = log.error;
+                    }
+                }
+
+                this.activeItem = logId;
+
+                this.$set(this.apiDetails, 'apiRequestBodyData', apiRequestBodyData);
+                this.$set(this.apiDetails, 'apiRequestBodyTitle', apiRequestBodyTitle);
+                this.$set(this.apiDetails, 'apiRequestTitle', apiRequestTitle);
+                this.$set(this.apiDetails, 'apiResponseTitle', apiResponseTitle);
+                this.$set(this.apiDetails, 'apiRequestData', apiRequestData);
+                this.$set(this.apiDetails, 'apiResponseData', apiResponseData);
+                this.$set(this.apiDetails, 'log', log);
+            }
+        },
+    });
+
+    const localeSelectorTexts = {
+        'de_DE': 'Deutsches (Deutschland)',
+        'en_AU': 'English (Australia)',
+        'en_CA': 'English (Canada)',
+        'en_GB': 'English (Great Britain)',
+        'en_IE': 'English (Ireland)',
+        'en_PR': 'English (Puerto Rico)',
+        'en_US': 'English (United States)',
+        'es_ES': 'Español (ESPAÑA)',
+        'fr_CA': 'Français (Canada)',
+        'fr_FR': 'Français (France)',
+        'it_IT': 'Italiano (Italia)',
+        'ko_KR': '한국어 (대한민국)',
+        'zh_TW': '中文 (台灣)',
+        'ja_JP': '日本語 (日本)'
+    }
+    const i18n = new VueI18n ({
+        locale: 'en_US',
+        fallbackLocale: 'en_US',
+        messages: {
+
+        }
+    });
+    let initialize = false;
+    const checkLocale = function (locale) {
+        const texts = ['BTN_ADD_TO_CART','PRODUCT','UNIT_PRICE','QUANTITY','PRICE','CURRENCY_TEMPLATE','SUB_TOTAL','TOTAL','TAX','DISCOUNT','SHIPPING','PROMO_CODE','INVALID_COUPON_CODE','REMOVE','BILLING_INFORMATION','SHIPPING_INFORMATION','LOGIN_CREATE_USER_PAGE_TITLE','ACCOUNT_INFORMATION','EMAIL_ADDRESS_REQUIRED','PASSWORD_REQUIRED_FIELD','FIRST_NAME_REQUIRED','LAST_NAME_REQUIRED','COUNTRY_REQUIRED','STATE_PROVINCE_REQUIRED','CITY_REQUIRED','ZIP_CODE_REQUIRED','ADDRESS1_REQUIRED','ADDRESS2','CHECKOUT','PHONETIC_FIRST_NAME_COLON','PHONETIC_LAST_NAME_COLON','PHONE_NUMBER_REQUIRED','LOGIN','ENTER_EMAIL_AND_PASSWORD','NEW_CUSTOMER_DESC','CREATE_ACCOUNT','PAYMENT_INFORMATION','THANKS','ORDER_TEXT','ORDER_SUMMARY','ORDER_DATE','TOTAL_ORDERS','PURCHASE_ORDER_INFORMATION_HEADER','LOOKUP_YOUR_ORDER'];
+        if(!i18n.messages.hasOwnProperty(locale) || Object.keys(i18n.messages[locale]).length !== texts.length) {
+            let message = localStorage[locale+'-texts'];
+            if(message) {
+                try {
+                    message = JSON.parse(message);
+                }catch{}
+            }
+            if(!message) message = {};
+            if(Object.keys(message).length !== texts.length && !initialize) {
+                initialize = true;
+                eventBus.$emit('loading',true,'locale');
+                return checkoutJS.shopperApi.getTexts(texts).then(function (texts) {
+                    for (let i = 0; i < texts.length; i++) {
+                        message[texts[i].attribute.key] = texts[i].attribute.value;
+                    }
+                    i18n.setLocaleMessage(locale, message);
+                    localStorage[locale+'-texts'] = JSON.stringify(message);
+                    eventBus.$emit('loading',false,'locale');
+                    initialize = false;
+                });
+            }
+            i18n.setLocaleMessage(locale, message);
+        }
+        return Promise.resolve();
+    }
+
+    app = new Vue({
+        el: '#app',
+        i18n,
+        data: function() {
+            return {
+                route: window.location.hash,
+                site: null,
+                page:"home",
+                cart: null,
+                order: null,
+                candyRackOffers: null,
+                ready: false,
+                isLoading: true,
+                TrueValue: 'true',
+                FalseValue: 'false',
+                defaultLocale: null,
+                supportedLocales: [],
+                selectedLocale: null
+            };
+        },
+        created: function() {
+            var _this = this;
+            eventBus.$on('updatingCart', this.updatingCart);
+            eventBus.$on('updatingOrder', this.updatingOrder);
+            eventBus.$on('initLocales', this.initLocales);
+            eventBus.$on('shopperUpdated', this.shopperUpdated);
+            eventBus.$on('getCandyRackOffers', this.getCandyRackOffers);
+            eventBus.$on('loading', this.loading);
+            eventBus.$on('forceUpdate',function(){
+                _this.route = window.location.hash;
+                _this.updateRoute();
+                _this.$forceUpdate();
+            });
+            if(window.location.hash.length === 0) {
+                history.pushState(null, 'home', '#home');
+            }else{
+                _this.route = window.location.hash;
+            }
+            eventBus.$emit('forceUpdate');
+            window.addEventListener("hashchange",function(event){
+                eventBus.$emit('forceUpdate');
+            });
+        },
+        methods: {
+            updatingCart: function(cartData) {
+                this.cart = cartData;
+            },
+            updatingOrder: function(orderData) {
+                this.order = orderData;
+            },
+            updatingCandyRackOffer: function(offerData) {
+                this.candyRackOffers = offerData;
+            },
+            getCandyRackOffers: function() {
+                var _this = this;
+                _this.updatingCandyRackOffer(null);
+                checkoutJS.shopperApi.getPointOfPromotionOffer('CandyRack_ShoppingCart').then(function(offersData) {
+                    if(offersData && offersData.offers.offer && offersData.offers.offer.length) {
+                        _this.updatingCandyRackOffer(offersData.offers);
+                    }
+                });
+            },
+            loading: function(isLoading,initialize){
+                if(initialize || this.lock) {
+                    this.lock = true;
+                    if(initialize) {
+                        this.isLoading = isLoading;
+                        if (!isLoading) {
+                            this.lock = false;
+                        }
+                    }
+                }else {
+                    this.isLoading = isLoading;
+                }
+            },
+            updateRoute: function() {
+                var _this = this;
+                let _page = _this.route.split("#")[1];
+                if(_page && _page.length) {
+                    _this.page = _page;
+                }
+            },
+            initLocales(site) {
+                // Set defaultLocale using the site's default locale
+                this.defaultLocale = site.defaultLocale;
+                // Set selectedLocale, if shopper preference is not present,
+                // use the site's default locale otherwise use the shopper's preference
+                this.selectedLocale =
+                    (!!checkoutJS.shopper && checkoutJS.shopper.locale === '')? this.defaultLocale : checkoutJS.shopper.locale;
+                // Create supportedLocales array
+                for (l in site.localeOptions.localeOption) {
+                    var locale = site.localeOptions.localeOption[l].locale;
+                    this.supportedLocales.push({
+                        text: (typeof localeSelectorTexts[locale] !== 'undefined')? localeSelectorTexts[locale] : locale,
+                        value: locale
+                    });
+                }
+                // Update i18n component's locale
+                /* TODO: no shopperUpdated event to update this */
+                if (i18n.locale !== this.selectedLocale) { this.updateI18nLocale(this.selectedLocale); }
+            },
+            shopperUpdated(shopper) {
+                return this.updateI18nLocale(shopper.locale);
+            },
+            updateI18nLocale(locale) {
+                i18n.locale = locale;
+                return checkLocale(locale);
+            },
+            localeChange(selectedLocale) {
+                // Check if locale is valid
+                var localeOptions = this.site.localeOptions.localeOption.filter(function(localeOption){
+                    return localeOption.locale === selectedLocale;
+                });
+                // Trigger locale change
+                if(localeOptions.length > 0){
+                    eventBus.$emit('loading',true);
+                    checkoutJS.updateLocaleAndCurrency(selectedLocale).catch(function(ex){
+                        checkoutJS.util.errorMessage(ex);
+                    }).then(function(){
+                        eventBus.$emit('forceUpdate');
+                        eventBus.$emit('localeUpdated');
+                        eventBus.$emit('loading',false);
+                    });
+                }
+            }
+        },
+        watch: {
+            route: function(){
+                var _this = this;
+                _this.updateRoute();
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

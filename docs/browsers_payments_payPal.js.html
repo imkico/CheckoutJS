@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browsers/payments/payPal.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browsers/payments/payPal.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {StorefrontPayment} from "../payment";
+import {Global} from "../../util";
+import {
+    LOGGING,
+    _CHECKOUTJS,
+    DRJS,
+    CONFIG,
+    UTIL,
+    SHOPPERAPI,
+    PAYMENTS,
+    REQUESTPAYLOAD,
+    PAYMENT,
+    CARTDATA,
+} from "../../keywords";
+import {$} from "../globalCommerce";
+import {PayPalPaymentRequestPayload} from "../../payments/payPal";
+
+const document = Global.document;
+const name = 'payPal';
+
+/**
+ * @class PayPalWeb
+ * @classdesc PayPal for web storefronts.
+ * @extends StorefrontPayment
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {string} [paymentType='payPal'] - e.g. 'payPal'
+ * @param {string} [storefrontType='storefront'] - e.g. 'storefront' / 'gC'
+ * @returns {PayPalWeb}
+ * @category PaymentMethods
+ */
+class PayPalWeb extends StorefrontPayment {
+
+    constructor(parent, collection, _name, storefront) {
+        super(parent, collection, name, storefront);
+        /**
+         * The PayPalPaymentRequestPayload created for PayPal.
+         * @name requestPayload
+         * @type PayPalPaymentRequestPayload
+         * @memberof PayPalWeb
+         * @instance
+         */
+        this[REQUESTPAYLOAD] = new PayPalPaymentRequestPayload(parent, {}, name, this);
+    }
+
+    async initPayment() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _util = _cjs[UTIL];
+        const _configPayment = _cjs[CONFIG].payments[name];
+        const payPalModuleName = "PAYPAL";
+        let _paypal = await _util.getCache(name);
+        const paypalElement = document.getElementById(_configPayment.elementId);
+        if (paypalElement) {
+            if (!_this.loading &amp;&amp; (!Global[payPalModuleName] || !Global[payPalModuleName].Button) ) {
+                _this.loading = true;
+                await _util.loadScript(_config.lib.paypal.url);
+            }
+            let cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+            if (_config.page === 'ProductDetailsPage') {
+                await _shopperApi.addToCart();
+            }
+            if (Global.hasOwnProperty(payPalModuleName) &amp;&amp; Global[payPalModuleName].Button &amp;&amp; !_paypal &amp;&amp; document.getElementById(_configPayment.elementId)) {
+                const payPayBtn = document.getElementById(_configPayment.elementId);
+                payPayBtn.innerHTML = '';
+                payPayBtn.classList.add(_configPayment.classes.base);
+                _paypal = Global[payPalModuleName].Button.render(Object.assign({
+                    env: (_config.drjsApiKey.split('_').length === 2 ? 'production' : 'sandbox'),
+                    style: _configPayment.style,
+                    // eslint-disable-next-line no-unused-vars
+                    payment: async function (data, actions) {
+                        _util.loadingOverlay();
+                        await _this.click();
+                        const paypalSourceData = await _this[REQUESTPAYLOAD].createObject(cartData);
+                        return _cjs[DRJS].createSource(paypalSourceData).then(function (result) {
+                            _util.setValue(PAYMENT, {name: name, result: result});
+                            if (result.error) {
+                                _util.errorMessage(result.error)
+                            } else {
+                                return result.source[paypalSourceData.type].token;
+                            }
+                        });
+                    },
+                    // eslint-disable-next-line no-unused-vars
+                    onAuthorize: async function (data, actions) {
+                        const paypalSourceData = await _util.getValue(PAYMENT);
+                        return _this.completeSourceId(paypalSourceData.result.source).then(function () {
+                            return _this.routing();
+                        }).catch(function (ex) {
+                            _util.errorMessage(ex);
+                            return false;
+                        }).then(function(routed){
+                            if(!routed) {
+                                _util.loadingOverlay(true);
+                            }
+                        });
+                        /*
+                        return actions.order.capture().then(function (details) {
+                            return _this.applyPayPalDetail(details);
+                        }).then(function (result) {
+                            return _this.completeSourceId(result.source);
+                        });
+                         */
+                    },
+                    // eslint-disable-next-line no-unused-vars
+                    onCancel: function (data) {
+                        _util.loadingOverlay(true);
+                        return _this.cancel();
+                    },
+                    onError: function (err) {
+                        _util.loadingOverlay(true);
+                        _util.errorMessage(err);
+                    }
+                }, _configPayment.button), '#' + _configPayment.elementId);
+                await _util.setCache(name, _paypal);
+                paypalElement.setAttribute('data-payment', name);
+                _configPayment.show = true;
+                return _paypal;
+            }
+        }else{
+            _configPayment.show = true;
+        }
+    }
+
+    /*
+    async applyPayPalDetail(detail) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        if (detail) {
+            const address = [];
+            const payer = detail.payer;
+            if (payer) {
+                address.push({
+                    "id": 'billingAddress',
+                    "firstName": payer.name.given_name,
+                    "lastName": payer.name.surname,
+                    "line1": payer.address.address_line_1,
+                    "line2": payer.address.address_line_2,
+                    "phoneNumber": payer.phone.phone_number.national_number,
+                    "city": payer.address.admin_area_2,
+                    "countrySubdivision": payer.address.admin_area_1,
+                    "postalCode": payer.address.postal_code,
+                    "country": payer.address.country_code,
+                    "emailAddress": payer.email_address
+                });
+            }
+            const purchase_units = detail.purchase_units[0];
+            if (purchase_units.shipping) {
+                address.push({
+                    "id": 'shippingAddress',
+                    "name": purchase_units.shipping.name.full_name,
+                    "line1": purchase_units.shipping.address.address_line_1,
+                    "line2": purchase_units.shipping.address.address_line_2,
+                    "phoneNumber": payer.phone.phone_number.national_number,
+                    "city": purchase_units.shipping.address.admin_area_2,
+                    "countrySubdivision": purchase_units.shipping.address.admin_area_1,
+                    "postalCode": purchase_units.shipping.address.postal_code,
+                    "country": purchase_units.shipping.address.country_code,
+                    "emailAddress": payer.email_address
+                });
+            } else {
+                address.push();
+            }
+            if (_config.isGCPage()) {
+                _cjs.gC.applyAddress(address[0], address[1]);
+            }
+            await _shopperApi.applyAddressToCart(address[0], address[1]);
+            let cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+            const validated = await _this.validateInfo(cartData);
+            if(!validated){
+                return false;
+            }
+            const payment = await _util.getValue(PAYMENT);
+            if (payment) {
+                await _shopperApi.applySourceToCart(payment.result.source.id);
+                return (payment.result);
+            }
+        }
+    }
+    */
+
+    async destroy() {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _configPayment = _cjs[CONFIG].payments[name];
+        const paypal = await _cjs[UTIL].getCache(name);
+        if (paypal) {
+            if (Global.paypal &amp;&amp; Global.paypal.Button &amp;&amp; document.getElementById(_configPayment.elementId)) {
+                document.getElementById(_configPayment.elementId).innerHTML = '';
+            }
+            await _util.removeCache(name);
+        }
+        _configPayment.show = false;
+        _configPayment.element = null;
+    }
+}
+
+/**
+ * @class PayPalGC
+ * @classdesc PayPal for Global Commerce.
+ * @extends PayPalWeb
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {string} [paymentType='payPal'] - e.g. 'payPal'
+ * @param {string} [storefrontType='storefront'] - e.g. 'storefront' / 'gC'
+ * @returns {PayPalGC}
+ * @category PaymentMethods
+ */
+class PayPalGC extends PayPalWeb {
+
+    constructor(parent, collection) {
+        super(parent, collection, name, 'gC');
+    }
+
+    // async initPayment() {
+    //     const _cjs = this[_CHECKOUTJS];
+    //     return await _cjs[PAYMENTS][name].initPayment.call(this);
+    // }
+
+    async createPaymentInfo() {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _configPayment = _cjs[CONFIG].payments[name];
+        const _name = this._name;
+        const $paymentMethodID = $("#PayPalExpressCheckout");
+        if ($paymentMethodID &amp;&amp; $paymentMethodID.length) {
+            $paymentMethodID.attr('data-type', _name);
+            let _payment = (await _util.getValue(PAYMENT) || {});
+            if (Object.keys(_payment).length === 0) {
+                _payment = _cjs[CONFIG].cloudPayPayload || {};
+            }
+            if (_payment &amp;&amp; (_payment.type === _name || _payment.name === _name)) {
+                let source = (_payment &amp;&amp; _payment.result &amp;&amp; _payment.result.source) ? _payment.result.source : _payment;
+                if (source &amp;&amp; source.id) {
+                    if (source.clientSecret) {
+                        const result = await _cjs[DRJS].retrieveSource(source.id, source.clientSecret);
+                        await _util.setValue(PAYMENT, {name: _name, result: result});
+                        source = result.source;
+                        _cjs.emit(LOGGING, {
+                            id: _util.getTime(),
+                            api: DRJS,
+                            method: 'retrieveSource',
+                            options: result
+                        });
+                    }
+                    if (source &amp;&amp; _util.isReadySubmitState(source.state)) {
+                        $paymentMethodID.attr('data-source-id', source.id);
+                    }
+                }
+                $paymentMethodID.trigger('click');
+            }
+        }
+        _configPayment.show = true;
+    }
+
+    async completeSourceId(/*source*/) {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        if (_cjs[CONFIG][PAYMENTS][_name].showTC) {
+            await _cjs.storefront.updateTC();
+        }
+        await _cjs.sync();
+    }
+
+    async routing() {
+        const _cjs = this[_CHECKOUTJS];
+        return _cjs.gC.routing(name);
+    }
+}
+
+export {
+    PayPalWeb,
+    PayPalGC
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

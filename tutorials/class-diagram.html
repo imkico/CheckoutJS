@@ -1,0 +1,107 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.5.0/mermaid.min.js"></script>
+<div class="mermaid">
+classDiagram
+    class CheckoutJS {
+        id : Symbol
+        config : Config
+        drjs : DigitalRiver
+        payments : Payments
+        gc : GlobalCommerce
+        storefront : Storefront
+        util : Util|BrowserUtil
+        shopper : Shopper|ShopperGC
+        paymentService : PaymentService
+        shopperApi : ShopperApi|ShopperApiCredentials
+        sync()
+        emit(eventName)
+        updateLocaleAndCurrency(locale, currency)
+        destroy()
+    }
+
+    class Storefront{
+        checkTC()
+        getPayments()
+        getSelectedPayment()
+        validateSource()
+    }
+    CheckoutJS *-- Storefront : storefront
+
+    class GlobalCommerce {
+        Payments payments
+        getBillingAddress()
+        getShippingAddress()
+        getAddressValues()
+        getAddress()
+        getSelectedCloudPayPayment()
+        createSourceToCloudPay()
+        applyShippingCountry()
+        applyShippingOption()
+        applyAddress()
+        submitCheckoutForm()
+        initCart()
+        initCheckout()
+        initConfirmOrder()
+        initThankYou()
+        initOffineRefund()
+    }
+    GlobalCommerce <|-- Storefront
+    GlobalCommerce *-- Payments : payments
+    CheckoutJS *-- GlobalCommerce : gC
+
+    class ShopperApi {
+        getSiteInfo()
+        getProducts()
+        addToCart()
+        login()
+        logout()
+        getTokenInfo()
+        getCart()
+        updateCart()
+        applyCouponToCart()
+        applySourceToCart()
+        webCheckout()
+        submitCart()
+    }
+    CheckoutJS *-- ShopperApi : shopperApi
+
+    class ShopperApiCredentials {
+        loginByReferenceId()
+        loginByUserId()
+        login()
+    }
+    ShopperApiCredentials <|-- ShopperApi
+    CheckoutJS *-- ShopperApiCredentials : shopperApi
+
+    class Shopper {
+        currency : String
+        isAuthenticated : Boolean
+        locale : String
+        sessionToken : SessionToken
+        getAccessToken()
+    }
+    CheckoutJS *-- Shopper : shopper
+
+    class Payments {
+        applePay : ApplePay
+        googlePay : GooglePay
+        paypal : PayPal
+        [...others] : StorefrontPayment
+    }
+    CheckoutJS *-- Payments : payments
+
+    class PaymentService {
+        createSource()
+        retrieveSource()
+    }
+    CheckoutJS *-- PaymentService : paymentService
+</div>
+<script>
+    var config = {
+        startOnLoad:true,
+        themeCSS: ".title { font-size: inherit; }"
+    };
+    mermaid.initialize(config);
+    window.addEventListener('load', (event) => {
+        document.getElementsByTagName("svg")[0].setAttribute("width","100%");
+    });
+</script>

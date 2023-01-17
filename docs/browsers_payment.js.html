@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browsers/payment.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browsers/payment.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {Payment, PaymentRequestPayload} from "../payments/payment";
+import {Global} from "../util";
+import {
+    LOGGING,
+    _CHECKOUTJS,
+    CONFIG,
+    UTIL,
+    DRJS,
+    SHOPPERAPI,
+    PAYMENTS,
+    CJS,
+    REQUESTPAYLOAD,
+    PAYMENT,
+    CARTDATA,
+    ELEMENT,
+} from "../keywords";
+
+const document = Global.document;
+
+const requireFieldUpdate = function(){
+    const _this = this;
+    return (async () => {
+        await _this.destroy();
+        await _this.initPayment();
+        return _this;
+    })();
+}
+
+/**
+ * @class StorefrontPayment
+ * @classdesc The StorefrontPayment class is the base class for all storefront payment methods, which implements generic and reusable functions. Override the functions in this class if customizations for the payment is needed.
+ * @extends Payment
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {string} [paymentType=''] - e.g. 'creditCard'
+ * @param {string} [storefrontType='storefront'] - e.g. 'storefront' / 'gC'
+ * @returns {Promise&lt;StorefrontPayment>}
+ * @category PaymentBase
+ */
+class StorefrontPayment extends Payment {
+    constructor(parent, collection, name = '', storefront = 'storefront') {
+        super(parent, Object.assign({
+            excludeMethods: {constructor: true},
+            writableMethods: {
+                initPayment: true,
+                applySourceId: true,
+                completeSourceId: true,
+                createPaymentInfo: true,
+                completePaymentInfo: true,
+                changePaymentMethod: true,
+                createPaymentRequest: true,
+                shippingAddressChange: true,
+                shippingOptionChange: true,
+                validateElements: true,
+                validate: true,
+                click: true,
+                cancel: true,
+                routing: true,
+                getReturnUrl: true,
+                getCancelUrl: true,
+            }
+        }, collection), name);
+        this[REQUESTPAYLOAD] = new PaymentRequestPayload(parent, {}, name, this);
+        Object.defineProperty(this, REQUESTPAYLOAD, {
+            enumerable: false,
+            configurable: false,
+            writable: true,
+        });
+
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        _this._storefront = _cjs[storefront];
+        _this._storefront._initPaymentMethod.call(_this);
+        Object.defineProperty(this, "_storefront", {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+        });
+    }
+
+    async initPayment() {
+        const _this = this;
+        const _cjs = _this[_CHECKOUTJS];
+        const _name = _this._name;
+        await _this.createElements();
+        _cjs[CONFIG][PAYMENTS][_name].show = true;
+    }
+
+    /**
+     * Creates the payment elements on the current page, e.g. bank selector, credit card fields, etc.
+     * @returns {Promise&lt;void>}
+     */
+    async createElements() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _util = _cjs[UTIL];
+        const _drjs = _cjs[DRJS];
+        const _element = _this[ELEMENT];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+
+        if(_configPayment.mountElement) {
+            const cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+            const _storefront = _this._storefront;
+            const _payments = await _storefront.getPayments();
+            const supportedGeography = await _payments[_name].supportedGeography(cartData.cart.billingAddress.country);
+            if(supportedGeography) {
+                const elementsObj = {};
+                let elements = _configPayment.mountElement.elements;
+                let keys = Object.keys(elements);
+                for (let i = 0; i &lt; keys.length; i++) {
+                    const key = keys[i];
+                    if(elements[key].disable!==true) {
+                        const elementPlacement = document.getElementById(elements[key].id);
+                        if (elementPlacement &amp;&amp; elementPlacement!==null) {
+
+                            const options = await _element.createOption(cartData);
+                            if (options) {
+                                const mountElement = _drjs.createElement(key, options);
+                                mountElement.mount(elementPlacement);
+                                mountElement.on('blur', _this.blur);
+                                mountElement.on('focus', _this.focus);
+                                mountElement.on('ready', _this.ready);
+                                mountElement.on('change', _this.change);
+                                mountElement.on('cancel', _this.cancel);
+                                mountElement.on('click', _this.click);
+                                elementsObj[key] = mountElement;
+                            }
+                        }
+                    }
+                }
+                await _util.setCache(_name, elementsObj);
+                Object.defineProperty(_configPayment, ELEMENT, {
+                    value: elementsObj,
+                    enumerable: true,
+                    configurable: false,
+                    writable: true,
+                });
+            }
+            if (_configPayment.mountElement.required) {
+                _configPayment.mountElement.required.forEach(function (key) {
+                    _cjs.on(key + 'Updated', requireFieldUpdate, _this);
+                });
+            }
+        }
+    }
+
+    /**
+     * Creates and validates the source for the selected payment on the current page.
+     * @param {Boolean} [applyToCart=true] - When this value is set to true, the source will be applied to the cart via Commerce API (Shopper API).
+     * @returns {Promise&lt;PaymentSourceObject>}
+     */
+    async applySourceId(applyToCart = true) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _config = _cjs[CONFIG];
+        const _drjs = _cjs[DRJS];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _name = this._name;
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        const _payment = await _util.getValue(PAYMENT) || {};
+        const _storefront = this._storefront;
+        let source = {}, result = {}, cartData;
+        if (_payment &amp;&amp; _payment.name === _name &amp;&amp; _payment.result &amp;&amp; _payment.result.source &amp;&amp; _payment.result.source.id &amp;&amp; _payment.result.source.clientSecret) {
+            const _source = await _storefront.validateSource(_payment.result.source);
+            if(_source) {
+                source = _source;
+            }
+        }
+        if ((_configPayment.show &amp;&amp; !_util.isReadySubmitState(source.state))) {
+            cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+            let sourceData = await _this[REQUESTPAYLOAD].createObject(cartData);
+            sourceData = await _storefront.updateSourceData(sourceData);
+            try {
+                let sourceArgs = [];
+                if(_configPayment.mountElement &amp;&amp; _configPayment.element) {
+                    let _element = _configPayment.element;
+                    if( !(_element.id &amp;&amp; _element.key) ){
+                        _element = Object.values(_element)[0];
+                    }
+                    sourceArgs.push(_element);
+                }
+                sourceArgs.push(sourceData);
+                result = await _drjs.createSource.apply(_drjs,sourceArgs);
+                await _util.setValue(PAYMENT, {name: _name, result: result});
+                if (result.source) {
+                    _cjs.emit(LOGGING, {
+                        id: _util.getTime(),
+                        api: DRJS,
+                        method: 'createSource',
+                        type: 'options',
+                        payment: _name,
+                        options: result,
+                    });
+                    source = result.source;
+                    if (source) {
+                        if (!_util.isReadySubmitState(source.state) &amp;&amp; source.flow === 'redirect' &amp;&amp; source.redirect) {
+                            await _storefront.redirectFlow(_name, source);
+                            _cjs.emit(LOGGING, {
+                                id: _util.getTime(),
+                                api: CJS,
+                                method: 'redirectBack',
+                                responseBody: source
+                            });
+                            try {
+                                result = await _drjs.retrieveSource(source.id, source.clientSecret);
+                                _cjs.emit(LOGGING, {
+                                    id: _util.getTime(),
+                                    api: DRJS,
+                                    method: 'retrieveSource',
+                                    options: result
+                                });
+                                await _util.setValue(PAYMENT, {name: _name, result: result});
+                            } catch (ex) {
+                                _cjs.emit(LOGGING, {
+                                    id: _util.getTime(),
+                                    api: CJS,
+                                    method: 'error',
+                                    responseBody: JSON.stringify(ex, _util.replaceErrors, 2)
+                                });
+                                return Promise.reject(ex);
+                            }
+                        }
+                    }
+                }
+            } catch (ex) {
+                _cjs.emit(LOGGING, {
+                    id: _util.getTime(),
+                    api: CJS,
+                    method: 'error',
+                    responseBody: JSON.stringify(ex, _util.replaceErrors, 2)
+                });
+                return Promise.reject(ex);
+            }
+            const validated = await _this.validateInfo(cartData);
+            if(!validated){
+                return false;
+            }
+        }
+
+        if (result.error) {
+            if (result.error.state === 'failed') {
+                return Promise.reject(new Error(_config.labels.error.PAYMENT_AUTHORIZATION_FAILED));
+            }
+            return Promise.reject(result);
+        } else if (result.source) {
+            source = result.source;
+        }
+        if (applyToCart) {
+            if (_util.isReadySubmitState(source.state)) {
+                await _shopperApi.applySourceToCart(source.id);
+            }
+        }
+        if (_configPayment.showTC) {
+            await _storefront.updateTC();
+        }
+        await this.completeSourceId(source);
+        return source;
+    }
+
+    /**
+     * This event will be triggered when the element loses focus.
+     * @abstract
+     */
+    async blur() {
+
+    }
+
+    /**
+     * This event will be triggered when the element gains focus.
+     * @abstract
+     */
+    async focus() {
+
+    }
+
+    /**
+     * This event will be triggered when the element is loaded and ready to accept an update request.
+     * @abstract
+     */
+    async ready() {
+
+    }
+
+    /**
+     * This event will be triggered when the element's state changes.
+     * @abstract
+     */
+    async change() {
+
+    }
+
+    /**
+     * This event will be triggered when the element is clicked.
+     * @abstract
+     */
+    async click() {
+
+    }
+
+    /**
+     * This event will be triggered when the element is selected.
+     */
+    async select() {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        let _payment = {name: _name};
+        const payment = await _cjs[UTIL].getValue(PAYMENT);
+        if (payment &amp;&amp; payment.name === _name) {
+            _payment = payment;
+        }
+        await _cjs[UTIL].setValue(PAYMENT, _payment);
+        return _payment;
+    }
+
+    /**
+     * This event will be triggered when the payment sheet has been cancelled.
+     * @abstract
+     */
+    async cancel() {
+
+    }
+
+    /**
+     * Modifies the payment request payload before creating the source.
+     * @param {PaymentRequestObject} payload
+     * @returns {Promise&lt;PaymentRequestObject>}
+     * @abstract
+     */
+    async createPaymentRequest(payload) {
+        return payload;
+    }
+
+    /**
+     * Validates the payment elements.
+     * @returns {Promise&lt;Boolean>}
+     */
+    async validateElements() {
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        let validated = true;
+        if (_configPayment[ELEMENT]) {
+            let _element = _configPayment[ELEMENT];
+            if(_element.id &amp;&amp; _element.key){
+                _element = [_element];
+            }
+            let keys = Object.keys(_element);
+            for(let i=0; i&lt;keys.length; i++){
+                const key = keys[i];
+                const _classList = _element[key].parentNode.classList;
+                if(!_classList.contains(_configPayment.classes.complete)){
+                    validated = false;
+                    _classList.add(_configPayment.classes.invalid);
+                }else {
+                    _classList.remove(_configPayment.classes.invalid);
+                }
+            }
+        }
+        return validated;
+    }
+
+    async destroy() {
+        const _cjs = this[_CHECKOUTJS];
+        const _config = _cjs[CONFIG];
+        const _name = this._name;
+        const _configPayment = _config[PAYMENTS][_name];
+        if(_configPayment.mountElement) {
+            let _element = await _cjs[UTIL].getCache(_name);
+            try {
+                if (_element) {
+                    if(_element.id &amp;&amp; _element.key){
+                        _element = [_element];
+                    }else{
+                        _element = Object.values(_element);
+                    }
+                    for (let i = 0; i &lt; _element.length; i++) {
+                        if(_element[i] &amp;&amp; _element[i].destroy){
+                            await _element[i].destroy();
+                        }
+                    }
+
+                    await _cjs[UTIL].removeCache(_name);
+                }
+                // eslint-disable-next-line no-empty
+            } catch (ex) {
+                console.error(ex);
+            }
+            if(_configPayment.mountElement.required) {
+                _configPayment.mountElement.required.forEach(function(key){
+                    _cjs.removeListener(key+'Updated',requireFieldUpdate);
+                });
+            }
+        }
+        _configPayment.show = false;
+        _configPayment[ELEMENT] = null;
+    }
+
+    /**
+     * Returns the paymentCallBack URL by default from {@link module:Config} with '?return=success' parameters.
+     * @see module:Config
+     * @returns {Promise&lt;string>}
+     */
+    async getReturnUrl() {
+        const _cjs = this[_CHECKOUTJS];
+        const _configUrl = _cjs[CONFIG].url;
+        const url = (_configUrl.paymentCallBack ? (_configUrl.paymentCallBack + '?return=success') : null) || document.location.href;
+        return url;
+    }
+
+    /**
+     * Returns the paymentCallBack URL by default from {@link module:Config} with '?return=cancel' parameters.
+     * @see module:Config
+     * @returns {Promise&lt;string>}
+     */
+    async getCancelUrl() {
+        const _cjs = this[_CHECKOUTJS];
+        const _configUrl = _cjs[CONFIG].url;
+        const url = (_configUrl.paymentCallBack ? (_configUrl.paymentCallBack + '?return=cancel') : null) || document.location.href;
+        return url;
+    }
+
+}
+
+export {
+    StorefrontPayment,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

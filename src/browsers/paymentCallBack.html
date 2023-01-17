@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loading...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script>
+        var urlParams;
+        (window.onpopstate = function () {
+            var match,
+                pl     = /\+/g,
+                search = /([^&=]+)=?([^&]*)/g,
+                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                query  = window.location.search.substring(1);
+            urlParams = {};
+            while (match = search.exec(query))
+                urlParams[decode(match[1])] = decode(match[2]);
+        })();
+
+        var win = window.opener || window.parent || window;
+
+        win.postMessage({
+            sourceId:urlParams.sourceId,
+            urlParams:urlParams
+        },"*");
+        if(window.parent === window && typeof urlParams.flow === 'undefined'){
+            try {
+                if (document.body.classList) {
+                    document.body.classList.add("back");
+                }
+            }catch(ex){
+                window.open('','_parent','');
+                window.close();
+            }
+        }
+        if(urlParams && urlParams.nextUrl) {
+            let _nextUrl = urlParams.nextUrl;
+            try {
+                let url = new URL(_nextUrl);
+                Object.entries(urlParams).forEach(function(item){
+                    if(item[0]!=='nextUrl') {
+                        console.log(item[0], item[1]);
+                        url.searchParams.set(item[0], item[1]);
+                    }
+                });
+                _nextUrl = url.toString();
+            }catch(e){
+                console.error(e);
+            }
+            location.href = _nextUrl;
+        }
+    </script>
+    <style>
+        body.back {
+            background: rgba(1,1,1,0.85);
+        }
+        .loading{
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #555;
+            width: 60px;
+            height: 60px;
+            -webkit-animation: spin 1.5s linear infinite;
+            animation: spin 1.5s linear infinite;
+            margin: 0 auto;
+            margin-top: 50px;
+            color: transparent;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<div class="loading">Loading..</div>
+</body>
+</html>

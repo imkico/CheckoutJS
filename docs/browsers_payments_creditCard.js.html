@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browsers/payments/creditCard.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://ui1.img.digitalrivercontent.net/drui/1.11.11/gc/images/logos/DRCC_Logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">CheckoutJS Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        Tutorials
+                        <i class="fas fa-chevron-down fa-xs"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-initialize.html">
+                                    How to initialize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-customize.html">
+                                    How to customize
+                                </a>
+                            
+                                <a class="dropdown-item" href="tutorial-class-diagram.html">
+                                    Class Diagram
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CheckoutJS.html">CheckoutJS</a></li></ul><h3><a href="global.html">Global</a></h3></div><div class="category"><h2>Browser</h2><h3>Classes</h3><ul><li><a href="GlobalCommerce.html">GlobalCommerce</a></li><li><a href="Storefront.html">Storefront</a></li></ul></div><div class="category"><h2>CommerceAPI</h2><h3>Classes</h3><ul><li><a href="Shopper.html">Shopper</a></li><li><a href="ShopperApi.html">ShopperApi</a></li><li><a href="ShopperApiCredentials.html">ShopperApiCredentials</a></li><li><a href="ShopperGC.html">ShopperGC</a></li></ul></div><div class="category"><h2>Events</h2><h3>Events</h3><ul><li><a href="CheckoutJS.html#.event:cartUpdated">cartUpdated</a></li><li><a href="CheckoutJS.html#.event:countryUpdated">countryUpdated</a></li><li><a href="CheckoutJS.html#.event:destroyPayments">destroyPayments</a></li><li><a href="CheckoutJS.html#.event:entityUpdate">entityUpdate</a></li><li><a href="CheckoutJS.html#.event:initialized">initialized</a></li><li><a href="CheckoutJS.html#.event:initializeElements">initializeElements</a></li><li><a href="CheckoutJS.html#.event:initializePayments">initializePayments</a></li><li><a href="CheckoutJS.html#.event:logging">logging</a></li><li><a href="CheckoutJS.html#.event:shopperUpdated">shopperUpdated</a></li></ul></div><div class="category"><h2>PaymentBase</h2><h3>Classes</h3><ul><li><a href="GlobalCommercePayment.html">GlobalCommercePayment</a></li><li><a href="Payment.html">Payment</a></li><li><a href="PaymentElement.html">PaymentElement</a></li><li><a href="PaymentRequestPayload.html">PaymentRequestPayload</a></li><li><a href="Payments.html">Payments</a></li><li><a href="StorefrontPayment.html">StorefrontPayment</a></li></ul></div><div class="category"><h2>PaymentMethods</h2><h3>Modules</h3><ul><li><a href="module-applePay.html">applePay</a></li><li><a href="module-bankTransfer.html">bankTransfer</a></li><li><a href="module-bPay.html">bPay</a></li><li><a href="module-creditCard.html">creditCard</a></li><li><a href="module-directDebit.html">directDebit</a></li><li><a href="module-directDebitGB.html">directDebitGB</a></li><li><a href="module-googlePay.html">googlePay</a></li><li><a href="module-klarnaCredit.html">klarnaCredit</a></li><li><a href="module-konbini.html">konbini</a></li><li><a href="module-onlineBanking.html">onlineBanking</a></li><li><a href="module-payco.html">payco</a></li><li><a href="module-payPal.html">payPal</a></li><li><a href="module-wireTransfer.html">wireTransfer</a></li></ul><h3>Classes</h3><ul><li><a href="ApplePay.html">ApplePay</a></li><li><a href="ApplePayGC.html">ApplePayGC</a></li><li><a href="ApplePayWeb.html">ApplePayWeb</a></li><li><a href="CreditCardGC.html">CreditCardGC</a></li><li><a href="CreditCardWeb.html">CreditCardWeb</a></li><li><a href="GooglePay.html">GooglePay</a></li><li><a href="GooglePayGC.html">GooglePayGC</a></li><li><a href="GooglePayWeb.html">GooglePayWeb</a></li><li><a href="KlarnaCredit.html">KlarnaCredit</a></li><li><a href="KlarnaCreditPaymentRequestPayload.html">KlarnaCreditPaymentRequestPayload</a></li><li><a href="KlarnaCreditWeb.html">KlarnaCreditWeb</a></li><li><a href="PayPalGC.html">PayPalGC</a></li><li><a href="PayPalPaymentRequestPayload.html">PayPalPaymentRequestPayload</a></li><li><a href="PayPalWeb.html">PayPalWeb</a></li></ul></div><div class="category"><h2>Utility</h2><h3>Modules</h3><ul><li><a href="module-Config.html">Config</a></li><li><a href="module-ConfigGC.html">ConfigGC</a></li></ul><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="BrowserUtil.html">BrowserUtil</a></li><li><a href="PaymentService.html">PaymentService</a></li><li><a href="Util.html">Util</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browsers/payments/creditCard.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {StorefrontPayment} from "../payment";
+import {Global} from "../../util";
+import {
+    LOGGING,
+    _CHECKOUTJS,
+    DRJS,
+    CONFIG,
+    UTIL,
+    SHOPPERAPI,
+    PAYMENTS,
+    REQUESTPAYLOAD,
+    PAYMENT,
+    CARTDATA
+} from "../../keywords";
+import {$} from "../globalCommerce";
+
+const document = Global.document;
+const name = 'creditCard';
+
+/**
+ * @class CreditCardWeb
+ * @classdesc Credit Card for web storefronts.
+ * @extends StorefrontPayment
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {string} [paymentType='creditCard'] - e.g. 'creditCard'
+ * @param {string} [storefrontType='storefront'] - e.g. 'storefront' / 'gC'
+ * @returns {CreditCardWeb}
+ * @category PaymentMethods
+ */
+class CreditCardWeb extends StorefrontPayment {
+
+    constructor(parent, collection, _name, storefront) {
+        super(parent, collection, name, storefront);
+    }
+
+    async initPayment() {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _configCreditCard = _cjs[CONFIG][PAYMENTS][name];
+        const _drjs = _cjs[DRJS];
+        const cardNumberElement = document.getElementById(_configCreditCard.elementId.cardNumber);
+        const cardExpirationElement = document.getElementById(_configCreditCard.elementId.cardExpiration);
+        const cardCvvElement = document.getElementById(_configCreditCard.elementId.cardCvv);
+        let creditCard = await _util.getCache(name);
+        if (cardNumberElement &amp;&amp; cardExpirationElement &amp;&amp; cardCvvElement) {
+            const options = {
+                style: _configCreditCard.style,
+                classes: _configCreditCard.classes,
+            };
+            creditCard = {
+                cardNumber: _drjs.createElement('cardnumber', options),
+                cardExpiration: _drjs.createElement('cardexpiration', options),
+                cardCVV: _drjs.createElement('cardcvv', options)
+            };
+            _cjs.emit(LOGGING, {
+                id: _util.getTime(),
+                api: DRJS,
+                method: 'createElement',
+                type: 'options',
+                payment: name,
+                options: options,
+            });
+            await _util.setCache(name, creditCard);
+
+            creditCard.cardNumber.mount(_configCreditCard.elementId.cardNumber);
+            creditCard.cardExpiration.mount(_configCreditCard.elementId.cardExpiration);
+            creditCard.cardCVV.mount(_configCreditCard.elementId.cardCvv);
+
+            _configCreditCard.show = true;
+            Object.defineProperty(_configCreditCard, 'element', {
+                value: creditCard,
+                enumerable: true,
+                configurable: false,
+                writable: true,
+            });
+            return creditCard;
+        }
+    }
+
+    async applySourceId() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const _name = this._name;
+        const _payment = await _util.getValue(PAYMENT) || {};
+        let cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        if (_cjs[CONFIG][PAYMENTS][name].show &amp;&amp; (_payment.name !== _name || !_payment.result)) {
+            const sourceData = await _this[REQUESTPAYLOAD].createObject(cartData);
+            const creditCard = await _util.getCache(name);
+            const result = await _cjs[DRJS].createSource(creditCard.cardCVV, sourceData);
+            await _util.setValue(PAYMENT, {name: name, result: result});
+            _cjs.emit(LOGGING, {
+                id: _util.getTime(),
+                api: DRJS,
+                method: 'createSource',
+                type: 'options',
+                payment: _name,
+                options: result,
+            });
+            if (result.error) {
+                return Promise.reject(result);
+            } else if (result.source) {
+                const source = result.source;
+                await _shopperApi.applySourceToCart(source.id);
+                return source;
+            }
+        }
+    }
+
+    async validateElements() {
+        const _cjs = this[_CHECKOUTJS];
+        const _configPayment = _cjs[CONFIG][PAYMENTS][name];
+        if (_configPayment.element) {
+            return (
+                _configPayment.element.cardNumber.parentNode.classList.contains(_configPayment.classes.complete) &amp;&amp;
+                _configPayment.element.cardExpiration.parentNode.classList.contains(_configPayment.classes.complete) &amp;&amp;
+                _configPayment.element.cardCVV.parentNode.classList.contains(_configPayment.classes.complete)
+            );
+        }
+        return true;
+    }
+
+    async destroy() {
+        const _cjs = this[_CHECKOUTJS];
+        const creditCard = await _cjs[UTIL].getCache(name);
+        const _configPayment = _cjs[CONFIG][PAYMENTS][name];
+        try {
+            if (creditCard) {
+                if (creditCard.cardNumber) {
+                    await creditCard.cardNumber.destroy();
+                }
+                if (creditCard.cardExpiration) {
+                    await creditCard.cardExpiration.destroy();
+                }
+                if (creditCard.cardCVV) {
+                    await creditCard.cardCVV.destroy();
+                }
+                await _cjs[UTIL].removeCache(name);
+            }
+            // eslint-disable-next-line no-empty
+        } catch (ex) {
+        }
+
+        _configPayment.show = false;
+        _configPayment.element = null;
+    }
+}
+
+/**
+ * @class CreditCardGC
+ * @classdesc Credit Card for Global Commerce storefronts.
+ * @extends StorefrontPayment
+ * @param {CheckoutJS} parent
+ * @param {Base.BaseCollection} [collection]
+ * @param {string} [paymentType='creditCard'] - e.g. 'creditCard'
+ * @param {string} [storefrontType='storefront'] - e.g. 'storefront' / 'gC'
+ * @returns {CreditCardGC}
+ * @category PaymentMethods
+ */
+class CreditCardGC extends StorefrontPayment {
+
+    constructor(parent, collection) {
+        super(parent, collection, name, 'gC');
+    }
+
+    async initPayment() {
+        //const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _util = _cjs[UTIL];
+        const $paymentMethodID = $("#CreditCardMethod,#CurrencySpecificCreditCardMethod");
+        const _configPayment = _cjs[CONFIG][PAYMENTS][name];
+        if ($paymentMethodID.length) {
+            if (!_configPayment.remainElements) {
+                $('#ccNum').siblings('.infield-label').remove();
+                $('#ccNum').replaceWith($('&lt;span/>').attr('id', _configPayment.mountElement.elements.cardnumber.id));
+                $('#ccMonth').replaceWith($('&lt;span/>').attr('id', _configPayment.mountElement.elements.cardexpiration.id));
+                $('#cardSecurityCode').replaceWith($('&lt;span/>').attr('id', _configPayment.mountElement.elements.cardcvv.id));
+                $('#ccYear').remove();
+            } else {
+                $('#ccNum').change(function () {
+                    if ($(this).val().indexOf('*') === -1) {
+                        $paymentMethodID.removeAttr('data-source-id');
+                        _util.setValue(PAYMENT, {name: _name});
+                    }
+                });
+            }
+            _configPayment.show = true;
+        }
+        const result = await _cjs[PAYMENTS][name].initPayment.call(this);
+
+        if (_configPayment.element &amp;&amp; _configPayment.element.cardnumber) {
+            _configPayment.element.cardnumber.on('change', function () {
+                $paymentMethodID.removeAttr('data-source-id');
+                _util.setValue(PAYMENT, {name: _name});
+            });
+        }
+        return result;
+    }
+
+    async applySourceId(applyToCart = false) {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _name = this._name;
+        const _configPayment = _cjs[CONFIG][PAYMENTS][_name];
+        const _util = _cjs[UTIL];
+        const _payment = await _cjs[UTIL].getValue(PAYMENT) || {};
+        if (
+            //!($('#ccNum').val().indexOf('*')!==-1 &amp;&amp; $(_cjs[CONFIG].selector.checkoutForm).find(_cjs[CONFIG].selector.cloudPaySourceId).val()!=='')
+            _configPayment.show &amp;&amp; (_payment.name !== _name || !_payment.result)
+        ) {
+            if (!_configPayment.remainElements) {
+                return await _cjs[PAYMENTS][_name].applySourceId.call(_this,applyToCart);
+            } else {
+                let sourceData = {};
+                const owner = await _cjs.gC.getBillingAddress();
+                const creditCard = await _this.getCreditCard();
+                sourceData = _util.extend(sourceData, {owner: owner});
+                sourceData = _util.extend(sourceData, creditCard);
+                const result = await _cjs.gC.createSourceToCloudPay(_name, sourceData);
+                return result;
+            }
+        }
+    }
+
+    async createPaymentInfo() {
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _name = this._name;
+        const $paymentMethodID = $("#CreditCardMethod,#CurrencySpecificCreditCardMethod,#dr_ExpandPaymentDetailsSwitchSolo");
+        let _payment = (await _util.getValue(PAYMENT) || _cjs[CONFIG].cloudPayPayload);
+        $("#dr_switchSoloSelect").remove(); //#billingNickDiv,#dr_ccMethodSelect,#dr_switchSoloSelect
+        $paymentMethodID.attr("data-type", name);
+        if (_payment.type === name) {
+            $('#ccNum').val('************' + _payment.details.lastFourDigits);
+            $('#ccMonth').val(_payment.details.expirationMonth);
+            $('#ccYear').val(_payment.details.expirationYear);
+            $paymentMethodID.attr('data-source-id', _payment.id).trigger('click');
+        } else {
+
+            if (Object.keys(_payment).length === 0) {
+                _payment = (await _cjs[UTIL].getValue(PAYMENT) || {});
+            }
+            if (_payment &amp;&amp; (_payment.type === _name || _payment.name === _name)) {
+                const source = (_payment &amp;&amp; _payment.result &amp;&amp; _payment.result.source) ? _payment.result.source : _payment;
+                if (source &amp;&amp; source.id) {
+                    $paymentMethodID.attr('data-source-id', source.id);
+                }
+                $paymentMethodID.trigger('click');
+            }
+        }
+    }
+
+    async getCreditCard() {
+        const _this = this;
+        const _cjs = this[_CHECKOUTJS];
+        const _util = _cjs[UTIL];
+        const _shopperApi = _cjs[SHOPPERAPI];
+        const cartData = await _util.getValue(CARTDATA) || await _shopperApi.getCart();
+        try {
+            const paymentRequestData = _this.createObject(cartData);
+            _util.extend(paymentRequestData,{
+                creditCard: {
+                    number: $('#ccNum').val(),
+                    expirationMonth: $('#ccMonth').val(),
+                    expirationYear: $('#ccYear').val(),
+                    cvv: $('#cardSecurityCode').val()
+                }
+            });
+        } catch (ex) {
+            return Promise.reject(ex);
+        }
+    }
+}
+
+export {
+    CreditCardGC
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
